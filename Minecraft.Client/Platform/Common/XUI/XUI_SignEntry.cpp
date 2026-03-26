@@ -74,7 +74,7 @@ HRESULT CScene_SignEntry::OnNotifyPressEx(HXUIOBJ hObjPressed,
         if (pMinecraft->level->isClientSide) {
             std::shared_ptr<MultiplayerLocalPlayer> player =
                 pMinecraft->localplayers[pNotifyPressData->UserIndex];
-            if (player != NULL && player->connection &&
+            if (player != nullptr && player->connection &&
                 player->connection->isStarted()) {
                 player->connection->send(
                     std::shared_ptr<SignUpdatePacket>(new SignUpdatePacket(

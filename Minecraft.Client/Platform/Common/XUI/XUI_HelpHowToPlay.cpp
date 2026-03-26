@@ -196,7 +196,7 @@ HRESULT CScene_HowToPlay::OnKeyDown(XUIMessageInput* pInputData,
 void CScene_HowToPlay::StartPage(EHowToPlayPage ePage) {
     int iBaseSceneUser;
     // if we're not in the game, we need to use basescene 0
-    if (Minecraft::GetInstance()->level == NULL) {
+    if (Minecraft::GetInstance()->level == nullptr) {
         iBaseSceneUser = DEFAULT_XUI_MENU_USER;
     } else {
         iBaseSceneUser = m_iPad;

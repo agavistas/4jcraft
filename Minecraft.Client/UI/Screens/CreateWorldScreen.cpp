@@ -141,7 +141,7 @@ std::wstring CreateWorldScreen::findAvailableFolderName(
     std::wstring folder2 = folder;  // 4J - copy input as it is const
 
 #if 0
-    while (levelSource->getDataTagFor(folder2) != NULL)
+    while (levelSource->getDataTagFor(folder2) != nullptr)
 	{
         folder2 = folder2 + L"-";
     }
@@ -236,7 +236,7 @@ void CreateWorldScreen::buttonClicked(Button* button) {
         }
 
         param->seed = seedValue;
-        param->saveData = NULL;
+        param->saveData = nullptr;
         param->texturePackId = 0;
         param->settings = 0;
 

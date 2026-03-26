@@ -85,7 +85,7 @@ void VineTile::updateShape(
     setShape(minX, minY, minZ, maxX, maxY, maxZ);
 }
 
-AABB* VineTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* VineTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 bool VineTile::mayPlace(Level* level, int x, int y, int z, int face) {
     switch (face) {
@@ -217,7 +217,7 @@ void VineTile::tick(Level* level, int x, int y, int z, Random* random) {
                     level->getTile(x + Direction::STEP_X[testDirection], y,
                                    z + Direction::STEP_Z[testDirection]);
 
-                if (edgeTile == 0 || Tile::tiles[edgeTile] == NULL) {
+                if (edgeTile == 0 || Tile::tiles[edgeTile] == nullptr) {
                     // if the edge tile is air, we could possibly cling
                     // to something
                     int left = (testDirection + 1) & 3;
@@ -362,7 +362,7 @@ int VineTile::getResourceCount(Random* random) { return 0; }
 
 void VineTile::playerDestroy(Level* level, std::shared_ptr<Player> player,
                              int x, int y, int z, int data) {
-    if (!level->isClientSide && player->getSelectedItem() != NULL &&
+    if (!level->isClientSide && player->getSelectedItem() != nullptr &&
         player->getSelectedItem()->id == Item::shears->id) {
         player->awardStat(GenericStats::blocksMined(id),
                           GenericStats::param_blocksMined(id, data, 1));

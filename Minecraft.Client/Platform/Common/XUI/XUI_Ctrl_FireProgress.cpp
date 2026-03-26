@@ -9,7 +9,7 @@ int CXuiCtrlFireProgress::GetValue() {
     void* pvUserData;
     this->GetUserData(&pvUserData);
 
-    if (pvUserData != NULL) {
+    if (pvUserData != nullptr) {
         FurnaceTileEntity* pFurnaceTileEntity = (FurnaceTileEntity*)pvUserData;
 
         // TODO This param is a magic number in Java but we should really define

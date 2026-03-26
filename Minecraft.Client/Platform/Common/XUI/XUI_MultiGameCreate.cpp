@@ -32,7 +32,7 @@ HRESULT CScene_MultiGameCreate::OnInit(XUIMessageInit* pInitData,
                                        BOOL& bHandled) {
     m_bSetup = false;
     m_texturePackDescDisplayed = false;
-    m_iConfigA = NULL;
+    m_iConfigA = nullptr;
 
     WCHAR TempString[256];
     MapChildControls();
@@ -220,7 +220,7 @@ HRESULT CScene_MultiGameCreate::OnInit(XUIMessageInit* pInitData,
         // 4J-PB - there may be texture packs we don't have, so use the info
         // from TMS for this
 
-        DLC_INFO* pDLCInfo = NULL;
+        DLC_INFO* pDLCInfo = nullptr;
 
         // first pass - look to see if there are any that are not in the list
         bool bTexturePackAlreadyListed;
@@ -309,7 +309,7 @@ HRESULT CScene_MultiGameCreate::OnNotifyPressEx(
             TexturePack* pTexturePack = pMinecraft->skins->getTexturePackById(
                 m_MoreOptionsParams.dwTexturePack);
 
-            if (pTexturePack == NULL) {
+            if (pTexturePack == nullptr) {
                 // They've selected a texture pack they don't have yet
                 // upsell
                 CXuiCtrl4JList::LIST_ITEM_INFO ListItem;
@@ -398,7 +398,7 @@ HRESULT CScene_MultiGameCreate::OnNotifyPressEx(
             TexturePack* pTexturePack = pMinecraft->skins->getTexturePackById(
                 m_MoreOptionsParams.dwTexturePack);
 
-            if (pTexturePack == NULL) {
+            if (pTexturePack == nullptr) {
                 // corrupt DLC so set it to the default textures
                 m_MoreOptionsParams.dwTexturePack = 0;
             } else {
@@ -424,7 +424,7 @@ HRESULT CScene_MultiGameCreate::OnNotifyPressEx(
                             m_pDLCPack->getPurchaseOfferId());
                         ULONGLONG ullOfferID_Full;
 
-                        if (pDLCInfo != NULL) {
+                        if (pDLCInfo != nullptr) {
                             ullOfferID_Full = pDLCInfo->ullOfferID_Full;
                         } else {
                             ullOfferID_Full = pTexturePack->getDLCPack()
@@ -511,7 +511,7 @@ HRESULT CScene_MultiGameCreate::OnNotifyPressEx(
                     StorageManager.RequestMessageBox(
                         IDS_FAILED_TO_CREATE_GAME_TITLE,
                         IDS_NO_USER_CREATED_CONTENT_PRIVILEGE_CREATE, uiIDA, 1,
-                        ProfileManager.GetPrimaryPad(), NULL, NULL,
+                        ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                         app.GetStringTable());
                 } else {
                     CreateGame(this, 0);
@@ -547,13 +547,13 @@ int CScene_MultiGameCreate::UnlockTexturePackReturned(
             DLC_INFO* pDLCInfo = app.GetDLCInfoForTrialOfferID(
                 pScene->m_pDLCPack->getPurchaseOfferId());
 
-            if (pDLCInfo != NULL) {
+            if (pDLCInfo != nullptr) {
                 ullIndexA[0] = pDLCInfo->ullOfferID_Full;
             } else {
                 ullIndexA[0] = pScene->m_pDLCPack->getPurchaseOfferId();
             }
 
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
 
             // the license change coming in when the offer has been installed
             // will cause this scene to refresh
@@ -610,7 +610,7 @@ int CScene_MultiGameCreate::WarningTrialTexturePackReturned(
             StorageManager.RequestMessageBox(
                 IDS_FAILED_TO_CREATE_GAME_TITLE,
                 IDS_NO_USER_CREATED_CONTENT_PRIVILEGE_CREATE, uiIDA, 1,
-                ProfileManager.GetPrimaryPad(), NULL, NULL,
+                ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                 app.GetStringTable());
         } else {
             // 4J - This is called from a storage manager thread... need to set
@@ -673,7 +673,7 @@ HRESULT CScene_MultiGameCreate::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest == NULL) {
+    if (pControlNavigateData->hObjDest == nullptr) {
         pControlNavigateData->hObjDest = pControlNavigateData->hObjSource;
     }
 
@@ -728,7 +728,7 @@ HRESULT CScene_MultiGameCreate::OnTimer(XUIMessageTimer* pTimer,
             for (int i = 0; i < m_iTexturePacksNotInstalled; i++) {
                 if (m_iConfigA[i] != -1) {
                     unsigned int dwBytes = 0;
-                    std::uint8_t* pbData = NULL;
+                    std::uint8_t* pbData = nullptr;
                     // app.DebugPrintf("Retrieving iConfig %d from
                     // TPD\n",m_iConfigA[i]);
 
@@ -738,7 +738,7 @@ HRESULT CScene_MultiGameCreate::OnTimer(XUIMessageTimer* pTimer,
                                sizeof(CXuiCtrl4JList::LIST_ITEM_INFO));
                     if (dwBytes > 0 && pbData) {
                         unsigned int dwImageBytes = 0;
-                        std::uint8_t* pbImageData = NULL;
+                        std::uint8_t* pbImageData = nullptr;
 
                         app.GetFileFromTPD(eTPDFileType_Icon, pbData, dwBytes,
                                            &pbImageData, &dwImageBytes);
@@ -820,7 +820,7 @@ int CScene_MultiGameCreate::ConfirmCreateReturned(
                 StorageManager.RequestMessageBox(
                     IDS_FAILED_TO_CREATE_GAME_TITLE,
                     IDS_NO_USER_CREATED_CONTENT_PRIVILEGE_CREATE, uiIDA, 1,
-                    ProfileManager.GetPrimaryPad(), NULL, NULL,
+                    ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                     app.GetStringTable());
             } else {
                 // This is called from a storage manager thread... need to set
@@ -882,7 +882,7 @@ int CScene_MultiGameCreate::StartGame_SignInReturned(void* pParam,
                     StorageManager.RequestMessageBox(
                         IDS_FAILED_TO_CREATE_GAME_TITLE,
                         IDS_NO_USER_CREATED_CONTENT_PRIVILEGE_CREATE, uiIDA, 1,
-                        ProfileManager.GetPrimaryPad(), NULL, NULL,
+                        ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                         app.GetStringTable());
                 } else {
                     pClass->m_bIgnoreInput = false;
@@ -892,7 +892,7 @@ int CScene_MultiGameCreate::StartGame_SignInReturned(void* pParam,
                     StorageManager.RequestMessageBox(
                         IDS_NO_MULTIPLAYER_PRIVILEGE_TITLE,
                         IDS_NO_MULTIPLAYER_PRIVILEGE_HOST_TEXT, uiIDA, 1,
-                        ProfileManager.GetPrimaryPad(), NULL, NULL,
+                        ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                         app.GetStringTable());
                 }
             } else {
@@ -932,7 +932,7 @@ void CScene_MultiGameCreate::CreateGame(CScene_MultiGameCreate* pClass,
     // Make our next save default to the name of the level
     StorageManager.SetSaveTitle((wchar_t*)wWorldName.c_str());
 
-    bool bHasSeed = (pClass->m_EditSeed.GetText() != NULL);
+    bool bHasSeed = (pClass->m_EditSeed.GetText() != nullptr);
 
     std::wstring wSeed;
     if (bHasSeed) {
@@ -990,7 +990,7 @@ void CScene_MultiGameCreate::CreateGame(CScene_MultiGameCreate* pClass,
 
     NetworkGameInitData* param = new NetworkGameInitData();
     param->seed = seedValue;
-    param->saveData = NULL;
+    param->saveData = nullptr;
     param->texturePackId = pClass->m_MoreOptionsParams.dwTexturePack;
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
@@ -1166,13 +1166,13 @@ void CScene_MultiGameCreate::UpdateTexturePackDescription(int index) {
     TexturePack* tp =
         Minecraft::GetInstance()->skins->getTexturePackById(iTexPackId);
 
-    if (tp == NULL) {
+    if (tp == nullptr) {
         // this is probably a texture pack icon added from TMS
 
         unsigned int dwBytes = 0;
         unsigned int dwFileBytes = 0;
-        std::uint8_t* pbData = NULL;
-        std::uint8_t* pbFileData = NULL;
+        std::uint8_t* pbData = nullptr;
+        std::uint8_t* pbFileData = nullptr;
 
         CXuiCtrl4JList::LIST_ITEM_INFO ListItem;
         // get the current index of the list, and then get the data
@@ -1240,7 +1240,7 @@ void CScene_MultiGameCreate::UpdateCurrentTexturePack() {
         Minecraft::GetInstance()->skins->getTexturePackById(iTexPackId);
 
     // if the texture pack is null, you don't have it yet
-    if (tp == NULL) {
+    if (tp == nullptr) {
         // Upsell
 
         CXuiCtrl4JList::LIST_ITEM_INFO ListItem;
@@ -1317,7 +1317,7 @@ int CScene_MultiGameCreate::TexturePackDialogReturned(
         if (result == C4JStorage::EMessage_ResultAccept)  // Full version
         {
             ullIndexA[0] = ullOfferID_Full;
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
 
         } else  // trial version
         {
@@ -1325,7 +1325,7 @@ int CScene_MultiGameCreate::TexturePackDialogReturned(
             DLC_INFO* pDLCInfo = app.GetDLCInfoForFullOfferID(ullOfferID_Full);
             if (pDLCInfo->ullOfferID_Trial != 0LL) {
                 ullIndexA[0] = pDLCInfo->ullOfferID_Trial;
-                StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+                StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
             }
         }
     }
@@ -1389,7 +1389,7 @@ HRESULT CScene_MultiGameCreate::OnCustomMessage_DLCMountingComplete() {
 
     // 4J-PB - there may be texture packs we don't have, so use the info from
     // TMS for this REMOVE UNTIL WORKING
-    DLC_INFO* pDLCInfo = NULL;
+    DLC_INFO* pDLCInfo = nullptr;
 
     // first pass - look to see if there are any that are not in the list
     bool bTexturePackAlreadyListed;
@@ -1417,7 +1417,7 @@ HRESULT CScene_MultiGameCreate::OnCustomMessage_DLCMountingComplete() {
         // add a TMS request for them
         app.DebugPrintf("+++ Adding TMSPP request for texture pack data\n");
         app.AddTMSPPFileTypeRequest(e_DLC_TexturePackData);
-        if (m_iConfigA != NULL) {
+        if (m_iConfigA != nullptr) {
             delete m_iConfigA;
         }
         m_iConfigA = new int[m_iTexturePacksNotInstalled];

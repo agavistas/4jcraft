@@ -50,8 +50,8 @@ void UIScene_TrialExitUpsell::handleInput(int iPad, int key, bool repeat,
 #if defined(__PS3__) || defined(__PSVITA__)
                 bool bContentRestricted;
                 ProfileManager.GetChatAndContentRestrictions(
-                    ProfileManager.GetPrimaryPad(), true, NULL,
-                    &bContentRestricted, NULL);
+                    ProfileManager.GetPrimaryPad(), true, nullptr,
+                    &bContentRestricted, nullptr);
                 if (bContentRestricted) {
                     unsigned int uiIDA[1];
                     uiIDA[0] = IDS_CONFIRM_OK;

@@ -88,7 +88,7 @@ HRESULT CScene_Controls::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 
     m_iPad = *(int*)pInitData->pvInitData;
     // if we're not in the game, we need to use basescene 0
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
     bool bSplitscreen = (app.GetLocalPlayerCount() > 1);
     m_iCurrentTextIndex = 0;
     m_bCreativeMode =
@@ -144,7 +144,7 @@ HRESULT CScene_Controls::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
             controlDetailsA[i].vPos.y /= 2.0f;
         }
         m_FigA[i].SetShow(FALSE);
-        m_TextPresenterA[i] = NULL;
+        m_TextPresenterA[i] = nullptr;
     }
 
     // fill out the layouts list
@@ -156,7 +156,7 @@ HRESULT CScene_Controls::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 
     for (int i = 0; i < 3; i++) {
         ListInfo[i].pwszText = m_LayoutNameA[i];
-        ListInfo[i].hXuiBrush = NULL;
+        ListInfo[i].hXuiBrush = nullptr;
         ListInfo[i].fEnabled = TRUE;
         m_pLayoutList->AddData(ListInfo[i]);
     }
@@ -301,8 +301,8 @@ void CScene_Controls::PositionText(int iPad, int iTextID,
     XuiElementGetScale(hFigGroup, &vScale);
 
     // check the width of the control with the text set in it
-    if (m_TextPresenterA[m_iCurrentTextIndex] == NULL) {
-        HXUIOBJ hObj = NULL;
+    if (m_TextPresenterA[m_iCurrentTextIndex] == nullptr) {
+        HXUIOBJ hObj = nullptr;
         HRESULT hr =
             XuiControlGetVisual(m_TextA[m_iCurrentTextIndex].m_hObj, &hObj);
         hr = XuiElementGetChildById(hObj, L"Text",
@@ -426,8 +426,8 @@ void CScene_Controls::PositionTextDirect(int iPad, int iTextID,
     XuiElementGetScale(hFigGroup, &vScale);
 
     // check the width of the control with the text set in it
-    if (m_TextPresenterA[m_iCurrentTextIndex] == NULL) {
-        HXUIOBJ hObj = NULL;
+    if (m_TextPresenterA[m_iCurrentTextIndex] == nullptr) {
+        HXUIOBJ hObj = nullptr;
         HRESULT hr =
             XuiControlGetVisual(m_TextA[m_iCurrentTextIndex].m_hObj, &hObj);
         hr = XuiElementGetChildById(hObj, L"Text",

@@ -59,7 +59,7 @@ HRESULT CScene_Death::OnNotifySelChanged(
         XuiSetLocale( Languages[curSel].pszLanguagePath );
 
         // Apply the locale to the main scene.
-        XuiApplyLocale( m_hObj, NULL );
+        XuiApplyLocale( m_hObj, nullptr );
 
         // Update the text for the current value.
         m_Value.SetText( m_List.GetText( curSel ) );*/
@@ -105,7 +105,7 @@ HRESULT CScene_Death::OnNotifyPressEx(HXUIOBJ hObjPressed,
                     ProfileManager.GetPrimaryPad()) {
                     int playTime = -1;
                     if (pMinecraft->localplayers[pNotifyPressData->UserIndex] !=
-                        NULL) {
+                        nullptr) {
                         playTime =
                             (int)pMinecraft
                                 ->localplayers[pNotifyPressData->UserIndex]

@@ -16,7 +16,7 @@ int TripWireTile::getTickDelay(Level* level) {
     return 20;  // 10;
 }
 
-AABB* TripWireTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* TripWireTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 bool TripWireTile::blocksLight() { return false; }
 
@@ -78,7 +78,7 @@ void TripWireTile::playerWillDestroy(Level* level, int x, int y, int z,
                                      int data, std::shared_ptr<Player> player) {
     if (level->isClientSide) return;
 
-    if (player->getSelectedItem() != NULL &&
+    if (player->getSelectedItem() != nullptr &&
         player->getSelectedItem()->id == Item::shears_Id) {
         level->setData(x, y, z, data | MASK_DISARMED, Tile::UPDATE_NONE);
     }

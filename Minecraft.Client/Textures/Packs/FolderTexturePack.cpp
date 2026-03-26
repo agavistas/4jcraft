@@ -33,7 +33,7 @@ InputStream* FolderTexturePack::getResourceImplementation(
 #endif
     InputStream* resource = InputStream::getResourceAsStream(wDrive + name);
     // InputStream *stream =
-    // DefaultTexturePack::class->getResourceAsStream(name); if (stream == NULL)
+    // DefaultTexturePack::class->getResourceAsStream(name); if (stream == nullptr)
     //{
     //	throw new FileNotFoundException(name);
     // }
@@ -86,7 +86,7 @@ void FolderTexturePack::loadUI() {
                  getPath().c_str());
 
         XuiFreeVisuals(L"");
-        app.LoadSkin(szResourceLocator, NULL);  // L"TexturePack");
+        app.LoadSkin(szResourceLocator, nullptr);  // L"TexturePack");
         bUILoaded = true;
         // CXuiSceneBase::GetInstance()->SetVisualPrefix(L"TexturePack");
     }

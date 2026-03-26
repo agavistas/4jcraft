@@ -43,7 +43,7 @@ Chunk::Chunk(Level* level, LevelRenderer::rteMap& globalRenderableTileEntities,
     : globalRenderableTileEntities(&globalRenderableTileEntities),
       globalRenderableTileEntities_cs(&globalRenderableTileEntities_cs) {
     clipChunk->visible = false;
-    bb = NULL;
+    bb = nullptr;
     id = 0;
 
     this->level = level;
@@ -94,7 +94,7 @@ void Chunk::setPos(int x, int y, int z) {
     float g = 6.0f;
     // 4J - changed to just set the value rather than make a new one, if we've
     // already created storage
-    if (bb == NULL) {
+    if (bb == nullptr) {
         bb = AABB::newPermanent(-g, -g, -g, XZSIZE + g, SIZE + g, XZSIZE + g);
     } else {
         // 4J MGH - bounds are relative to the position now, so the AABB will be
@@ -162,7 +162,7 @@ void Chunk::makeCopyForRebuild(Chunk* source) {
     this->ym = source->ym;
     this->zm = source->zm;
     this->bb = source->bb;
-    this->clipChunk = NULL;
+    this->clipChunk = nullptr;
     this->id = source->id;
     this->globalRenderableTileEntities = source->globalRenderableTileEntities;
     this->globalRenderableTileEntities_cs =
@@ -722,7 +722,7 @@ void Chunk::rebuild_SPU() {
     // actually get all of it if the data was ordered differently, but currently
     // it is ordered by x then z then y so just getting a small range of y out
     // of it would involve getting the whole thing into the cache anyway.
-    ChunkRebuildData* pOutData = NULL;
+    ChunkRebuildData* pOutData = nullptr;
     g_rebuildDataIn.buildForChunk(&region, level, x0, y0, z0);
 
     Tesselator::Bounds bounds;
@@ -1018,7 +1018,7 @@ void Chunk::reset() {
 
 void Chunk::_delete() {
     reset();
-    level = NULL;
+    level = nullptr;
 }
 
 int Chunk::getList(int layer) {

@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 CXuiCtrlCraftIngredientSlot::CXuiCtrlCraftIngredientSlot() {
     m_iID = 0;
-    m_Desc = NULL;
+    m_Desc = nullptr;
     m_isFoil = false;
     m_isDirty = false;
     m_item = nullptr;
@@ -26,7 +26,7 @@ HRESULT CXuiCtrlCraftIngredientSlot::OnInit(XUIMessageInit* pInitData,
 //-----------------------------------------------------------------------------
 HRESULT CXuiCtrlCraftIngredientSlot::OnCustomMessage_GetSlotItem(
     CustomMessage_GetSlotItem_Struct* pData, BOOL& bHandled) {
-    if (m_iID != 0 || m_item != NULL) {
+    if (m_iID != 0 || m_item != nullptr) {
         pData->item = m_item;
         pData->iItemBitField =
             MAKE_SLOTDISPLAY_ITEM_BITMASK(m_iID, m_iAuxVal, m_isFoil);
@@ -98,7 +98,7 @@ void CXuiCtrlCraftIngredientSlot::SetIcon(int iPad,
                                           std::shared_ptr<ItemInstance> item,
                                           int iScale, unsigned int uiAlpha,
                                           bool bDecorations, bool bShow) {
-    if (item == NULL)
+    if (item == nullptr)
         SetIcon(iPad, 0, 0, 0, 0, 0, false, false, bShow);
     else {
         m_item = item;
@@ -121,6 +121,6 @@ void CXuiCtrlCraftIngredientSlot::SetDescription(LPCWSTR Desc) {
     hr = GetVisual(&hObj);
     XuiElementGetChildById(hObj, L"text_name", &hObjChild);
     XuiControlSetText(hObjChild, Desc);
-    XuiElementSetShow(hObjChild, Desc == NULL ? FALSE : TRUE);
+    XuiElementSetShow(hObjChild, Desc == nullptr ? FALSE : TRUE);
     m_Desc = Desc;
 }

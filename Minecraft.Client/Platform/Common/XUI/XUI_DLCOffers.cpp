@@ -187,7 +187,7 @@ HRESULT CScene_DLCOffers::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_iType = param->iType;
     m_iOfferC = app.GetDLCOffersCount();
     m_bIsFemale = false;
-    m_pNoImageFor_DLC = NULL;
+    m_pNoImageFor_DLC = nullptr;
     bNoDLCToDisplay = true;
     // hCostText=NULL;
 
@@ -203,10 +203,10 @@ HRESULT CScene_DLCOffers::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
         HRESULT hRes;
 
         hRes = XAvatarInitialize(XAVATAR_COORDINATE_SYSTEM_LEFT_HANDED, 0, 0, 0,
-                                 NULL);
+                                 nullptr);
 
         // get the avatar gender
-        hRes = XAvatarGetMetadataLocalUser(m_iPad, &AvatarMetadata, NULL);
+        hRes = XAvatarGetMetadataLocalUser(m_iPad, &AvatarMetadata, nullptr);
 
         m_bIsFemale = (XAVATAR_BODY_TYPE_FEMALE ==
                        XAvatarMetadataGetBodyType(&AvatarMetadata));
@@ -224,7 +224,7 @@ HRESULT CScene_DLCOffers::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_bIgnorePress = true;
 
     void* pObj;
-    m_hXuiBrush = NULL;
+    m_hXuiBrush = nullptr;
 
     XuiObjectFromHandle(m_List, &pObj);
     m_pOffersList = (CXuiCtrl4JList*)pObj;
@@ -257,7 +257,7 @@ HRESULT CScene_DLCOffers::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 }
 
 HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
-    CXuiCtrl4JList::LIST_ITEM_INFO* pListInfo = NULL;
+    CXuiCtrl4JList::LIST_ITEM_INFO* pListInfo = nullptr;
     // XMARKETPLACE_CONTENTOFFER_INFO xOffer;
     XMARKETPLACE_CURRENCY_CONTENTOFFER_INFO xOffer;
     constexpr int LOCATOR_SIZE =
@@ -273,12 +273,12 @@ HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
             xOffer = StorageManager.GetOffer(i);
             // Check that this is in the list of known DLC
             DLC_INFO* pDLC = app.GetDLCInfoForFullOfferID(xOffer.qwOfferID);
-            if (pDLC == NULL) {
+            if (pDLC == nullptr) {
                 // try the trial version
                 pDLC = app.GetDLCInfoForTrialOfferID(xOffer.qwOfferID);
             }
 
-            if (pDLC == NULL) {
+            if (pDLC == nullptr) {
                 // skip this one
 #ifdef _DEBUG
                 app.DebugPrintf("Unknown offer - ");
@@ -336,12 +336,12 @@ HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
 
             // Check that this is in the list of known DLC
             DLC_INFO* pDLC = app.GetDLCInfoForFullOfferID(xOffer.qwOfferID);
-            if (pDLC == NULL) {
+            if (pDLC == nullptr) {
                 // try the trial version
                 pDLC = app.GetDLCInfoForTrialOfferID(xOffer.qwOfferID);
             }
 
-            if (pDLC == NULL) {
+            if (pDLC == nullptr) {
                 // skip this one
 #ifdef _DEBUG
                 app.DebugPrintf("Unknown offer - ");
@@ -439,8 +439,8 @@ HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
         m_pOffersList->SetCurSelVisible(0);
 
         DLC_INFO* dlc = app.GetDLCInfoForFullOfferID(xOffer.qwOfferID);
-        if (dlc != NULL) {
-            std::uint8_t* pData = NULL;
+        if (dlc != nullptr) {
+            std::uint8_t* pData = nullptr;
             unsigned int dwSize = 0;
 
             WCHAR* cString = dlc->wchBanner;
@@ -449,7 +449,7 @@ HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
 
             if (iIndex != -1) {
                 // it's in the xzp
-                if (m_hXuiBrush != NULL) {
+                if (m_hXuiBrush != nullptr) {
                     XuiDestroyBrush(m_hXuiBrush);
                     // clear the TMS XZP vector memory
                     // app.FreeLocalTMSFiles();
@@ -466,7 +466,7 @@ HRESULT CScene_DLCOffers::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
                     // image when it comes in
                     m_pNoImageFor_DLC = dlc;
                 } else {
-                    if (m_hXuiBrush != NULL) {
+                    if (m_hXuiBrush != nullptr) {
                         XuiDestroyBrush(m_hXuiBrush);
                         // clear the TMS XZP vector memory
                         // app.FreeLocalTMSFiles();
@@ -551,7 +551,7 @@ HRESULT CScene_DLCOffers::OnNotifyPressEx(HXUIOBJ hObjPressed,
         // anyway
         {
             ullIndexA[0] = StorageManager.GetOffer(ItemInfo.iData).qwOfferID;
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
         }
     }
 
@@ -635,7 +635,7 @@ HRESULT CScene_DLCOffers::OnNotifySelChanged(
     // int index = pNotifySelChangedData->iItem;
     //  reset the image monitor, but not for the first selection
     if (pNotifySelChangedData->iOldItem != -1) {
-        m_pNoImageFor_DLC = NULL;
+        m_pNoImageFor_DLC = nullptr;
     }
 
     if (m_List.TreeHasFocus())  // && offerIndexes.size() > index)
@@ -667,12 +667,12 @@ HRESULT CScene_DLCOffers::OnNotifySelChanged(
         m_PriceTag.SetText(xOffer.wszCurrencyPrice);
 
         DLC_INFO* dlc = app.GetDLCInfoForTrialOfferID(xOffer.qwOfferID);
-        if (dlc == NULL) {
+        if (dlc == nullptr) {
             dlc = app.GetDLCInfoForFullOfferID(xOffer.qwOfferID);
         }
 
-        if (dlc != NULL) {
-            std::uint8_t* pImage = NULL;
+        if (dlc != nullptr) {
+            std::uint8_t* pImage = nullptr;
             unsigned int dwSize = 0;
 
             WCHAR* cString = dlc->wchBanner;
@@ -681,7 +681,7 @@ HRESULT CScene_DLCOffers::OnNotifySelChanged(
 
             if (iIndex != -1) {
                 // it's in the xzp
-                if (m_hXuiBrush != NULL) {
+                if (m_hXuiBrush != nullptr) {
                     XuiDestroyBrush(m_hXuiBrush);
                     // clear the TMS XZP vector memory
                     // app.FreeLocalTMSFiles();
@@ -704,7 +704,7 @@ HRESULT CScene_DLCOffers::OnNotifySelChanged(
                     // avatars
                     app.AddTMSPPFileTypeRequest(dlc->eDLCType, true);
                 } else {
-                    if (m_hXuiBrush != NULL) {
+                    if (m_hXuiBrush != nullptr) {
                         XuiDestroyBrush(m_hXuiBrush);
                         // clear the TMS XZP vector memory
                         // app.FreeLocalTMSFiles();
@@ -715,12 +715,12 @@ HRESULT CScene_DLCOffers::OnNotifySelChanged(
                 }
             }
         } else {
-            if (m_hXuiBrush != NULL) {
+            if (m_hXuiBrush != nullptr) {
                 XuiDestroyBrush(m_hXuiBrush);
                 // clear the TMS XZP vector memory
                 // app.FreeLocalTMSFiles();
 
-                m_hXuiBrush = NULL;
+                m_hXuiBrush = nullptr;
             }
         }
 
@@ -765,24 +765,24 @@ HRESULT CScene_DLCOffers::OnTimer(XUIMessageTimer* pData, BOOL& rfHandled) {
     }
 
     // Check for any TMS image we're waiting for
-    if (m_pNoImageFor_DLC != NULL) {
+    if (m_pNoImageFor_DLC != nullptr) {
         // Is it present now?
         WCHAR* cString = m_pNoImageFor_DLC->wchBanner;
 
         bool bPresent = app.IsFileInMemoryTextures(cString);
 
         if (bPresent) {
-            std::uint8_t* pImage = NULL;
+            std::uint8_t* pImage = nullptr;
             unsigned int dwSize = 0;
 
-            if (m_hXuiBrush != NULL) {
+            if (m_hXuiBrush != nullptr) {
                 XuiDestroyBrush(m_hXuiBrush);
                 // clear the TMS XZP vector memory
                 // app.FreeLocalTMSFiles();
             }
             app.GetMemFileDetails(cString, &pImage, &dwSize);
             XuiCreateTextureBrushFromMemory(pImage, dwSize, &m_hXuiBrush);
-            m_pNoImageFor_DLC = NULL;
+            m_pNoImageFor_DLC = nullptr;
         }
     }
 

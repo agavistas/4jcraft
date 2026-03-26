@@ -74,15 +74,15 @@
 
    Nullness:
    --------
-   If the parameter can be NULL as a precondition to the function, the
+   If the parameter can be nullptr as a precondition to the function, the
    annotation contains _opt. If the macro does not contain '_opt' the
-   parameter cannot be NULL.
+   parameter cannot be nullptr.
 
    If an out/inout parameter returns a null pointer as a postcondition, this is
    indicated by _Ret_maybenull_ or _result_maybenull_. If the macro is not
-   of this form, then the result will not be NULL as a postcondition.
-     _Outptr_ - output value is not NULL
-     _Outptr_result_maybenull_ - output value might be NULL
+   of this form, then the result will not be nullptr as a postcondition.
+     _Outptr_ - output value is not nullptr
+     _Outptr_result_maybenull_ - output value might be nullptr
 
    String Type:
    -----------
@@ -126,7 +126,7 @@
    The success criteria can be specified with the _Success_(expr) annotation:
      _Success_(return != FALSE) BOOL
      PathCanonicalizeA(_Out_writes_(MAX_PATH) LPSTR pszBuf, LPCSTR pszPath) :
-        pszBuf is only guaranteed to be NULL-terminated when TRUE is returned,
+        pszBuf is only guaranteed to be nullptr-terminated when TRUE is returned,
         and FALSE indicates failure. In common practice, callers check for zero
         vs. non-zero returns, so it is preferable to express the success
         criteria in terms of zero/non-zero, not checked for exactly TRUE.
@@ -293,7 +293,7 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
 //   _In_\_Out_ Layer:
 //============================================================================
 
-// Reserved pointer parameters, must always be NULL.
+// Reserved pointer parameters, must always be nullptr.
 #define _Reserved_ _SAL2_Source_(_Reserved_, (), _Pre1_impl_(__null_impl))
 
 // _Const_ allows specification that any namable memory location is considered
@@ -482,16 +482,16 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
 //      The caller passes the address of an LPWSTR variable as ppwsz, and SHStrDupW allocates
 //      and initializes memory and returns the pointer to the new LPWSTR in *ppwsz.
 //
-//    _Outptr_opt_ - describes parameters that are allowed to be NULL.
-//    _Outptr_*_result_maybenull_ - describes parameters where the called function might return NULL
+//    _Outptr_opt_ - describes parameters that are allowed to be nullptr.
+//    _Outptr_*_result_maybenull_ - describes parameters where the called function might return nullptr
 //    to the caller.
 //
 //    Example:
 //       void MyFunc(_Outptr_opt_ int **ppData1, _Outptr_result_maybenull_ int **ppData2);
 //    Callers:
-//       MyFunc(NULL, NULL);           // error: parameter 2, ppData2, should not be NULL
+//       MyFunc(NULL, nullptr);           // error: parameter 2, ppData2, should not be nullptr
 //       MyFunc(&pData1, &pData2);     // ok: both non-NULL
-//       if (*pData1 == *pData2) ...   // error: pData2 might be NULL after call
+//       if (*pData1 == *pData2) ...   // error: pData2 might be nullptr after call
 
 #define _Outptr_                \
     _SAL2_Source_(_Outptr_, (), \
@@ -516,7 +516,7 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
 #define _Outptr_opt_result_maybenull_z_ \
     _SAL2_Source_(_Outptr_opt_result_maybenull_z_, (), _Out_opt_impl_ _Deref_post_opt_z_)
 
-// Annotations for _Outptr_ parameters where the output pointer is set to NULL if the function
+// Annotations for _Outptr_ parameters where the output pointer is set to nullptr if the function
 // fails.
 
 #define _Outptr_result_nullonfailure_ \
@@ -526,7 +526,7 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
                   _Outptr_opt_ _On_failure_(_Deref_post_null_))
 
 // Annotations for _Outptr_ parameters which return a pointer to a ref-counted COM object,
-// following the COM convention of setting the output to NULL on failure.
+// following the COM convention of setting the output to nullptr on failure.
 // The current implementation is identical to _Outptr_result_nullonfailure_.
 // For pointers to types that are not COM objects, _Outptr_result_nullonfailure_ is preferred.
 
@@ -679,7 +679,7 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
                   _Outref_result_bytebuffer_to_maybenull_(size, _Old_(size)))
 
 // Annotations for output reference to pointer parameters that guarantee
-// that the pointer is set to NULL on failure.
+// that the pointer is set to nullptr on failure.
 #define _Outref_result_nullonfailure_ \
     _SAL2_Source_(_Outref_result_nullonfailure_, (), _Outref_ _On_failure_(_Post_null_))
 
@@ -1009,8 +1009,8 @@ enum __SAL_YesNo { _SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default 
 
    Nullness:
    --------
-   If the pointer can be NULL the annotation contains _opt. If the macro
-   does not contain '_opt' the pointer may not be NULL.
+   If the pointer can be nullptr the annotation contains _opt. If the macro
+   does not contain '_opt' the pointer may not be nullptr.
 
    String Type:
    -----------
@@ -3257,8 +3257,8 @@ typedef struct __F_ __F_;
           return value 'p'.
 
  <>         : p is the buffer pointer.
- _deref     : *p is the buffer pointer. p must not be NULL.
- _deref_opt : *p may be the buffer pointer. p may be NULL, in which case the rest of
+ _deref     : *p is the buffer pointer. p must not be nullptr.
+ _deref_opt : *p may be the buffer pointer. p may be nullptr, in which case the rest of
                 the annotation is ignored.
 
  Usage: Describes how the function uses the buffer.
@@ -3291,7 +3291,7 @@ typedef struct __F_ __F_;
            category for _in buffers; they must be fully initialized by the caller.
 
  <>    : The type specifies how much is initialized. For instance, a function initializing
-           an LPWSTR must NULL-terminate the string.
+           an LPWSTR must nullptr-terminate the string.
  _full : The function initializes the entire buffer.
  _part : The function initializes part of the buffer, and explicitly indicates how much.
 
@@ -3301,8 +3301,8 @@ typedef struct __F_ __F_;
           buffer.
  Optional: Describes if the buffer itself is optional.
 
- <>   : The pointer to the buffer must not be NULL.
- _opt : The pointer to the buffer might be NULL. It will be checked before being dereferenced.
+ <>   : The pointer to the buffer must not be nullptr.
+ _opt : The pointer to the buffer might be nullptr. It will be checked before being dereferenced.
 
  Parameters: Gives explicit counts for the size and length of the buffer.
 
@@ -3322,14 +3322,14 @@ typedef struct __F_ __F_;
 
  void MyPaintingFunction(
      __in HWND hwndControl,               -- An initialized read-only parameter.
-     __in_opt HDC hdcOptional,            -- An initialized read-only parameter that might be NULL.
+     __in_opt HDC hdcOptional,            -- An initialized read-only parameter that might be nullptr.
      __inout IPropertyStore *ppsStore     -- An initialized parameter that may be freely used
                                           --   and modified.
  );
 
  LWSTDAPI_(BOOL) PathCompactPathExA(
      __out_ecount(cchMax) LPSTR pszOut,   -- A string buffer with cch elements that will
-                                          --   be NULL terminated on exit.
+                                          --   be nullptr terminated on exit.
      __in LPCSTR pszSrc,
      UINT cchMax,
      DWORD dwFlags
@@ -3366,12 +3366,12 @@ typedef struct __F_ __F_;
 
  __nullterminated p :
      Pointer p is a buffer that may be read or written up to and including the first
-     NULL character or pointer. May be used on typedefs, which marks valid (properly
-     initialized) instances of that type as being NULL-terminated.
+     nullptr character or pointer. May be used on typedefs, which marks valid (properly
+     initialized) instances of that type as being nullptr-terminated.
 
  __nullnullterminated p :
      Pointer p is a buffer that may be read or written up to and including the first
-     sequence of two NULL characters or pointers. May be used on typedefs, which marks
+     sequence of two nullptr characters or pointers. May be used on typedefs, which marks
      valid instances of that type as being double-NULL terminated.
 
  __reserved v :
@@ -3404,12 +3404,12 @@ typedef struct __F_ __F_;
 
  __success(return != FALSE) LWSTDAPI_(BOOL)
  PathCanonicalizeA(__out_ecount(MAX_PATH) LPSTR pszBuf, LPCSTR pszPath) :
-    pszBuf is only guaranteed to be NULL-terminated when TRUE is returned.
+    pszBuf is only guaranteed to be nullptr-terminated when TRUE is returned.
 
- typedef __nullterminated WCHAR* LPWSTR : Initialized LPWSTRs are NULL-terminated strings.
+ typedef __nullterminated WCHAR* LPWSTR : Initialized LPWSTRs are nullptr-terminated strings.
 
  __out_ecount(cch) __typefix(LPWSTR) void *psz : psz is a buffer parameter which will be
-     a NULL-terminated WCHAR string at exit, and which initially contains cch WCHARs.
+     a nullptr-terminated WCHAR string at exit, and which initially contains cch WCHARs.
 
  -------------------------------------------------------------------------------
 */
@@ -3487,7 +3487,7 @@ extern "C" {
 
  Annotates any value v. States that the value satisfies all properties of
  valid values of its type. For example, for a string buffer, valid means
- that the buffer pointer is either NULL or points to a NULL-terminated string.
+ that the buffer pointer is either nullptr or points to a nullptr-terminated string.
 */
 
 #define __valid _Valid_impl_

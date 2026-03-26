@@ -87,7 +87,7 @@ void ConsoleSaveFileConverter::ConvertSave(ConsoleSaveFile* sourceSave,
         sourceSave->getFilesWithPrefix(DirectoryLevelStorage::getPlayerDir());
 #endif
 
-    if (playerFiles != NULL) {
+    if (playerFiles != nullptr) {
         for (int fileIdx = 0; fileIdx < playerFiles->size(); fileIdx++) {
             ConsoleSavePath sourcePlayerDatPath(
                 playerFiles->at(fileIdx)->data.filename);

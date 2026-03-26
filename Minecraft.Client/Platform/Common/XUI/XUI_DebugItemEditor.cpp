@@ -18,9 +18,9 @@ HRESULT CScene_DebugItemEditor::OnInit(XUIMessageInit* pInitData,
     m_iPad = initData->iPad;
     m_slot = initData->slot;
     m_menu = initData->menu;
-    if (m_slot != NULL) m_item = m_slot->getItem();
+    if (m_slot != nullptr) m_item = m_slot->getItem();
 
-    if (m_item != NULL) {
+    if (m_item != nullptr) {
         m_icon->SetIcon(m_iPad, m_item->id, m_item->getAuxValue(),
                         m_item->count, 10, 31, false, m_item->isFoil());
         m_itemName.SetText(
@@ -55,13 +55,13 @@ HRESULT CScene_DebugItemEditor::OnKeyDown(XUIMessageInput* pInputData,
         case VK_PAD_BACK:
             // We need to send a packet to the server to update it's
             // representation of this item
-            if (m_slot != NULL && m_menu != NULL) {
+            if (m_slot != nullptr && m_menu != nullptr) {
                 m_slot->set(m_item);
 
                 Minecraft* pMinecraft = Minecraft::GetInstance();
                 std::shared_ptr<MultiplayerLocalPlayer> player =
                     pMinecraft->localplayers[m_iPad];
-                if (player != NULL && player->connection)
+                if (player != nullptr && player->connection)
                     player->connection->send(
                         std::shared_ptr<ContainerSetSlotPacket>(
                             new ContainerSetSlotPacket(m_menu->containerId,
@@ -81,7 +81,7 @@ HRESULT CScene_DebugItemEditor::OnKeyDown(XUIMessageInput* pInputData,
 HRESULT CScene_DebugItemEditor::OnNotifyValueChanged(
     HXUIOBJ hObjSource, XUINotifyValueChanged* pNotifyValueChangedData,
     BOOL& bHandled) {
-    if (m_item == NULL)
+    if (m_item == nullptr)
         m_item = std::shared_ptr<ItemInstance>(new ItemInstance(0, 1, 0));
     if (hObjSource == m_itemId) {
         int id = 0;
@@ -89,7 +89,7 @@ HRESULT CScene_DebugItemEditor::OnNotifyValueChanged(
         if (!value.empty()) id = _fromString<int>(value);
 
         // TODO Proper validation of the valid item ids
-        if (id > 0 && Item::items[id] != NULL) m_item->id = id;
+        if (id > 0 && Item::items[id] != nullptr) m_item->id = id;
     } else if (hObjSource == m_itemAuxValue) {
         int auxVal = 0;
         std::wstring value = m_itemAuxValue.GetText();

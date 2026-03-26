@@ -25,10 +25,10 @@ RedStoneDustTile::RedStoneDustTile(int id)
 
     updateDefaultShape();
 
-    iconCross = NULL;
-    iconLine = NULL;
-    iconCrossOver = NULL;
-    iconLineOver = NULL;
+    iconCross = nullptr;
+    iconLine = nullptr;
+    iconCrossOver = nullptr;
+    iconLineOver = nullptr;
 }
 
 // 4J Added override
@@ -37,7 +37,7 @@ void RedStoneDustTile::updateDefaultShape() {
 }
 
 AABB* RedStoneDustTile::getAABB(Level* level, int x, int y, int z) {
-    return NULL;
+    return nullptr;
 }
 
 bool RedStoneDustTile::isSolidRender(bool isServerLevel) { return false; }
@@ -431,5 +431,5 @@ Icon* RedStoneDustTile::getTexture(const std::wstring& name) {
         return Tile::redStoneDust->iconCrossOver;
     if (name.compare(TEXTURE_LINE_OVERLAY) == 0)
         return Tile::redStoneDust->iconLineOver;
-    return NULL;
+    return nullptr;
 }

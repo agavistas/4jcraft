@@ -5,7 +5,7 @@
 #include "../../Minecraft.World/Util/JavaMath.h"
 
 UIControl::UIControl() {
-    m_parentScene = NULL;
+    m_parentScene = nullptr;
     m_lastOpacity = 1.0f;
     m_controlName = "";
     m_isVisible = true;
@@ -29,10 +29,10 @@ bool UIControl::setupControl(UIScene* scene, IggyValuePath* parent,
     m_nameVisible = registerFastName(L"visible");
 
     F64 fx, fy, fwidth, fheight;
-    IggyValueGetF64RS(getIggyValuePath(), m_nameXPos, NULL, &fx);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameYPos, NULL, &fy);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameWidth, NULL, &fwidth);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameHeight, NULL, &fheight);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameXPos, nullptr, &fx);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameYPos, nullptr, &fy);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameWidth, nullptr, &fwidth);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameHeight, nullptr, &fheight);
 
     m_x = (S32)fx;
     m_y = (S32)fy;
@@ -45,10 +45,10 @@ bool UIControl::setupControl(UIScene* scene, IggyValuePath* parent,
 #ifdef __PSVITA__
 void UIControl::UpdateControl() {
     F64 fx, fy, fwidth, fheight;
-    IggyValueGetF64RS(getIggyValuePath(), m_nameXPos, NULL, &fx);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameYPos, NULL, &fy);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameWidth, NULL, &fwidth);
-    IggyValueGetF64RS(getIggyValuePath(), m_nameHeight, NULL, &fheight);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameXPos, nullptr, &fx);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameYPos, nullptr, &fy);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameWidth, nullptr, &fwidth);
+    IggyValueGetF64RS(getIggyValuePath(), m_nameHeight, nullptr, &fheight);
     m_x = (S32)fx;
     m_y = (S32)fy;
     m_width = (S32)Math::round(fwidth);
@@ -75,7 +75,7 @@ void UIControl::ReInit() {
             m_funcSetAlpha, 2, value);
     }
 
-    IggyValueSetBooleanRS(getIggyValuePath(), m_nameVisible, NULL, m_isVisible);
+    IggyValueSetBooleanRS(getIggyValuePath(), m_nameVisible, nullptr, m_isVisible);
 }
 
 IggyValuePath* UIControl::getIggyValuePath() { return &m_iggyPath; }
@@ -113,7 +113,7 @@ void UIControl::setOpacity(float percent) {
 void UIControl::setVisible(bool visible) {
     if (visible != m_isVisible) {
         rrbool succ = IggyValueSetBooleanRS(getIggyValuePath(), m_nameVisible,
-                                            NULL, visible);
+                                            nullptr, visible);
         if (succ)
             m_isVisible = visible;
         else
@@ -125,7 +125,7 @@ bool UIControl::getVisible() {
     rrbool bVisible = false;
 
     IggyResult result = IggyValueGetBooleanRS(getIggyValuePath(), m_nameVisible,
-                                              NULL, &bVisible);
+                                              nullptr, &bVisible);
 
     m_isVisible = bVisible;
 

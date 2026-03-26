@@ -86,7 +86,7 @@ UIScene_CreateWorldMenu::UIScene_CreateWorldMenu(int iPad, void* initData,
 
     m_bGameModeCreative = false;
     m_iGameModeId = GameType::SURVIVAL->getId();
-    m_pDLCPack = NULL;
+    m_pDLCPack = nullptr;
     m_bRebuildTouchBoxes = false;
 
     m_bMultiplayerAllowed = ProfileManager.IsSignedInLive(m_iPad) &&
@@ -186,7 +186,7 @@ UIScene_CreateWorldMenu::UIScene_CreateWorldMenu(int iPad, void* initData,
         // 4J-PB - there may be texture packs we don't have, so use the info
         // from TMS for this
 
-        DLC_INFO* pDLCInfo = NULL;
+        DLC_INFO* pDLCInfo = nullptr;
 
         // first pass - look to see if there are any that are not in the list
         bool bTexturePackAlreadyListed;
@@ -464,7 +464,7 @@ void UIScene_CreateWorldMenu::StartSharedLaunchFlow() {
         TexturePack* pTexturePack = pMinecraft->skins->getTexturePackById(
             m_MoreOptionsParams.dwTexturePack);
 
-        if (pTexturePack == NULL) {
+        if (pTexturePack == nullptr) {
 #if TO_BE_IMPLEMENTED
             // They've selected a texture pack they don't have yet
             // upsell
@@ -553,7 +553,7 @@ void UIScene_CreateWorldMenu::StartSharedLaunchFlow() {
                     m_pDLCPack->getPurchaseOfferId());
                 ULONGLONG ullOfferID_Full;
 
-                if (pDLCInfo != NULL) {
+                if (pDLCInfo != nullptr) {
                     ullOfferID_Full = pDLCInfo->ullOfferID_Full;
                 } else {
                     ullOfferID_Full =
@@ -674,7 +674,7 @@ void UIScene_CreateWorldMenu::handleTimerComplete(int id) {
             for (int i = 0; i < m_iTexturePacksNotInstalled; i++) {
                 if (m_iConfigA[i] != -1) {
                     unsigned int dwBytes = 0;
-                    std::uint8_t* pbData = NULL;
+                    std::uint8_t* pbData = nullptr;
                     // app.DebugPrintf("Retrieving iConfig %d from
                     // TPD\n",m_iConfigA[i]);
 
@@ -684,7 +684,7 @@ void UIScene_CreateWorldMenu::handleTimerComplete(int id) {
                                sizeof(CXuiCtrl4JList::LIST_ITEM_INFO));
                     if (dwBytes > 0 && pbData) {
                         unsigned int dwImageBytes = 0;
-                        std::uint8_t* pbImageData = NULL;
+                        std::uint8_t* pbImageData = nullptr;
 
                         app.GetFileFromTPD(eTPDFileType_Icon, pbData, dwBytes,
                                            &pbImageData, &dwImageBytes);
@@ -839,7 +839,7 @@ IDS_PRO_NOTONLINE_TEXT, uiIDA, 1, ProfileManager.GetPrimaryPad()); return;
                 uiIDA[0] = IDS_OK;
                 ui.RequestAlertMessage(
                     IDS_ERROR_NETWORK_TITLE, IDS_ERROR_NETWORK, uiIDA, 1,
-                    ProfileManager.GetPrimaryPad(), NULL, NULL);
+                    ProfileManager.GetPrimaryPad(), nullptr, nullptr);
                 return;
             }
 
@@ -907,8 +907,8 @@ IDS_PRO_NOTONLINE_TEXT, uiIDA, 1, ProfileManager.GetPrimaryPad()); return;
 #if defined(__PS3__) || defined(__PSVITA__)
         if (isOnlineGame && isSignedInLive) {
             ProfileManager.GetChatAndContentRestrictions(
-                ProfileManager.GetPrimaryPad(), false, NULL,
-                &bContentRestricted, NULL);
+                ProfileManager.GetPrimaryPad(), false, nullptr,
+                &bContentRestricted, nullptr);
         }
 #endif
 
@@ -939,7 +939,7 @@ IDS_PRO_NOTONLINE_TEXT, uiIDA, 1, ProfileManager.GetPrimaryPad()); return;
                     uiIDA[0] = IDS_OK;
                     ui.RequestAlertMessage(
                         IDS_ERROR_NETWORK_TITLE, IDS_ERROR_NETWORK, uiIDA, 1,
-                        ProfileManager.GetPrimaryPad(), NULL, NULL);
+                        ProfileManager.GetPrimaryPad(), nullptr, nullptr);
                     return;
                 }
 
@@ -998,7 +998,7 @@ IDS_PRO_NOTONLINE_TEXT, uiIDA, 1, ProfileManager.GetPrimaryPad()); return;
                     uiIDA[0] = IDS_OK;
                     ui.RequestAlertMessage(
                         IDS_ERROR_NETWORK_TITLE, IDS_ERROR_NETWORK, uiIDA, 1,
-                        ProfileManager.GetPrimaryPad(), NULL, NULL);
+                        ProfileManager.GetPrimaryPad(), nullptr, nullptr);
                     return;
                 }
 
@@ -1032,7 +1032,7 @@ IDS_PRO_NOTONLINE_TEXT, uiIDA, 1, ProfileManager.GetPrimaryPad()); return;
                     bool chatRestricted = false;
                     ProfileManager.GetChatAndContentRestrictions(
                         ProfileManager.GetPrimaryPad(), false, &chatRestricted,
-                        NULL, NULL);
+                        nullptr, nullptr);
                     if (chatRestricted) {
                         ProfileManager.DisplaySystemMessage(
                             SCE_MSG_DIALOG_SYSMSG_TYPE_TRC_PSN_CHAT_RESTRICTION,
@@ -1132,7 +1132,7 @@ void UIScene_CreateWorldMenu::CreateGame(UIScene_CreateWorldMenu* pClass,
     }
 
     param->seed = seedValue;
-    param->saveData = NULL;
+    param->saveData = nullptr;
     param->texturePackId = pClass->m_MoreOptionsParams.dwTexturePack;
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
@@ -1440,7 +1440,7 @@ int UIScene_CreateWorldMenu::ConfirmCreateReturned(
                     bool chatRestricted = false;
                     ProfileManager.GetChatAndContentRestrictions(
                         ProfileManager.GetPrimaryPad(), false, &chatRestricted,
-                        NULL, NULL);
+                        nullptr, nullptr);
                     if (chatRestricted) {
                         ProfileManager.DisplaySystemMessage(
                             SCE_MSG_DIALOG_SYSMSG_TYPE_TRC_PSN_CHAT_RESTRICTION,

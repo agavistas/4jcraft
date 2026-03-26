@@ -42,7 +42,7 @@ HRESULT CXuiSceneEnchant::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     }
 
 #ifdef _XBOX
-    if (pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
         m_previousTutorialState = gameMode->getTutorial()->getCurrentState();
@@ -78,10 +78,10 @@ HRESULT CXuiSceneEnchant::OnDestroy() {
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
 #ifdef _XBOX
-    if (pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
-        if (gameMode != NULL)
+        if (gameMode != nullptr)
             gameMode->getTutorial()->changeTutorialState(
                 m_previousTutorialState);
     }
@@ -92,7 +92,7 @@ HRESULT CXuiSceneEnchant::OnDestroy() {
     // packet loss. We need to make sure that we call closeContainer() anytime
     // this menu is closed, even if it is forced to close by some other reason
     // (like the player dying)
-    if (Minecraft::GetInstance()->localplayers[m_iPad] != NULL)
+    if (Minecraft::GetInstance()->localplayers[m_iPad] != nullptr)
         Minecraft::GetInstance()->localplayers[m_iPad]->closeContainer();
     return S_OK;
 }
@@ -121,7 +121,7 @@ CXuiControl* CXuiSceneEnchant::GetSectionControl(ESceneSection eSection) {
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 CXuiCtrlSlotList* CXuiSceneEnchant::GetSectionSlotList(ESceneSection eSection) {
@@ -139,7 +139,7 @@ CXuiCtrlSlotList* CXuiSceneEnchant::GetSectionSlotList(ESceneSection eSection) {
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 // 4J Stu - Added to support auto-save. Need to re-associate on a navigate back

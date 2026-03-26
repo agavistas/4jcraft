@@ -20,7 +20,7 @@ HRESULT CScene_SettingsOptions::OnInit(XUIMessageInit* pInitData,
     WCHAR TempString[256];
     m_iPad = *(int*)pInitData->pvInitData;
     // if we're not in the game, we need to use basescene 0
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
     bool bPrimaryPlayer = ProfileManager.GetPrimaryPad() == m_iPad;
 
     MapChildControls();
@@ -348,7 +348,7 @@ HRESULT CScene_SettingsOptions::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 
@@ -472,7 +472,7 @@ HRESULT CScene_SettingsOptions::OnTransitionStart(
             // changed
             XuiControlAttachVisual(m_hObj);
 
-            bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+            bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
             if (bNotInGame) {
                 float fDiffTextW;

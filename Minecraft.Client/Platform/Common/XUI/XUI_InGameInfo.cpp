@@ -41,7 +41,7 @@ HRESULT CScene_InGameInfo::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     for (int i = 0; i < playerCount; ++i) {
         INetworkPlayer* player = g_NetworkManager.GetPlayerByIndex(i);
 
-        if (player != NULL) {
+        if (player != nullptr) {
             m_players[i] = player->GetSmallId();
             ++m_playersCount;
         }
@@ -53,7 +53,7 @@ HRESULT CScene_InGameInfo::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     INetworkPlayer* thisPlayer =
         g_NetworkManager.GetLocalPlayerByUserIndex(m_iPad);
     m_isHostPlayer = false;
-    if (thisPlayer != NULL) m_isHostPlayer = thisPlayer->IsHost() == TRUE;
+    if (thisPlayer != nullptr) m_isHostPlayer = thisPlayer->IsHost() == TRUE;
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
     std::shared_ptr<MultiplayerLocalPlayer> localPlayer =
@@ -138,7 +138,7 @@ HRESULT CScene_InGameInfo::OnKeyDown(XUIMessageInput* pInputData,
                 (playersList.GetCurSel() < m_playersCount)) {
                 INetworkPlayer* player = g_NetworkManager.GetPlayerBySmallId(
                     m_players[playersList.GetCurSel()]);
-                if (player != NULL) {
+                if (player != nullptr) {
                     PlayerUID xuid = ((NetworkPlayerXbox*)player)->GetUID();
                     if (xuid != INVALID_XUID)
                         hr = XShowGamerCardUI(pInputData->UserIndex, xuid);
@@ -182,7 +182,7 @@ HRESULT CScene_InGameInfo::OnNotifyPressEx(HXUIOBJ hObjPressed,
         bool cheats = app.GetGameHostOption(eGameHostOption_CheatsEnabled) != 0;
         bool trust = app.GetGameHostOption(eGameHostOption_TrustPlayers) != 0;
 
-        if (isOp && selectedPlayer != NULL && playersList.TreeHasFocus() &&
+        if (isOp && selectedPlayer != nullptr && playersList.TreeHasFocus() &&
             (playersList.GetItemCount() > 0) &&
             (playersList.GetCurSel() < m_playersCount)) {
             bool editingHost = selectedPlayer->IsHost();
@@ -301,7 +301,7 @@ HRESULT CScene_InGameInfo::OnGetSourceDataText(
         if (pGetSourceTextData->iItem < m_playersCount) {
             INetworkPlayer* player = g_NetworkManager.GetPlayerBySmallId(
                 m_players[pGetSourceTextData->iItem]);
-            if (player != NULL) {
+            if (player != nullptr) {
 #ifndef _CONTENT_PACKAGE
                 if (app.DebugSettingsOn() &&
                     (app.GetGameSettingsDebugMask() &
@@ -385,7 +385,7 @@ HRESULT CScene_InGameInfo::OnGetSourceDataText(
             hr = XuiElementGetChildById(hVisual, L"VoiceGroup", &hVoiceIcon);
 
             playFrame = -1;
-            if (player != NULL && player->HasVoice()) {
+            if (player != nullptr && player->HasVoice()) {
                 if (player->IsMutedByLocalUser(m_iPad)) {
                     // Muted image
                     XuiElementFindNamedFrame(hVoiceIcon, L"Muted", &playFrame);
@@ -457,7 +457,7 @@ void CScene_InGameInfo::updateTooltips() {
     if (isOp) {
         if (m_gameOptionsButton.HasFocus()) {
             keyA = IDS_TOOLTIPS_SELECT;
-        } else if (selectedPlayer != NULL) {
+        } else if (selectedPlayer != nullptr) {
             bool editingHost = selectedPlayer->IsHost();
             if ((cheats && (m_isHostPlayer || !editingHost)) ||
                 (!trust && (m_isHostPlayer || !editingHost))
@@ -479,7 +479,7 @@ void CScene_InGameInfo::updateTooltips() {
 
     if (!m_gameOptionsButton.HasFocus()) {
         // if the player is me, then view gamer profile
-        if (selectedPlayer != NULL && selectedPlayer->IsLocal() &&
+        if (selectedPlayer != nullptr && selectedPlayer->IsLocal() &&
             selectedPlayer->GetUserIndex() == m_iPad) {
             ikeyY = IDS_TOOLTIPS_VIEW_GAMERPROFILE;
         } else {
@@ -505,7 +505,7 @@ int CScene_InGameInfo::KickPlayerReturned(void* pParam, int iPad,
         Minecraft* pMinecraft = Minecraft::GetInstance();
         std::shared_ptr<MultiplayerLocalPlayer> localPlayer =
             pMinecraft->localplayers[iPad];
-        if (localPlayer != NULL && localPlayer->connection) {
+        if (localPlayer != nullptr && localPlayer->connection) {
             localPlayer->connection->send(std::shared_ptr<KickPlayerPacket>(
                 new KickPlayerPacket(smallId)));
         }

@@ -92,7 +92,7 @@ HRESULT CScene_SocialPost::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest == NULL) {
+    if (pControlNavigateData->hObjDest == nullptr) {
         pControlNavigateData->hObjDest = pControlNavigateData->hObjSource;
     }
 

@@ -113,7 +113,7 @@ UIScene_PauseMenu::UIScene_PauseMenu(int iPad, void* initData,
     TelemetryManager->RecordPauseOrInactive(m_iPad);
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
-    if (pMinecraft != NULL && pMinecraft->localgameModes[iPad] != NULL) {
+    if (pMinecraft != nullptr && pMinecraft->localgameModes[iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[iPad];
 
@@ -125,7 +125,7 @@ UIScene_PauseMenu::UIScene_PauseMenu(int iPad, void* initData,
 
 UIScene_PauseMenu::~UIScene_PauseMenu() {
     Minecraft* pMinecraft = Minecraft::GetInstance();
-    if (pMinecraft != NULL && pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft != nullptr && pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
 
@@ -633,7 +633,7 @@ void UIScene_PauseMenu::handlePress(F64 controlId, F64 childId) {
                 bool bContentRestricted = false;
 #if defined(__PS3__) || defined(__PSVITA__)
                 ProfileManager.GetChatAndContentRestrictions(
-                    m_iPad, true, NULL, &bContentRestricted, NULL);
+                    m_iPad, true, nullptr, &bContentRestricted, nullptr);
 #endif
                 if (bContentRestricted) {
 #if !(defined(_XBOX) || defined(_WINDOWS64) || \
@@ -688,7 +688,7 @@ void UIScene_PauseMenu::handlePress(F64 controlId, F64 childId) {
                 // is it the primary player exiting?
                 if (m_iPad == ProfileManager.GetPrimaryPad()) {
                     int playTime = -1;
-                    if (pMinecraft->localplayers[m_iPad] != NULL) {
+                    if (pMinecraft->localplayers[m_iPad] != nullptr) {
                         playTime = (int)pMinecraft->localplayers[m_iPad]
                                        ->getSessionTimer();
                     }
@@ -775,7 +775,7 @@ void UIScene_PauseMenu::handlePress(F64 controlId, F64 childId) {
 #endif
                 } else {
                     int playTime = -1;
-                    if (pMinecraft->localplayers[m_iPad] != NULL) {
+                    if (pMinecraft->localplayers[m_iPad] != nullptr) {
                         playTime = (int)pMinecraft->localplayers[m_iPad]
                                        ->getSessionTimer();
                     }
@@ -790,7 +790,7 @@ void UIScene_PauseMenu::handlePress(F64 controlId, F64 childId) {
                 // is it the primary player exiting?
                 if (m_iPad == ProfileManager.GetPrimaryPad()) {
                     int playTime = -1;
-                    if (pMinecraft->localplayers[m_iPad] != NULL) {
+                    if (pMinecraft->localplayers[m_iPad] != nullptr) {
                         playTime = (int)pMinecraft->localplayers[m_iPad]
                                        ->getSessionTimer();
                     }
@@ -810,7 +810,7 @@ void UIScene_PauseMenu::handlePress(F64 controlId, F64 childId) {
 
                 } else {
                     int playTime = -1;
-                    if (pMinecraft->localplayers[m_iPad] != NULL) {
+                    if (pMinecraft->localplayers[m_iPad] != nullptr) {
                         playTime = (int)pMinecraft->localplayers[m_iPad]
                                        ->getSessionTimer();
                     }
@@ -1054,8 +1054,8 @@ int UIScene_PauseMenu::UnlockFullSaveReturned(
 #if defined(__PS3__) || defined(__PSVITA__)
             bool bContentRestricted;
             ProfileManager.GetChatAndContentRestrictions(
-                ProfileManager.GetPrimaryPad(), true, NULL, &bContentRestricted,
-                NULL);
+                ProfileManager.GetPrimaryPad(), true, nullptr, &bContentRestricted,
+                nullptr);
             if (bContentRestricted) {
                 unsigned int uiIDA[1];
                 uiIDA[0] = IDS_CONFIRM_OK;
@@ -1204,7 +1204,7 @@ int UIScene_PauseMenu::ViewLeaderboards_SignInReturned(void* pParam,
 #ifndef __ORBIS__
             bool bContentRestricted = false;
             ProfileManager.GetChatAndContentRestrictions(
-                pClass->m_iPad, true, NULL, &bContentRestricted, NULL);
+                pClass->m_iPad, true, nullptr, &bContentRestricted, nullptr);
             if (bContentRestricted) {
                 // you can't see leaderboards
                 ui.RequestAlertMessage(IDS_ONLINE_SERVICE_TITLE,
@@ -1277,8 +1277,8 @@ int UIScene_PauseMenu::WarningTrialTexturePackReturned(
             // 4J-PB - need to check this user can access the store
             bool bContentRestricted = false;
             ProfileManager.GetChatAndContentRestrictions(
-                ProfileManager.GetPrimaryPad(), true, NULL, &bContentRestricted,
-                NULL);
+                ProfileManager.GetPrimaryPad(), true, nullptr, &bContentRestricted,
+                nullptr);
             if (bContentRestricted) {
                 unsigned int uiIDA[1];
                 uiIDA[0] = IDS_CONFIRM_OK;
@@ -1302,7 +1302,7 @@ int UIScene_PauseMenu::WarningTrialTexturePackReturned(
                 app.DebugPrintf("Texture Pack - %s\n", pchPackName);
                 SONYDLC* pSONYDLCInfo = app.GetSONYDLCInfo((char*)pchPackName);
 
-                if (pSONYDLCInfo != NULL) {
+                if (pSONYDLCInfo != nullptr) {
                     char chName[42];
                     char chKeyName[20];
                     char chSkuID[SCE_NP_COMMERCE2_SKU_ID_LEN];
@@ -1314,7 +1314,7 @@ int UIScene_PauseMenu::WarningTrialTexturePackReturned(
                     // the first sku for the product is the one we want
 
                     // MGH -  keyname in the DLC file is 16 chars long, but
-                    // there's no space for a NULL terminating char
+                    // there's no space for a nullptr terminating char
                     memset(chKeyName, 0, sizeof(chKeyName));
                     strncpy(chKeyName, pSONYDLCInfo->chDLCKeyname, 16);
 
@@ -1357,7 +1357,7 @@ int UIScene_PauseMenu::BuyTexturePack_SignInReturned(void* pParam,
             // 4J-PB - need to check this user can access the store
             bool bContentRestricted = false;
             ProfileManager.GetChatAndContentRestrictions(
-                iPad, true, NULL, &bContentRestricted, NULL);
+                iPad, true, nullptr, &bContentRestricted, nullptr);
             if (bContentRestricted) {
                 unsigned int uiIDA[1];
                 uiIDA[0] = IDS_CONFIRM_OK;
@@ -1381,7 +1381,7 @@ int UIScene_PauseMenu::BuyTexturePack_SignInReturned(void* pParam,
                 app.DebugPrintf("Texture Pack - %s\n", pchPackName);
                 SONYDLC* pSONYDLCInfo = app.GetSONYDLCInfo((char*)pchPackName);
 
-                if (pSONYDLCInfo != NULL) {
+                if (pSONYDLCInfo != nullptr) {
                     char chName[42];
                     char chKeyName[20];
                     char chSkuID[SCE_NP_COMMERCE2_SKU_ID_LEN];
@@ -1393,7 +1393,7 @@ int UIScene_PauseMenu::BuyTexturePack_SignInReturned(void* pParam,
                     // the first sku for the product is the one we want
 
                     // MGH -  keyname in the DLC file is 16 chars long, but
-                    // there's no space for a NULL terminating char
+                    // there's no space for a nullptr terminating char
                     memset(chKeyName, 0, sizeof(chKeyName));
                     strncpy(chKeyName, pSONYDLCInfo->chDLCKeyname, 16);
 

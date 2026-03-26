@@ -266,8 +266,8 @@ const int MobSpawner::tick(ServerLevel* level, bool spawnEnemies,
                 int z = zStart;
                 int ss = 6;
 
-                Biome::MobSpawnerData* currentMobType = NULL;
-                MobGroupData* groupData = NULL;
+                Biome::MobSpawnerData* currentMobType = nullptr;
+                MobGroupData* groupData = nullptr;
 
                 for (int ll = 0; ll < 4; ll++) {
                     x +=
@@ -288,7 +288,7 @@ const int MobSpawner::tick(ServerLevel* level, bool spawnEnemies,
                         float yy = (float)y;
                         float zz = z + 0.5f;
                         if (level->getNearestPlayer(
-                                xx, yy, zz, MIN_SPAWN_DISTANCE) != NULL) {
+                                xx, yy, zz, MIN_SPAWN_DISTANCE) != nullptr) {
                             continue;
                         } else {
                             float xd = xx - spawnPos->x;
@@ -300,10 +300,10 @@ const int MobSpawner::tick(ServerLevel* level, bool spawnEnemies,
                             }
                         }
 
-                        if (currentMobType == NULL) {
+                        if (currentMobType == nullptr) {
                             currentMobType = level->getRandomMobSpawnAt(
                                 mobCategory, x, y, z);
-                            if (currentMobType == NULL) {
+                            if (currentMobType == nullptr) {
                                 break;
                             }
                         }
@@ -492,7 +492,7 @@ void MobSpawner::postProcessSpawnMobs(Level* level, Biome* biome, int xo,
 	while (random->nextFloat() < biome->getCreatureProbability())
 	{
 		Biome::MobSpawnerData *type = (Biome::MobSpawnerData *) WeighedRandom::getRandomItem(level->random, ((std::vector<WeighedRandomItem *> *)mobs));
-		MobGroupData *groupData = NULL;
+		MobGroupData *groupData = nullptr;
 		int count = type->minCount + random->nextInt(1 + type->maxCount - type->minCount);
 
 		int x = xo + random->nextInt(cellWidth);

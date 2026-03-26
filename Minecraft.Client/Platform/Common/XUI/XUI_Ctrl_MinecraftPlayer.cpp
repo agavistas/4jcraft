@@ -38,10 +38,10 @@ HRESULT CXuiCtrlMinecraftPlayer::OnInit(XUIMessageInit* pInitData,
     do {
         XuiElementGetParent(parent, &parent);
         currentClass = XuiGetObjectClass(parent);
-    } while (parent != NULL &&
+    } while (parent != nullptr &&
              !XuiClassDerivesFrom(currentClass, hcInventoryClass));
 
-    assert(parent != NULL);
+    assert(parent != nullptr);
 
     void* pObj;
     XuiObjectFromHandle(parent, &pObj);
@@ -110,7 +110,7 @@ HRESULT CXuiCtrlMinecraftPlayer::OnRender(XUIMessageRender* pRenderData,
     //
     // 	for(int i=0;i<XUSER_MAX_COUNT;i++)
     // 	{
-    // 		if(pMinecraft->localplayers[i] != NULL)
+    // 		if(pMinecraft->localplayers[i] != nullptr)
     // 		{
     // 			iPlayerC++;
     // 		}

@@ -194,7 +194,7 @@ HRESULT CScene_ConnectingProgress::OnTimer(XUIMessageTimer* pTimer,
             StorageManager.RequestMessageBox(IDS_CONNECTION_FAILED,
                                              exitReasonStringId, uiIDA, 1,
                                              ProfileManager.GetPrimaryPad(),
-                                             NULL, NULL, app.GetStringTable());
+                                             nullptr, nullptr, app.GetStringTable());
 #endif
             exitReasonStringId = -1;
 

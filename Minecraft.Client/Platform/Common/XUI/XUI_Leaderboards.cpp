@@ -23,11 +23,11 @@ const int
     CScene_Leaderboards::TitleIcons[CScene_Leaderboards::NUM_LEADERBOARDS][7] =
         {
             {XZP_ICON_WALKED, XZP_ICON_FALLEN, Item::minecart_Id, Item::boat_Id,
-             NULL},
+             nullptr},
             {Tile::dirt_Id, Tile::stoneBrick_Id, Tile::sand_Id, Tile::rock_Id,
              Tile::gravel_Id, Tile::clay_Id, Tile::obsidian_Id},
             {Item::egg_Id, Item::wheat_Id, Tile::mushroom1_Id, Tile::reeds_Id,
-             Item::milk_Id, Tile::pumpkin_Id, NULL},
+             Item::milk_Id, Tile::pumpkin_Id, nullptr},
             {XZP_ICON_ZOMBIE, XZP_ICON_SKELETON, XZP_ICON_CREEPER,
              XZP_ICON_SPIDER, XZP_ICON_SPIDERJOCKEY, XZP_ICON_ZOMBIEPIGMAN,
              XZP_ICON_SLIME},
@@ -56,25 +56,25 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_TRAVELLING_PEACEFUL_WALKED,
                 STATS_COLUMN_TRAVELLING_PEACEFUL_FALLEN,
                 STATS_COLUMN_TRAVELLING_PEACEFUL_MINECART,
-                STATS_COLUMN_TRAVELLING_PEACEFUL_BOAT, NULL, NULL, NULL, NULL),
+                STATS_COLUMN_TRAVELLING_PEACEFUL_BOAT, nullptr, nullptr, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_TRAVELLING_EASY, 4,
                 STATS_COLUMN_TRAVELLING_EASY_WALKED,
                 STATS_COLUMN_TRAVELLING_EASY_FALLEN,
                 STATS_COLUMN_TRAVELLING_EASY_MINECART,
-                STATS_COLUMN_TRAVELLING_EASY_BOAT, NULL, NULL, NULL, NULL),
+                STATS_COLUMN_TRAVELLING_EASY_BOAT, nullptr, nullptr, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_TRAVELLING_NORMAL, 4,
                 STATS_COLUMN_TRAVELLING_NORMAL_WALKED,
                 STATS_COLUMN_TRAVELLING_NORMAL_FALLEN,
                 STATS_COLUMN_TRAVELLING_NORMAL_MINECART,
-                STATS_COLUMN_TRAVELLING_NORMAL_BOAT, NULL, NULL, NULL, NULL),
+                STATS_COLUMN_TRAVELLING_NORMAL_BOAT, nullptr, nullptr, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_TRAVELLING_HARD, 4,
                 STATS_COLUMN_TRAVELLING_HARD_WALKED,
                 STATS_COLUMN_TRAVELLING_HARD_FALLEN,
                 STATS_COLUMN_TRAVELLING_HARD_MINECART,
-                STATS_COLUMN_TRAVELLING_HARD_BOAT, NULL, NULL, NULL, NULL),
+                STATS_COLUMN_TRAVELLING_HARD_BOAT, nullptr, nullptr, nullptr, nullptr),
         },
         {
             CScene_Leaderboards::LeaderboardDescriptor(
@@ -85,7 +85,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_MINING_BLOCKS_PEACEFUL_COBBLESTONE,
                 STATS_COLUMN_MINING_BLOCKS_PEACEFUL_GRAVEL,
                 STATS_COLUMN_MINING_BLOCKS_PEACEFUL_CLAY,
-                STATS_COLUMN_MINING_BLOCKS_PEACEFUL_OBSIDIAN, NULL),
+                STATS_COLUMN_MINING_BLOCKS_PEACEFUL_OBSIDIAN, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_MINING_BLOCKS_EASY, 7,
                 STATS_COLUMN_MINING_BLOCKS_EASY_DIRT,
@@ -94,7 +94,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_MINING_BLOCKS_EASY_COBBLESTONE,
                 STATS_COLUMN_MINING_BLOCKS_EASY_GRAVEL,
                 STATS_COLUMN_MINING_BLOCKS_EASY_CLAY,
-                STATS_COLUMN_MINING_BLOCKS_EASY_OBSIDIAN, NULL),
+                STATS_COLUMN_MINING_BLOCKS_EASY_OBSIDIAN, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_MINING_BLOCKS_NORMAL, 7,
                 STATS_COLUMN_MINING_BLOCKS_NORMAL_DIRT,
@@ -103,7 +103,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_MINING_BLOCKS_NORMAL_COBBLESTONE,
                 STATS_COLUMN_MINING_BLOCKS_NORMAL_GRAVEL,
                 STATS_COLUMN_MINING_BLOCKS_NORMAL_CLAY,
-                STATS_COLUMN_MINING_BLOCKS_NORMAL_OBSIDIAN, NULL),
+                STATS_COLUMN_MINING_BLOCKS_NORMAL_OBSIDIAN, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_MINING_BLOCKS_HARD, 7,
                 STATS_COLUMN_MINING_BLOCKS_HARD_DIRT,
@@ -112,7 +112,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_MINING_BLOCKS_HARD_COBBLESTONE,
                 STATS_COLUMN_MINING_BLOCKS_HARD_GRAVEL,
                 STATS_COLUMN_MINING_BLOCKS_HARD_CLAY,
-                STATS_COLUMN_MINING_BLOCKS_HARD_OBSIDIAN, NULL),
+                STATS_COLUMN_MINING_BLOCKS_HARD_OBSIDIAN, nullptr),
         },
         {
             CScene_Leaderboards::LeaderboardDescriptor(
@@ -122,32 +122,32 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_FARMING_PEACEFUL_MUSHROOMS,
                 STATS_COLUMN_FARMING_PEACEFUL_SUGARCANE,
                 STATS_COLUMN_FARMING_PEACEFUL_MILK,
-                STATS_COLUMN_FARMING_PEACEFUL_PUMPKINS, NULL, NULL),
+                STATS_COLUMN_FARMING_PEACEFUL_PUMPKINS, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_FARMING_EASY, 6, STATS_COLUMN_FARMING_EASY_EGGS,
                 STATS_COLUMN_FARMING_PEACEFUL_WHEAT,
                 STATS_COLUMN_FARMING_EASY_MUSHROOMS,
                 STATS_COLUMN_FARMING_EASY_SUGARCANE,
                 STATS_COLUMN_FARMING_EASY_MILK,
-                STATS_COLUMN_FARMING_EASY_PUMPKINS, NULL, NULL),
+                STATS_COLUMN_FARMING_EASY_PUMPKINS, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_FARMING_NORMAL, 6, STATS_COLUMN_FARMING_NORMAL_EGGS,
                 STATS_COLUMN_FARMING_NORMAL_WHEAT,
                 STATS_COLUMN_FARMING_NORMAL_MUSHROOMS,
                 STATS_COLUMN_FARMING_NORMAL_SUGARCANE,
                 STATS_COLUMN_FARMING_NORMAL_MILK,
-                STATS_COLUMN_FARMING_NORMAL_PUMPKINS, NULL, NULL),
+                STATS_COLUMN_FARMING_NORMAL_PUMPKINS, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_FARMING_HARD, 6, STATS_COLUMN_FARMING_HARD_EGGS,
                 STATS_COLUMN_FARMING_HARD_WHEAT,
                 STATS_COLUMN_FARMING_HARD_MUSHROOMS,
                 STATS_COLUMN_FARMING_HARD_SUGARCANE,
                 STATS_COLUMN_FARMING_HARD_MILK,
-                STATS_COLUMN_FARMING_HARD_PUMPKINS, NULL, NULL),
+                STATS_COLUMN_FARMING_HARD_PUMPKINS, nullptr, nullptr),
         },
         {
             CScene_Leaderboards::LeaderboardDescriptor(
-                NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                nullptr, 0, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_KILLS_EASY, 7, STATS_COLUMN_KILLS_EASY_ZOMBIES,
                 STATS_COLUMN_KILLS_EASY_SKELETONS,
@@ -155,7 +155,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_KILLS_EASY_SPIDERS,
                 STATS_COLUMN_KILLS_EASY_SPIDERJOCKEYS,
                 STATS_COLUMN_KILLS_EASY_ZOMBIEPIGMEN,
-                STATS_COLUMN_KILLS_EASY_SLIME, NULL),
+                STATS_COLUMN_KILLS_EASY_SLIME, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_KILLS_NORMAL, 7, STATS_COLUMN_KILLS_NORMAL_ZOMBIES,
                 STATS_COLUMN_KILLS_NORMAL_SKELETONS,
@@ -163,7 +163,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_KILLS_NORMAL_SPIDERS,
                 STATS_COLUMN_KILLS_NORMAL_SPIDERJOCKEYS,
                 STATS_COLUMN_KILLS_NORMAL_ZOMBIEPIGMEN,
-                STATS_COLUMN_KILLS_NORMAL_SLIME, NULL),
+                STATS_COLUMN_KILLS_NORMAL_SLIME, nullptr),
             CScene_Leaderboards::LeaderboardDescriptor(
                 STATS_VIEW_KILLS_HARD, 7, STATS_COLUMN_KILLS_HARD_ZOMBIES,
                 STATS_COLUMN_KILLS_HARD_SKELETONS,
@@ -171,7 +171,7 @@ const CScene_Leaderboards::LeaderboardDescriptor CScene_Leaderboards::
                 STATS_COLUMN_KILLS_HARD_SPIDERS,
                 STATS_COLUMN_KILLS_HARD_SPIDERJOCKEYS,
                 STATS_COLUMN_KILLS_HARD_ZOMBIEPIGMEN,
-                STATS_COLUMN_KILLS_HARD_SLIME, NULL),
+                STATS_COLUMN_KILLS_HARD_SLIME, nullptr),
         },
 };
 
@@ -181,7 +181,7 @@ HRESULT CScene_Leaderboards::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_bReady = false;
 
     // if we're not in the game, we need to use basescene 0
-    if (Minecraft::GetInstance()->level == NULL) {
+    if (Minecraft::GetInstance()->level == nullptr) {
         m_iPad = DEFAULT_XUI_MENU_USER;
     }
 
@@ -191,9 +191,9 @@ HRESULT CScene_Leaderboards::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
                    -1);
     CXuiSceneBase::ShowLogo(m_iPad, FALSE);
 
-    m_friends = NULL;
+    m_friends = nullptr;
     m_numFriends = 0;
-    m_filteredFriends = NULL;
+    m_filteredFriends = nullptr;
     m_numFilteredFriends = 0;
 
     m_newTop = m_newSel = -1;
@@ -226,10 +226,10 @@ HRESULT CScene_Leaderboards::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 
     // title icons
     for (int i = 0; i < 7; i++) {
-        m_pHTitleIconSlots[i] = NULL;
+        m_pHTitleIconSlots[i] = nullptr;
         m_fTitleIconXPositions[i] = 0.0f;
         m_fTextXPositions[i] = 0.0f;
-        m_hTextEntryA[i] = NULL;
+        m_hTextEntryA[i] = nullptr;
     }
 
     bHandled = TRUE;
@@ -286,9 +286,9 @@ HRESULT CScene_Leaderboards::OnDestroy() {
         Sleep(10);
     }
 
-    if (m_friends != NULL) delete[] m_friends;
+    if (m_friends != nullptr) delete[] m_friends;
 
-    if (m_filteredFriends != NULL) delete[] m_filteredFriends;
+    if (m_filteredFriends != nullptr) delete[] m_filteredFriends;
 
     return S_OK;
 }
@@ -795,7 +795,7 @@ bool CScene_Leaderboards::RetrieveStats() {
         return true;
     }
 
-    // assert( LeaderboardManager::Instance()->GetStats() != NULL );
+    // assert( LeaderboardManager::Instance()->GetStats() != nullptr );
     // PXUSER_STATS_READ_RESULTS stats =
     // LeaderboardManager::Instance()->GetStats(); if( m_currentFilter ==
     // LeaderboardManager::eFM_Friends  )
@@ -1042,11 +1042,11 @@ HRESULT CScene_Leaderboards::OnGetSourceDataImage(
 
 void CScene_Leaderboards::PopulateLeaderboard(bool noResults) {
     HRESULT hr;
-    HXUIOBJ visual = NULL;
-    HXUIOBJ hTemp = NULL;
+    HXUIOBJ visual = nullptr;
+    HXUIOBJ hTemp = nullptr;
     hr = XuiControlGetVisual(m_listGamers.m_hObj, &visual);
 
-    if (m_pHTitleIconSlots[0] == NULL) {
+    if (m_pHTitleIconSlots[0] == nullptr) {
         void* pObj;
         HXUIOBJ button;
         D3DXVECTOR3 vPos;
@@ -1110,7 +1110,7 @@ void CScene_Leaderboards::PopulateLeaderboard(bool noResults) {
              i < (m_leaderboard.m_entryStartIndex - 1) +
                      m_leaderboard.m_currentEntryCount;
              ++i) {
-            HXUIOBJ visual = NULL;
+            HXUIOBJ visual = nullptr;
             HXUIOBJ button;
             D3DXVECTOR3 vPos;
             // 4J-PB - fix for #13768 - Leaderboards: Player scores appear
@@ -1291,7 +1291,7 @@ void CScene_Leaderboards::SetLeaderboardHeader() {
 
     DWORD ret = XResourceGetString(
         LEADERBOARD_HEADERS[m_currentLeaderboard][m_currentDifficulty], buffer,
-        &bufferLength, NULL);
+        &bufferLength, nullptr);
 
     if (ret == ERROR_SUCCESS) m_textLeaderboard.SetText(buffer);
 }
@@ -1319,8 +1319,8 @@ void CScene_Leaderboards::ClearLeaderboardTitlebar() {
         m_pHTitleIconSlots[i]->SetShow(FALSE);
     }
 
-    HXUIOBJ visual = NULL;
-    HXUIOBJ hTemp = NULL;
+    HXUIOBJ visual = nullptr;
+    HXUIOBJ hTemp = nullptr;
     HRESULT hr;
     hr = XuiControlGetVisual(m_listGamers.m_hObj, &visual);
 

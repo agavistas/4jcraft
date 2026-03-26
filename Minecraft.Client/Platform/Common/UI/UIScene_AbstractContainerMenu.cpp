@@ -37,10 +37,10 @@ UIScene_AbstractContainerMenu::~UIScene_AbstractContainerMenu() {
 void UIScene_AbstractContainerMenu::handleDestroy() {
     app.DebugPrintf("UIScene_AbstractContainerMenu::handleDestroy\n");
     Minecraft* pMinecraft = Minecraft::GetInstance();
-    if (pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
-        if (gameMode != NULL)
+        if (gameMode != nullptr)
             gameMode->getTutorial()->changeTutorialState(
                 m_previousTutorialState);
     }
@@ -50,7 +50,7 @@ void UIScene_AbstractContainerMenu::handleDestroy() {
     // packet loss. We need to make sure that we call closeContainer() anytime
     // this menu is closed, even if it is forced to close by some other reason
     // (like the player dying)
-    if (pMinecraft->localplayers[m_iPad] != NULL &&
+    if (pMinecraft->localplayers[m_iPad] != nullptr &&
         pMinecraft->localplayers[m_iPad]->containerMenu->containerId ==
             m_menu->containerId) {
         pMinecraft->localplayers[m_iPad]->closeContainer();
@@ -226,8 +226,8 @@ void UIScene_AbstractContainerMenu::render(S32 width, S32 height,
 void UIScene_AbstractContainerMenu::customDraw(
     IggyCustomDrawCallbackRegion* region) {
     Minecraft* pMinecraft = Minecraft::GetInstance();
-    if (pMinecraft->localplayers[m_iPad] == NULL ||
-        pMinecraft->localgameModes[m_iPad] == NULL)
+    if (pMinecraft->localplayers[m_iPad] == nullptr ||
+        pMinecraft->localgameModes[m_iPad] == nullptr)
         return;
 
     int slotId = parseSlotId(region->name);
@@ -246,7 +246,7 @@ void UIScene_AbstractContainerMenu::customDraw(
         }
     }
 
-    if (item != NULL)
+    if (item != nullptr)
         customDrawSlotControl(
             region, m_iPad, item,
             m_menu->isValidIngredient(item, slotId) ? 1.0f : 0.5f,
@@ -313,7 +313,7 @@ Slot* UIScene_AbstractContainerMenu::getSlot(ESceneSection eSection,
     if (slot)
         return slot;
     else
-        return NULL;
+        return nullptr;
 }
 
 bool UIScene_AbstractContainerMenu::isSlotEmpty(ESceneSection eSection,

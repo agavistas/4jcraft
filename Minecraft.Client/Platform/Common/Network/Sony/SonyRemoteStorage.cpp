@@ -29,7 +29,7 @@ static SceRemoteStorageStatus statParams;
 // 	app.DebugPrintf("remoteStorageCallback err : 0x%08x\n");
 //
 // 	app.getRemoteStorage()->getRemoteFileInfo(&statParams,
-// remoteStorageGetInfoCallback, NULL);
+// remoteStorageGetInfoCallback, nullptr);
 // }
 
 void getSaveInfoReturnCallback(void* lpParam, SonyRemoteStorage::Status s,
@@ -122,7 +122,7 @@ const char* SonyRemoteStorage::getLocalFilename() {
 }
 
 const char* SonyRemoteStorage::getSaveNameUTF8() {
-    if (m_getInfoStatus != e_infoFound) return NULL;
+    if (m_getInfoStatus != e_infoFound) return nullptr;
     DescriptionData* pDescData =
         (DescriptionData*)m_remoteFileInfo->fileDescription;
     return pDescData->m_saveNameUTF8;
@@ -224,12 +224,12 @@ int SonyRemoteStorage::LoadSaveDataThumbnailReturned(
         pClass->m_thumbnailData = thumbnailData;
         pClass->m_thumbnailDataSize = thumbnailBytes;
     } else {
-        app.DebugPrintf("Thumbnail data is NULL, or has size 0\n");
-        pClass->m_thumbnailData = NULL;
+        app.DebugPrintf("Thumbnail data is nullptr, or has size 0\n");
+        pClass->m_thumbnailData = nullptr;
         pClass->m_thumbnailDataSize = 0;
     }
 
-    if (pClass->m_SetDataThread != NULL) delete pClass->m_SetDataThread;
+    if (pClass->m_SetDataThread != nullptr) delete pClass->m_SetDataThread;
 
     pClass->m_SetDataThread =
         new C4JThread(setDataThread, pClass, "setDataThread");
@@ -273,7 +273,7 @@ bool SonyRemoteStorage::shutdown() {
             app.DebugPrintf("Term request done \n");
             m_bInitialised = false;
             free(m_memPoolBuffer);
-            m_memPoolBuffer = NULL;
+            m_memPoolBuffer = nullptr;
             return true;
         } else {
             app.DebugPrintf("Error in Term request: 0x%x \n", ret);

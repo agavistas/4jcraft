@@ -22,7 +22,7 @@ UIScene_DLCOffersMenu::UIScene_DLCOffersMenu(int iPad, void* initData,
     m_iCurrentDLC = 0;
     m_iTotalDLC = 0;
 #if defined(__PS3__) || defined(__ORBIS__) || defined(__PSVITA__)
-    m_pvProductInfo = NULL;
+    m_pvProductInfo = nullptr;
 #endif
     m_bAddAllDLCButtons = true;
 
@@ -51,7 +51,7 @@ UIScene_DLCOffersMenu::UIScene_DLCOffersMenu(int iPad, void* initData,
     }
 
 #ifdef _DURANGO
-    m_pNoImageFor_DLC = NULL;
+    m_pNoImageFor_DLC = nullptr;
     // If we don't yet have this DLC, we need to display a timer
     m_bDLCRequiredIsRetrieved = false;
     m_bIgnorePress = true;
@@ -275,13 +275,13 @@ void UIScene_DLCOffersMenu::handlePress(F64 controlId, F64 childId) {
 #elif defined _XBOX_ONE
             int iIndex = (int)childId;
             StorageManager.InstallOffer(
-                1, StorageManager.GetOffer(iIndex).wszProductID, NULL, NULL);
+                1, StorageManager.GetOffer(iIndex).wszProductID, nullptr, nullptr);
 #else
             int iIndex = (int)childId;
 
             uint64_t ullIndexA[1];
             ullIndexA[0] = StorageManager.GetOffer(iIndex).qwOfferID;
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
 #endif
         } break;
     }
@@ -347,9 +347,9 @@ void UIScene_DLCOffersMenu::tick() {
             app.GetCommerceProductListInfoRetrieved()) {
             m_bAddAllDLCButtons = false;
             // add the categories to the list box
-            if (m_pvProductInfo == NULL) {
+            if (m_pvProductInfo == nullptr) {
                 m_pvProductInfo = app.GetProductList(m_iProductInfoIndex);
-                if (m_pvProductInfo == NULL) {
+                if (m_pvProductInfo == nullptr) {
                     m_iTotalDLC = 0;
                     // need to display text to say no downloadable content
                     // available yet
@@ -686,7 +686,7 @@ void UIScene_DLCOffersMenu::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
             // Check that this is in the list of known DLC
             DLC_INFO* pDLC = app.GetDLCInfoForFullOfferID(xOffer.wszProductID);
 
-            if (pDLC != NULL) {
+            if (pDLC != nullptr) {
                 OrderA[uiDLCCount].uiContentIndex = i;
                 OrderA[uiDLCCount++].uiSortIndex = pDLC->uiSortIndex;
             } else {
@@ -702,7 +702,7 @@ void UIScene_DLCOffersMenu::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
             // Check that this is in the list of known DLC
             DLC_INFO* pDLC = app.GetDLCInfoForFullOfferID(xOffer.wszProductID);
 
-            if (pDLC == NULL) {
+            if (pDLC == nullptr) {
                 // skip this one
                 app.DebugPrintf("Unknown offer - %ls\n", xOffer.wszOfferName);
                 continue;
@@ -728,7 +728,7 @@ void UIScene_DLCOffersMenu::GetDLCInfo(int iOfferC, bool bUpdateOnly) {
                 XCONTENT_DATA* pContentData =
                     StorageManager.GetInstalledDLC(xOffer.wszProductID);
 
-                if (pContentData != NULL) {
+                if (pContentData != nullptr) {
                     m_buttonListOffers.addItem(wstrTemp,
                                                !pContentData->bTrialLicense,
                                                OrderA[i].uiContentIndex);
@@ -800,7 +800,7 @@ bool UIScene_DLCOffersMenu::UpdateDisplay(
     DLC_INFO* dlc = app.GetDLCInfoForFullOfferID(xOffer.wszOfferName);
 #endif
 
-    if (dlc != NULL) {
+    if (dlc != nullptr) {
         WCHAR* cString = dlc->wchBanner;
 
         // is the file in the local DLC images?
@@ -828,7 +828,7 @@ bool UIScene_DLCOffersMenu::UpdateDisplay(
                 // m_bitmapIconOfferImage.setTextureName(L"");
             } else {
                 if (hasRegisteredSubstitutionTexture(cString) == false) {
-                    BYTE* pData = NULL;
+                    BYTE* pData = nullptr;
                     DWORD dwSize = 0;
                     app.GetMemFileDetails(cString, &pData, &dwSize);
                     // set the image

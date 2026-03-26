@@ -33,7 +33,7 @@ CXuiCtrlEnchantmentBook::CXuiCtrlEnchantmentBook()
     m_fScreenHeight = (float)pMinecraft->height_phys;
     m_fRawHeight = (float)ssc.rawHeight;
 
-    model = NULL;
+    model = nullptr;
 
     time = 0;
     flip = oFlip = flipT = flipA = 0.0f;
@@ -41,7 +41,7 @@ CXuiCtrlEnchantmentBook::CXuiCtrlEnchantmentBook()
 }
 
 CXuiCtrlEnchantmentBook::~CXuiCtrlEnchantmentBook() {
-    // if(model != NULL) delete model;
+    // if(model != nullptr) delete model;
 }
 
 //-----------------------------------------------------------------------------
@@ -56,10 +56,10 @@ HRESULT CXuiCtrlEnchantmentBook::OnInit(XUIMessageInit* pInitData,
     do {
         XuiElementGetParent(parent, &parent);
         currentClass = XuiGetObjectClass(parent);
-    } while (parent != NULL &&
+    } while (parent != nullptr &&
              !XuiClassDerivesFrom(currentClass, hcInventoryClass));
 
-    assert(parent != NULL);
+    assert(parent != nullptr);
 
     void* pObj;
     XuiObjectFromHandle(parent, &pObj);
@@ -166,13 +166,13 @@ HRESULT CXuiCtrlEnchantmentBook::OnRender(XUIMessageRender* pRenderData,
 
     glEnable(GL_CULL_FACE);
 
-    if (model == NULL) {
+    if (model == nullptr) {
         // Share the model the the EnchantTableRenderer
 
         EnchantTableRenderer* etr =
             (EnchantTableRenderer*)TileEntityRenderDispatcher::instance
                 ->getRenderer(eTYPE_ENCHANTMENTTABLEENTITY);
-        if (etr != NULL) {
+        if (etr != nullptr) {
             model = etr->bookModel;
         } else {
             model = new BookModel();

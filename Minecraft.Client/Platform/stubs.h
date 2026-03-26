@@ -230,15 +230,15 @@ class ZipFile
 {
 public:
 	ZipFile(File *file) {}
-	InputStream *getInputStream(ZipEntry *entry) { return NULL; }
-	ZipEntry *getEntry(const std::wstring& name) {return NULL;}
+	InputStream *getInputStream(ZipEntry *entry) { return nullptr; }
+	ZipEntry *getEntry(const std::wstring& name) {return nullptr;}
 	void close() {}
 };
 
 class ImageIO
 {
 public:
-	static BufferedImage *read(InputStream *in) { return NULL; }
+	static BufferedImage *read(InputStream *in) { return nullptr; }
 };
 
 class Keyboard

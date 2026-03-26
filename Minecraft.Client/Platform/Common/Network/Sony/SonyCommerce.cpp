@@ -8,22 +8,22 @@ bool SonyCommerce::m_bCommerceInitialised = false;
 SceNpCommerce2SessionInfo SonyCommerce::m_sessionInfo;
 SonyCommerce::State SonyCommerce::m_state = e_state_noSession;
 int SonyCommerce::m_errorCode = 0;
-void* SonyCommerce::m_callbackParam = NULL;
+void* SonyCommerce::m_callbackParam = nullptr;
 
-void* SonyCommerce::m_receiveBuffer = NULL;
+void* SonyCommerce::m_receiveBuffer = nullptr;
 SonyCommerce::Event SonyCommerce::m_event;
 std::queue<SonyCommerce::Message> SonyCommerce::m_messageQueue;
-std::vector<SonyCommerce::ProductInfo>* SonyCommerce::m_pProductInfoList = NULL;
-SonyCommerce::ProductInfoDetailed* SonyCommerce::m_pProductInfoDetailed = NULL;
-SonyCommerce::ProductInfo* SonyCommerce::m_pProductInfo = NULL;
+std::vector<SonyCommerce::ProductInfo>* SonyCommerce::m_pProductInfoList = nullptr;
+SonyCommerce::ProductInfoDetailed* SonyCommerce::m_pProductInfoDetailed = nullptr;
+SonyCommerce::ProductInfo* SonyCommerce::m_pProductInfo = nullptr;
 
-SonyCommerce::CategoryInfo* SonyCommerce::m_pCategoryInfo = NULL;
-const char* SonyCommerce::m_pProductID = NULL;
-char* SonyCommerce::m_pCategoryID = NULL;
+SonyCommerce::CategoryInfo* SonyCommerce::m_pCategoryInfo = nullptr;
+const char* SonyCommerce::m_pProductID = nullptr;
+char* SonyCommerce::m_pCategoryID = nullptr;
 SonyCommerce::CheckoutInputParams SonyCommerce::m_checkoutInputParams;
 SonyCommerce::DownloadListInputParams SonyCommerce::m_downloadInputParams;
 
-SonyCommerce::CallbackFunc SonyCommerce::m_callbackFunc = NULL;
+SonyCommerce::CallbackFunc SonyCommerce::m_callbackFunc = nullptr;
 sys_memory_container_t SonyCommerce::m_memContainer =
     SYS_MEMORY_CONTAINER_ID_INVALID;
 bool SonyCommerce::m_bUpgradingTrial = false;
@@ -40,18 +40,18 @@ SonyCommerce::Phase SonyCommerce::m_currentPhase =
     e_phase_stopped;  ///< Current commerce2 util
 char SonyCommerce::m_commercebuffer[SCE_NP_COMMERCE2_RECV_BUF_SIZE];
 
-C4JThread* SonyCommerce::m_tickThread = NULL;
+C4JThread* SonyCommerce::m_tickThread = nullptr;
 bool SonyCommerce::m_bLicenseChecked =
     false;  // Check the trial/full license for the game
 
 SonyCommerce::ProductInfoDetailed s_trialUpgradeProductInfoDetailed;
 void SonyCommerce::Delete() {
-    m_pProductInfoList = NULL;
-    m_pProductInfoDetailed = NULL;
-    m_pProductInfo = NULL;
-    m_pCategoryInfo = NULL;
-    m_pProductID = NULL;
-    m_pCategoryID = NULL;
+    m_pProductInfoList = nullptr;
+    m_pProductInfoDetailed = nullptr;
+    m_pProductInfo = nullptr;
+    m_pCategoryInfo = nullptr;
+    m_pProductID = nullptr;
+    m_pCategoryID = nullptr;
 }
 void SonyCommerce::Init() {
     int ret;
@@ -90,7 +90,7 @@ bool SonyCommerce::LicenseChecked() { return m_bLicenseChecked; }
 
 void SonyCommerce::CheckForTrialUpgradeKey() {
     StorageManager.CheckForTrialUpgradeKey(CheckForTrialUpgradeKey_Callback,
-                                           NULL);
+                                           nullptr);
 }
 
 int SonyCommerce::Shutdown() {
@@ -458,7 +458,7 @@ int SonyCommerce::getDetailedProductInfo(ProductInfoDetailed* pInfo,
         ret =
             sceNpCommerce2GetProductInfoStart(requestId, categoryId, productId);
     } else {
-        ret = sceNpCommerce2GetProductInfoStart(requestId, NULL, productId);
+        ret = sceNpCommerce2GetProductInfoStart(requestId, nullptr, productId);
     }
     if (ret < 0) {
         sceNpCommerce2DestroyReq(requestId);
@@ -792,11 +792,11 @@ void SonyCommerce::UpgradeTrialCallback1(void* lpParam, int err) {
             SCE_NP_COMMERCE2_SKU_PURCHASABILITY_FLAG_OFF) {
             app.DebugPrintf(
                 4, "UpgradeTrialCallback1 - DownloadAlreadyPurchased\n");
-            SonyCommerce::DownloadAlreadyPurchased(UpgradeTrialCallback2, NULL,
+            SonyCommerce::DownloadAlreadyPurchased(UpgradeTrialCallback2, nullptr,
                                                    skuID);
         } else {
             app.DebugPrintf(4, "UpgradeTrialCallback1 - Checkout\n");
-            SonyCommerce::Checkout(UpgradeTrialCallback2, NULL, skuID);
+            SonyCommerce::Checkout(UpgradeTrialCallback2, nullptr, skuID);
         }
     } else {
         unsigned int uiIDA[1];
@@ -821,7 +821,7 @@ void SonyCommerce::UpgradeTrial(CallbackFunc cb, void* lpParam) {
     // 	static char szTrialUpgradeSkuID[64];
     // 	sprintf(szTrialUpgradeSkuID, "%s-TRIALUPGRADE0001",
     // app.GetCommerceCategory());//, szSKUSuffix);
-    GetDetailedProductInfo(UpgradeTrialCallback1, NULL,
+    GetDetailedProductInfo(UpgradeTrialCallback1, nullptr,
                            &s_trialUpgradeProductInfoDetailed,
                            app.GetUpgradeKey(), app.GetCommerceCategory());
 }
@@ -845,7 +845,7 @@ int SonyCommerce::createContext() {
 
     // Create commerce2 context
     ret = sceNpCommerce2CreateCtx(SCE_NP_COMMERCE2_VERSION, &npId,
-                                  commerce2Handler, NULL, &m_contextId);
+                                  commerce2Handler, nullptr, &m_contextId);
     if (ret < 0) {
         app.DebugPrintf(4, "createContext sceNpCommerce2CreateCtx problem\n");
         return ret;
@@ -1243,7 +1243,7 @@ void SonyCommerce::processEvent() {
             m_memContainer = SYS_MEMORY_CONTAINER_ID_INVALID;
             // 4J-PB - if there's been an error - like dlc already purchased,
             // the runcallback has already happened, and will crash this time
-            if (m_callbackFunc != NULL) {
+            if (m_callbackFunc != nullptr) {
                 runCallback();
             }
             break;
@@ -1263,7 +1263,7 @@ void SonyCommerce::processEvent() {
             m_memContainer = SYS_MEMORY_CONTAINER_ID_INVALID;
             // 4J-PB - if there's been an error - like dlc already purchased,
             // the runcallback has already happened, and will crash this time
-            if (m_callbackFunc != NULL) {
+            if (m_callbackFunc != nullptr) {
                 runCallback();
             }
             break;
@@ -1311,8 +1311,8 @@ void SonyCommerce::CreateSession(CallbackFunc cb, void* lpParam) {
     EnterCriticalSection(&m_queueLock);
     setCallback(cb, lpParam);
     m_messageQueue.push(e_message_commerceCreateSession);
-    if (m_tickThread == NULL)
-        m_tickThread = new C4JThread(TickLoop, NULL, "SonyCommerce tick");
+    if (m_tickThread == nullptr)
+        m_tickThread = new C4JThread(TickLoop, nullptr, "SonyCommerce tick");
     if (m_tickThread->isRunning() == false) {
         m_currentPhase = e_phase_idle;
         m_tickThread->Run();

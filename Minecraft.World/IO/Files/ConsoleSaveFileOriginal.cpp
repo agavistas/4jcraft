@@ -22,16 +22,16 @@
 #endif
 
 unsigned int ConsoleSaveFileOriginal::pagesCommitted = 0;
-void* ConsoleSaveFileOriginal::pvHeap = NULL;
+void* ConsoleSaveFileOriginal::pvHeap = nullptr;
 
 ConsoleSaveFileOriginal::ConsoleSaveFileOriginal(
-    const std::wstring& fileName, void* pvSaveData /*= NULL*/,
+    const std::wstring& fileName, void* pvSaveData /*= nullptr*/,
     unsigned int initialFileSize /*= 0*/, bool forceCleanSave /*= false*/,
     ESavePlatform plat /*= SAVE_FILE_PLATFORM_LOCAL*/) {
     InitializeCriticalSectionAndSpinCount(&m_lock, 5120);
 
     // One time initialise of static stuff required for our storage
-    if (pvHeap == NULL) {
+    if (pvHeap == nullptr) {
         // Reserve a chunk of 64MB of virtual address space for our saves, using
         // 64KB pages. We'll only be committing these as required to grow the
         // storage we need, which will the storage to grow without having to use
@@ -53,13 +53,13 @@ ConsoleSaveFileOriginal::ConsoleSaveFileOriginal(
     // Load a save from the game rules
     bool bLevelGenBaseSave = false;
     LevelGenerationOptions* levelGen = app.getLevelGenerationOptions();
-    if (pvSaveData == NULL && levelGen != NULL &&
+    if (pvSaveData == nullptr && levelGen != nullptr &&
         levelGen->requiresBaseSave()) {
         pvSaveData = levelGen->getBaseSaveData(fileSize);
         if (pvSaveData && fileSize != 0) bLevelGenBaseSave = true;
     }
 
-    if (pvSaveData == NULL || fileSize == 0)
+    if (pvSaveData == nullptr || fileSize == 0)
         fileSize = StorageManager.GetSaveSize();
 
     if (forceCleanSave) fileSize = 0;
@@ -84,7 +84,7 @@ ConsoleSaveFileOriginal::ConsoleSaveFileOriginal(
 
     void* pvRet = VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                COMMIT_ALLOCATION, PAGE_READWRITE);
-    if (pvRet == NULL) {
+    if (pvRet == nullptr) {
 #ifndef _CONTENT_PACKAGE
         // Out of physical memory
         __debugbreak();
@@ -94,7 +94,7 @@ ConsoleSaveFileOriginal::ConsoleSaveFileOriginal(
 
     if (fileSize > 0) {
         bool AllocData = false;
-        if (pvSaveData != NULL) {
+        if (pvSaveData != nullptr) {
 #ifdef __PSVITA__
             // AP - use this to access the virtual memory
             VirtualCopyTo(pvSaveMem, pvSaveData, fileSize);
@@ -191,7 +191,7 @@ ConsoleSaveFileOriginal::ConsoleSaveFileOriginal(
                         void* pvRet =
                             VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                          COMMIT_ALLOCATION, PAGE_READWRITE);
-                        if (pvRet == NULL) {
+                        if (pvRet == nullptr) {
                             // Out of physical memory
                             __debugbreak();
                         }
@@ -221,9 +221,9 @@ ConsoleSaveFileOriginal::~ConsoleSaveFileOriginal() {
     // Make sure we don't have any thumbnail data still waiting round - we can't
     // need it now we've destroyed the save file anyway
 #if defined _XBOX
-    app.GetSaveThumbnail(NULL, NULL);
+    app.GetSaveThumbnail(NULL, nullptr);
 #elif defined __PS3__
-    app.GetSaveThumbnail(NULL, NULL, NULL, NULL);
+    app.GetSaveThumbnail(NULL, nullptr, nullptr, nullptr);
 #endif
 
     DeleteCriticalSection(&m_lock);
@@ -242,7 +242,7 @@ FileEntry* ConsoleSaveFileOriginal::createFile(
 }
 
 void ConsoleSaveFileOriginal::deleteFile(FileEntry* file) {
-    if (file == NULL) return;
+    if (file == nullptr) return;
 
     LockSaveAccess();
 
@@ -350,8 +350,8 @@ void ConsoleSaveFileOriginal::PrepareForWrite(
 bool ConsoleSaveFileOriginal::writeFile(FileEntry* file, const void* lpBuffer,
                                         unsigned int nNumberOfBytesToWrite,
                                         unsigned int* lpNumberOfBytesWritten) {
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -390,8 +390,8 @@ bool ConsoleSaveFileOriginal::writeFile(FileEntry* file, const void* lpBuffer,
 bool ConsoleSaveFileOriginal::zeroFile(FileEntry* file,
                                        unsigned int nNumberOfBytesToWrite,
                                        unsigned int* lpNumberOfBytesWritten) {
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -430,8 +430,8 @@ bool ConsoleSaveFileOriginal::readFile(FileEntry* file, void* lpBuffer,
                                        unsigned int nNumberOfBytesToRead,
                                        unsigned int* lpNumberOfBytesRead) {
     unsigned int actualBytesToRead;
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -507,7 +507,7 @@ void ConsoleSaveFileOriginal::MoveDataBeyond(
             (desiredSize + (CSF_PAGE_SIZE - 1)) / CSF_PAGE_SIZE;
         void* pvRet = VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                    COMMIT_ALLOCATION, PAGE_READWRITE);
-        if (pvRet == NULL) {
+        if (pvRet == nullptr) {
             // Out of physical memory
             __debugbreak();
         }
@@ -702,13 +702,13 @@ void ConsoleSaveFileOriginal::Flush(bool autosave, bool updateThumbnail) {
     // AP - make sure we always allocate just what is needed so it will only
     // SAVE what is needed. If we don't do this the StorageManager will save a
     // file of uncompressed size unnecessarily.
-    compData = NULL;
+    compData = nullptr;
 #endif
 
-    // If we failed to allocate then compData will be NULL
+    // If we failed to allocate then compData will be nullptr
     // Pre-calculate the compressed data size so that we can attempt to allocate
     // a smaller buffer
-    if (compData == NULL) {
+    if (compData == nullptr) {
         // Length should be 0 here so that the compression call knows that we
         // want to know the length back
         compLength = 0;
@@ -742,7 +742,7 @@ void ConsoleSaveFileOriginal::Flush(bool autosave, bool updateThumbnail) {
     }
 #endif
 
-    if (compData != NULL) {
+    if (compData != nullptr) {
         // No compression on PS3 - see comment above
 #ifndef __PS3__
         // Re-compress all save data before we save it to disk
@@ -773,10 +773,10 @@ void ConsoleSaveFileOriginal::Flush(bool autosave, bool updateThumbnail) {
                         compLength);
 #endif
 
-        std::uint8_t* pbThumbnailData = NULL;
+        std::uint8_t* pbThumbnailData = nullptr;
         unsigned int dwThumbnailDataSize = 0;
 
-        std::uint8_t* pbDataSaveImage = NULL;
+        std::uint8_t* pbDataSaveImage = nullptr;
         unsigned int dwDataSizeSaveImage = 0;
 
 #if (defined _XBOX || defined _DURANGO)
@@ -791,8 +791,8 @@ void ConsoleSaveFileOriginal::Flush(bool autosave, bool updateThumbnail) {
 
         int64_t seed = 0;
         bool hasSeed = false;
-        if (MinecraftServer::getInstance() != NULL &&
-            MinecraftServer::getInstance()->levels[0] != NULL) {
+        if (MinecraftServer::getInstance() != nullptr &&
+            MinecraftServer::getInstance()->levels[0] != nullptr) {
             seed = MinecraftServer::getInstance()
                        ->levels[0]
                        ->getLevelData()
@@ -868,7 +868,7 @@ int ConsoleSaveFileOriginal::SaveSaveDataCallback(void* lpParam, bool bRes) {
 
 #ifndef _CONTENT_PACKAGE
 void ConsoleSaveFileOriginal::DebugFlushToFile(
-    void* compressedData /*= NULL*/, unsigned int compressedDataSize /*= 0*/) {
+    void* compressedData /*= nullptr*/, unsigned int compressedDataSize /*= 0*/) {
     LockSaveAccess();
 
     finalizeWrite();
@@ -907,11 +907,11 @@ void ConsoleSaveFileOriginal::DebugFlushToFile(
     bool writeSucceeded = false;
 #endif
 
-    if (compressedData != NULL && compressedDataSize > 0) {
+    if (compressedData != nullptr && compressedDataSize > 0) {
 #ifdef __PSVITA__
         // AP - Use the access function to save
         VirtualWriteFile(outputPath.c_str(), compressedData, compressedDataSize,
-                         &numberOfBytesWritten, NULL);
+                         &numberOfBytesWritten, nullptr);
 #else
         writeSucceeded = PortableFileIO::WriteBinaryFile(
             outputPath, compressedData, compressedDataSize);
@@ -922,7 +922,7 @@ void ConsoleSaveFileOriginal::DebugFlushToFile(
 #ifdef __PSVITA__
         // AP - Use the access function to save
         VirtualWriteFile(outputPath.c_str(), compressedData, compressedDataSize,
-                         &numberOfBytesWritten, NULL);
+                         &numberOfBytesWritten, nullptr);
 #else
         writeSucceeded =
             PortableFileIO::WriteBinaryFile(outputPath, pvSaveMem, fileSize);
@@ -950,7 +950,7 @@ std::vector<FileEntry*>* ConsoleSaveFileOriginal::getFilesWithPrefix(
 
 std::vector<FileEntry*>* ConsoleSaveFileOriginal::getRegionFilesByDimension(
     unsigned int dimensionIndex) {
-    return NULL;
+    return nullptr;
 }
 
 #if defined(__PS3__) || defined(__ORBIS__) || defined(__PSVITA__)

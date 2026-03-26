@@ -38,10 +38,10 @@ HRESULT CXuiCtrlEnchantmentButtonText::OnInit(XUIMessageInit* pInitData,
     do {
         XuiElementGetParent(parent, &parent);
         currentClass = XuiGetObjectClass(parent);
-    } while (parent != NULL &&
+    } while (parent != nullptr &&
              !XuiClassDerivesFrom(currentClass, hcInventoryClass));
 
-    assert(parent != NULL);
+    assert(parent != nullptr);
 
     void* pObj;
     XuiObjectFromHandle(parent, &pObj);

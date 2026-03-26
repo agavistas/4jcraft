@@ -172,7 +172,7 @@ HRESULT CXuiSceneAbstractContainer::OnTransitionStart(
             InitDataAssociations(m_iPad, m_menu);
         }
 
-        HXUIOBJ hObj = NULL;
+        HXUIOBJ hObj = nullptr;
         HRESULT hr = XuiControlGetVisual(m_pointerControl->m_hObj, &hObj);
         hr = XuiElementGetChildById(hObj, L"text_measurer",
                                     &m_hPointerTextMeasurer);

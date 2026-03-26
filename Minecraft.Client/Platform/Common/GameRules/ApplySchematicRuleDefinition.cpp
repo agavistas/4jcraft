@@ -13,19 +13,19 @@ ApplySchematicRuleDefinition::ApplySchematicRuleDefinition(
     LevelGenerationOptions* levelGenOptions) {
     m_levelGenOptions = levelGenOptions;
     m_location = Vec3::newPermanent(0, 0, 0);
-    m_locationBox = NULL;
+    m_locationBox = nullptr;
     m_totalBlocksChanged = 0;
     m_totalBlocksChangedLighting = 0;
     m_rotation = ConsoleSchematicFile::eSchematicRot_0;
     m_completed = false;
     m_dimension = 0;
-    m_schematic = NULL;
+    m_schematic = nullptr;
 }
 
 ApplySchematicRuleDefinition::~ApplySchematicRuleDefinition() {
     app.DebugPrintf("Deleting ApplySchematicRuleDefinition.\n");
     if (!m_completed) m_levelGenOptions->releaseSchematicFile(m_schematicName);
-    m_schematic = NULL;
+    m_schematic = nullptr;
     delete m_location;
 }
 
@@ -128,7 +128,7 @@ void ApplySchematicRuleDefinition::addAttribute(
 }
 
 void ApplySchematicRuleDefinition::updateLocationBox() {
-    if (m_schematic == NULL)
+    if (m_schematic == nullptr)
         m_schematic = m_levelGenOptions->getSchematicFile(m_schematicName);
 
     m_locationBox = AABB::newPermanent(0, 0, 0, 0, 0, 0);
@@ -160,10 +160,10 @@ void ApplySchematicRuleDefinition::processSchematic(AABB* chunkBox,
     if (chunk->level->dimension->id != m_dimension) return;
 
     PIXBeginNamedEvent(0, "Processing ApplySchematicRuleDefinition");
-    if (m_schematic == NULL)
+    if (m_schematic == nullptr)
         m_schematic = m_levelGenOptions->getSchematicFile(m_schematicName);
 
-    if (m_locationBox == NULL) updateLocationBox();
+    if (m_locationBox == nullptr) updateLocationBox();
     if (chunkBox->intersects(m_locationBox)) {
         m_locationBox->y1 =
             std::min((double)Level::maxBuildHeight, m_locationBox->y1);
@@ -192,7 +192,7 @@ void ApplySchematicRuleDefinition::processSchematic(AABB* chunkBox,
             (m_totalBlocksChangedLighting == targetBlocks)) {
             m_completed = true;
             // m_levelGenOptions->releaseSchematicFile(m_schematicName);
-            // m_schematic = NULL;
+            // m_schematic = nullptr;
         }
     }
     PIXEndNamedEvent();
@@ -204,10 +204,10 @@ void ApplySchematicRuleDefinition::processSchematicLighting(AABB* chunkBox,
     if (chunk->level->dimension->id != m_dimension) return;
 
     PIXBeginNamedEvent(0, "Processing ApplySchematicRuleDefinition (lighting)");
-    if (m_schematic == NULL)
+    if (m_schematic == nullptr)
         m_schematic = m_levelGenOptions->getSchematicFile(m_schematicName);
 
-    if (m_locationBox == NULL) updateLocationBox();
+    if (m_locationBox == nullptr) updateLocationBox();
     if (chunkBox->intersects(m_locationBox)) {
         m_locationBox->y1 =
             std::min((double)Level::maxBuildHeight, m_locationBox->y1);
@@ -230,7 +230,7 @@ void ApplySchematicRuleDefinition::processSchematicLighting(AABB* chunkBox,
             (m_totalBlocksChangedLighting == targetBlocks)) {
             m_completed = true;
             // m_levelGenOptions->releaseSchematicFile(m_schematicName);
-            // m_schematic = NULL;
+            // m_schematic = nullptr;
         }
     }
     PIXEndNamedEvent();
@@ -238,12 +238,12 @@ void ApplySchematicRuleDefinition::processSchematicLighting(AABB* chunkBox,
 
 bool ApplySchematicRuleDefinition::checkIntersects(int x0, int y0, int z0,
                                                    int x1, int y1, int z1) {
-    if (m_locationBox == NULL) updateLocationBox();
+    if (m_locationBox == nullptr) updateLocationBox();
     return m_locationBox->intersects(x0, y0, z0, x1, y1, z1);
 }
 
 int ApplySchematicRuleDefinition::getMinY() {
-    if (m_locationBox == NULL) updateLocationBox();
+    if (m_locationBox == nullptr) updateLocationBox();
     return m_locationBox->y0;
 }
 

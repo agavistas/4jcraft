@@ -43,7 +43,7 @@ int Entity::extraWanderCount = 0;
 
 int Entity::getSmallId() {
     unsigned int* puiUsedFlags = entityIdUsedFlags;
-    unsigned int* puiRemovedFlags = NULL;
+    unsigned int* puiRemovedFlags = nullptr;
 
     // If we are the server (we should be, if we are allocating small Ids), then
     // check with the server if there are any small Ids which are still in the
@@ -261,7 +261,7 @@ void Entity::_init(bool useSmallId, Level* level) {
     riding = nullptr;
     forcedLoading = false;
 
-    // level = NULL; // Level is assigned to in the original c_tor code
+    // level = nullptr; // Level is assigned to in the original c_tor code
     xo = yo = zo = 0.0;
     x = y = z = 0.0;
     xd = yd = zd = 0.0;
@@ -353,7 +353,7 @@ Entity::Entity(Level* level,
     // resetPos();
     setPos(0, 0, 0);
 
-    if (level != NULL) {
+    if (level != nullptr) {
         dimension = level->dimension->id;
     }
 
@@ -396,7 +396,7 @@ return entityId;
 */
 
 void Entity::resetPos() {
-    if (level == NULL) return;
+    if (level == nullptr) return;
 
     std::shared_ptr<Entity> sharedThis = shared_from_this();
     while (true && y > 0) {
@@ -492,7 +492,7 @@ void Entity::baseTick() {
     // 4J Stu - Not needed
     // util.Timer.push("entityBaseTick");
 
-    if (riding != NULL && riding->removed) {
+    if (riding != nullptr && riding->removed) {
         riding = nullptr;
     }
 
@@ -514,7 +514,7 @@ void Entity::baseTick() {
 
             if (isInsidePortal) {
                 if (server->isNetherEnabled()) {
-                    if (riding == NULL) {
+                    if (riding == nullptr) {
                         if (portalTime++ >= waitTime) {
                             portalTime = waitTime;
                             changingDimensionDelay =
@@ -848,7 +848,7 @@ void Entity::move(double xa, double ya, double za,
     double ym = y - yo;
     double zm = z - zo;
 
-    if (makeStepSound() && !isPlayerSneaking && riding == NULL) {
+    if (makeStepSound() && !isPlayerSneaking && riding == nullptr) {
         int xt = Mth::floor(x);
         int yt = Mth::floor(y - 0.2f - heightOffset);
         int zt = Mth::floor(z);
@@ -971,7 +971,7 @@ void Entity::checkFallDamage(double ya, bool onGround) {
     }
 }
 
-AABB* Entity::getCollideBox() { return NULL; }
+AABB* Entity::getCollideBox() { return nullptr; }
 
 void Entity::burn(int dmg) {
     if (!fireImmune) {
@@ -982,7 +982,7 @@ void Entity::burn(int dmg) {
 bool Entity::isFireImmune() { return fireImmune; }
 
 void Entity::causeFallDamage(float distance) {
-    if (rider.lock() != NULL) rider.lock()->causeFallDamage(distance);
+    if (rider.lock() != nullptr) rider.lock()->causeFallDamage(distance);
 }
 
 bool Entity::isInWaterOrRain() {
@@ -1235,7 +1235,7 @@ bool Entity::saveAsMount(CompoundTag* entityTag) {
 
 bool Entity::save(CompoundTag* entityTag) {
     std::wstring id = getEncodeId();
-    if (removed || id.empty() || (rider.lock() != NULL)) {
+    if (removed || id.empty() || (rider.lock() != nullptr)) {
         return false;
     }
     // TODO Is this fine to be casting to a non-const char pointer?
@@ -1261,7 +1261,7 @@ void Entity::saveWithoutId(CompoundTag* entityTag) {
 
     addAdditonalSaveData(entityTag);
 
-    if (riding != NULL) {
+    if (riding != nullptr) {
         CompoundTag* ridingTag = new CompoundTag(RIDING_TAG);
         if (riding->saveAsMount(ridingTag)) {
             entityTag->put(L"Riding", ridingTag);
@@ -1423,7 +1423,7 @@ bool Entity::isInWall() {
 bool Entity::interact(std::shared_ptr<Player> player) { return false; }
 
 AABB* Entity::getCollideAgainstBox(std::shared_ptr<Entity> entity) {
-    return NULL;
+    return nullptr;
 }
 
 void Entity::rideTick() {
@@ -1434,7 +1434,7 @@ void Entity::rideTick() {
     xd = yd = zd = 0;
     tick();
 
-    if (riding == NULL) return;
+    if (riding == nullptr) return;
 
     // Sets riders old&new position to it's mount's old&new position (plus the
     // ride y-seperatation).
@@ -1472,7 +1472,7 @@ void Entity::rideTick() {
 
 void Entity::positionRider() {
     std::shared_ptr<Entity> lockedRider = rider.lock();
-    if (lockedRider == NULL) {
+    if (lockedRider == nullptr) {
         return;
     }
     lockedRider->setPos(x, y + getRideHeight() + lockedRider->getRidingHeight(),
@@ -1487,8 +1487,8 @@ void Entity::ride(std::shared_ptr<Entity> e) {
     xRideRotA = 0;
     yRideRotA = 0;
 
-    if (e == NULL) {
-        if (riding != NULL) {
+    if (e == nullptr) {
+        if (riding != nullptr) {
             // 4J Stu - Position should already be updated before the
             // SetEntityLinkPacket comes in
             if (!level->isClientSide)
@@ -1499,7 +1499,7 @@ void Entity::ride(std::shared_ptr<Entity> e) {
         riding = nullptr;
         return;
     }
-    if (riding != NULL) {
+    if (riding != nullptr) {
         riding->rider = std::weak_ptr<Entity>();
     }
     riding = e;
@@ -1533,7 +1533,7 @@ void Entity::lerpTo(double x, double y, double z, float yRot, float xRot,
 
 float Entity::getPickRadius() { return 0.1f; }
 
-Vec3* Entity::getLookAngle() { return NULL; }
+Vec3* Entity::getLookAngle() { return nullptr; }
 
 void Entity::handleInsidePortal() {
     if (changingDimensionDelay > 0) {
@@ -1567,7 +1567,7 @@ void Entity::animateHurt() {}
 
 ItemInstanceArray Entity::getEquipmentSlots()  // ItemInstance[]
 {
-    return ItemInstanceArray();  // Default ctor creates NULL internal array
+    return ItemInstanceArray();  // Default ctor creates nullptr internal array
 }
 
 // 4J Stu - Brought forward change from 1.3 to fix #64688 - Customer
@@ -1579,7 +1579,7 @@ bool Entity::isOnFire() {
     return !fireImmune && (onFire > 0 || getSharedFlag(FLAG_ONFIRE));
 }
 
-bool Entity::isRiding() { return riding != NULL; }
+bool Entity::isRiding() { return riding != nullptr; }
 
 bool Entity::isSneaking() { return getSharedFlag(FLAG_SNEAKING); }
 
@@ -1726,7 +1726,7 @@ std::wstring Entity::getAName() {
 #endif
 }
 
-std::vector<std::shared_ptr<Entity> >* Entity::getSubEntities() { return NULL; }
+std::vector<std::shared_ptr<Entity> >* Entity::getSubEntities() { return nullptr; }
 
 bool Entity::is(std::shared_ptr<Entity> other) {
     return shared_from_this() == other;
@@ -1798,7 +1798,7 @@ void Entity::changeDimension(int i) {
     std::shared_ptr<Entity> newEntity = EntityIO::newEntity(
         EntityIO::getEncodeId(shared_from_this()), newLevel);
 
-    if (newEntity != NULL) {
+    if (newEntity != nullptr) {
         newEntity->restoreFrom(shared_from_this(), true);
 
         if (lastDimension == 1 && i == 1) {

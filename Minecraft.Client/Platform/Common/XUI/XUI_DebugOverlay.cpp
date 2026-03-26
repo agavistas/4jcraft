@@ -35,7 +35,7 @@ HRESULT CScene_DebugOverlay::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_items.InsertItems(0, 512);
 
     for (unsigned int i = 0; i < Item::items.length; ++i) {
-        if (Item::items[i] != NULL) {
+        if (Item::items[i] != nullptr) {
             // m_items.InsertItems(m_items.GetItemCount(),1);
             m_itemIds.push_back(i);
             m_items.SetText(m_itemIds.size() - 1,
@@ -152,7 +152,7 @@ HRESULT CScene_DebugOverlay::OnNotifyPressEx(HXUIOBJ hObjPressed,
 this debug option anymore.
     {
 #ifndef _CONTENT_PACKAGE
-            pMinecraft->level->save(true, NULL);
+            pMinecraft->level->save(true, nullptr);
 
             int radius;
             m_chunkRadius.GetValue(&radius);
@@ -182,7 +182,7 @@ this debug option anymore.
                  c_ModuleHandle, L"media", L"media/");
         hr = XuiSceneCreate(
             szResourceLocator,
-            app.GetSceneName(eUIScene_DebugCreateSchematic, false, false), NULL,
+            app.GetSceneName(eUIScene_DebugCreateSchematic, false, false), nullptr,
             &hScene);
         this->NavigateForward(hScene);
         // app.NavigateToScene(ProfileManager.GetPrimaryPad(),eUIScene_DebugCreateSchematic);
@@ -203,7 +203,7 @@ this debug option anymore.
                  c_ModuleHandle, L"media", L"media/");
         hr = XuiSceneCreate(
             szResourceLocator,
-            app.GetSceneName(eUIScene_DebugSetCamera, false, false), NULL,
+            app.GetSceneName(eUIScene_DebugSetCamera, false, false), nullptr,
             &hScene);
         this->NavigateForward(hScene);
         // app.NavigateToScene(ProfileManager.GetPrimaryPad(),eUIScene_DebugCreateSchematic);
@@ -275,7 +275,7 @@ HRESULT CScene_DebugOverlay::OnNotifyValueChanged(
 
 HRESULT CScene_DebugOverlay::OnTimer(XUIMessageTimer* pTimer, BOOL& bHandled) {
     Minecraft* pMinecraft = Minecraft::GetInstance();
-    if (pMinecraft->level != NULL) {
+    if (pMinecraft->level != nullptr) {
         m_setTime.SetValue(pMinecraft->level->getLevelData()->getTime() %
                            24000);
         m_setFov.SetValue((int)pMinecraft->gameRenderer->GetFovVal());
@@ -302,7 +302,7 @@ void CScene_DebugOverlay::SaveLimitedFile(int chunkRadius) {
 
     // With a size of 0 but a value in the data pointer we should create a new
     // save
-    ConsoleSaveFileOriginal newSave(currentSave->getFilename(), NULL, 0, true);
+    ConsoleSaveFileOriginal newSave(currentSave->getFilename(), nullptr, 0, true);
 
     // TODO Make this only happen for the new save
     // SetSpawnToPlayerPos();
@@ -333,11 +333,11 @@ void CScene_DebugOverlay::SaveLimitedFile(int chunkRadius) {
          xPos < playerChunkX + chunkRadius; ++xPos) {
         for (int zPos = playerChunkZ - chunkRadius;
              zPos < playerChunkZ + chunkRadius; ++zPos) {
-            CompoundTag* chunkData = NULL;
+            CompoundTag* chunkData = nullptr;
 
             DataInputStream* is = RegionFileCache::getChunkDataInputStream(
                 currentSave, L"", xPos, zPos);
-            if (is != NULL) {
+            if (is != nullptr) {
                 chunkData = NbtIo::read((DataInput*)is);
                 is->deleteChildStream();
                 delete is;
@@ -345,7 +345,7 @@ void CScene_DebugOverlay::SaveLimitedFile(int chunkRadius) {
             app.DebugPrintf("Processing chunk (%d, %d)\n", xPos, zPos);
             DataOutputStream* os = getChunkDataOutputStream(
                 newFileCache, &newSave, L"", xPos, zPos);
-            if (os != NULL) {
+            if (os != nullptr) {
                 NbtIo::write(chunkData, os);
                 os->close();
 
@@ -356,7 +356,7 @@ void CScene_DebugOverlay::SaveLimitedFile(int chunkRadius) {
                 os->deleteChildStream();
                 delete os;
             }
-            if (chunkData != NULL) {
+            if (chunkData != nullptr) {
                 delete chunkData;
             }
         }
@@ -374,12 +374,12 @@ RegionFile* CScene_DebugOverlay::getRegionFile(
     File file(prefix + std::wstring(L"r.") + _toString(chunkX >> 5) + L"." +
               _toString(chunkZ >> 5) + L".mcr");
 
-    RegionFile* ref = NULL;
+    RegionFile* ref = nullptr;
     AUTO_VAR(it, newFileCache.find(file));
     if (it != newFileCache.end()) ref = it->second;
 
     // 4J Jev, put back in.
-    if (ref != NULL) {
+    if (ref != nullptr) {
         return ref;
     }
 

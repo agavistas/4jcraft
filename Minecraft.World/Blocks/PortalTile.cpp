@@ -26,7 +26,7 @@ void PortalTile::tick(Level* level, int x, int y, int z, Random* random) {
             int iResult = 0;
             std::shared_ptr<Entity> entity = SpawnEggItem::spawnMobAt(
                 level, 57, x + .5, y0 + 1.1, z + .5, &iResult);
-            if (entity != NULL) {
+            if (entity != nullptr) {
                 entity->changingDimensionDelay =
                     entity->getDimensionChangingDelay();
             }
@@ -34,7 +34,7 @@ void PortalTile::tick(Level* level, int x, int y, int z, Random* random) {
     }
 }
 
-AABB* PortalTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* PortalTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 void PortalTile::updateShape(
     LevelSource* level, int x, int y, int z, int forceData,
@@ -181,7 +181,7 @@ void PortalTile::entityInside(Level* level, int x, int y, int z,
                               std::shared_ptr<Entity> entity) {
     if (entity->GetType() == eTYPE_EXPERIENCEORB) return;  // 4J added
 
-    if (entity->riding == NULL && entity->rider.lock() == NULL)
+    if (entity->riding == nullptr && entity->rider.lock() == nullptr)
         entity->handleInsidePortal();
 }
 

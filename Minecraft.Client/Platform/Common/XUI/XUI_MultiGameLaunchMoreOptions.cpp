@@ -207,7 +207,7 @@ HRESULT CScene_MultiGameLaunchMoreOptions::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 

@@ -18,7 +18,7 @@
 #define COMMIT_ALLOCATION MEM_COMMIT
 
 unsigned int ConsoleSaveFileSplit::pagesCommitted = 0;
-void* ConsoleSaveFileSplit::pvHeap = NULL;
+void* ConsoleSaveFileSplit::pvHeap = nullptr;
 
 ConsoleSaveFileSplit::RegionFileReference::RegionFileReference(
     int index, unsigned int regionIndex, unsigned int length /*=0*/,
@@ -247,7 +247,7 @@ void ConsoleSaveFileSplit::RegionFileReference::Decompress() {
     if ((dataOut - data) != fileEntry->data.length) {
         free(data);
         fileEntry->data.length = 0;
-        data = NULL;
+        data = nullptr;
         assert(0);
     }
     //	std::int64_t endTime = System::currentTimeMillis();
@@ -314,7 +314,7 @@ void ConsoleSaveFileSplit::RegionFileReference::ReleaseCompressed() {
     //	app.DebugPrintf("Releasing compressed data for region file from
     //0x%.8x\n", fileEntry->data.regionIndex );
     free(dataCompressed);
-    dataCompressed = NULL;
+    dataCompressed = nullptr;
     dataCompressedSize = 0;
 }
 
@@ -334,7 +334,7 @@ FileEntry* ConsoleSaveFileSplit::GetRegionFileEntry(unsigned int regionIndex) {
 }
 
 ConsoleSaveFileSplit::ConsoleSaveFileSplit(
-    const std::wstring& fileName, void* pvSaveData /*= NULL*/,
+    const std::wstring& fileName, void* pvSaveData /*= nullptr*/,
     unsigned int initialFileSize /*= 0*/, bool forceCleanSave /*= false*/,
     ESavePlatform plat /*= SAVE_FILE_PLATFORM_LOCAL*/) {
     unsigned int fileSize = initialFileSize;
@@ -342,13 +342,13 @@ ConsoleSaveFileSplit::ConsoleSaveFileSplit(
     // Load a save from the game rules
     bool bLevelGenBaseSave = false;
     LevelGenerationOptions* levelGen = app.getLevelGenerationOptions();
-    if (pvSaveData == NULL && levelGen != NULL &&
+    if (pvSaveData == nullptr && levelGen != nullptr &&
         levelGen->requiresBaseSave()) {
         pvSaveData = levelGen->getBaseSaveData(fileSize);
         if (pvSaveData && fileSize != 0) bLevelGenBaseSave = true;
     }
 
-    if (pvSaveData == NULL || fileSize == 0)
+    if (pvSaveData == nullptr || fileSize == 0)
         fileSize = StorageManager.GetSaveSize();
 
     if (forceCleanSave) fileSize = 0;
@@ -363,7 +363,7 @@ ConsoleSaveFileSplit::ConsoleSaveFileSplit(
 ConsoleSaveFileSplit::ConsoleSaveFileSplit(ConsoleSaveFile* sourceSave,
                                            bool alreadySmallRegions,
                                            ProgressListener* progress) {
-    _init(sourceSave->getFilename(), NULL, 0, sourceSave->getSavePlatform());
+    _init(sourceSave->getFilename(), nullptr, 0, sourceSave->getSavePlatform());
 
     header.setOriginalSaveVersion(sourceSave->getOriginalSaveVersion());
     header.setSaveVersion(sourceSave->getSaveVersion());
@@ -399,7 +399,7 @@ void ConsoleSaveFileSplit::_init(const std::wstring& fileName, void* pvSaveData,
     m_lastTickTime = 0;
 
     // One time initialise of static stuff required for our storage
-    if (pvHeap == NULL) {
+    if (pvHeap == nullptr) {
         // Reserve a chunk of 64MB of virtual address space for our saves, using
         // 64KB pages. We'll only be committing these as required to grow the
         // storage we need, which will the storage to grow without having to use
@@ -454,7 +454,7 @@ void ConsoleSaveFileSplit::_init(const std::wstring& fileName, void* pvSaveData,
 
     void* pvRet = VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                COMMIT_ALLOCATION, PAGE_READWRITE);
-    if (pvRet == NULL) {
+    if (pvRet == nullptr) {
 #ifndef _CONTENT_PACKAGE
         // Out of physical memory
         __debugbreak();
@@ -463,7 +463,7 @@ void ConsoleSaveFileSplit::_init(const std::wstring& fileName, void* pvSaveData,
     pagesCommitted = pagesRequired;
 
     if (fileSize > 0) {
-        if (pvSaveData != NULL) {
+        if (pvSaveData != nullptr) {
             memcpy(pvSaveMem, pvSaveData, fileSize);
         } else {
             unsigned int storageLength;
@@ -504,7 +504,7 @@ void ConsoleSaveFileSplit::_init(const std::wstring& fileName, void* pvSaveData,
                         void* pvRet =
                             VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                          COMMIT_ALLOCATION, PAGE_READWRITE);
-                        if (pvRet == NULL) {
+                        if (pvRet == nullptr) {
                             // Out of physical memory
                             __debugbreak();
                         }
@@ -542,9 +542,9 @@ ConsoleSaveFileSplit::~ConsoleSaveFileSplit() {
     // Make sure we don't have any thumbnail data still waiting round - we can't
     // need it now we've destroyed the save file anyway
 #if defined _XBOX
-    app.GetSaveThumbnail(NULL, NULL);
+    app.GetSaveThumbnail(NULL, nullptr);
 #elif defined __PS3__
-    app.GetSaveThumbnail(NULL, NULL, NULL, NULL);
+    app.GetSaveThumbnail(NULL, nullptr, nullptr, nullptr);
 #endif
 
     for (AUTO_VAR(it, regionFiles.begin()); it != regionFiles.end(); it++) {
@@ -584,7 +584,7 @@ FileEntry* ConsoleSaveFileSplit::createFile(const ConsoleSavePath& fileName) {
 }
 
 void ConsoleSaveFileSplit::deleteFile(FileEntry* file) {
-    if (file == NULL) return;
+    if (file == nullptr) return;
 
     assert(file->isRegionFile() == false);
 
@@ -686,8 +686,8 @@ void ConsoleSaveFileSplit::PrepareForWrite(FileEntry* file,
 bool ConsoleSaveFileSplit::writeFile(FileEntry* file, const void* lpBuffer,
                                      unsigned int nNumberOfBytesToWrite,
                                      unsigned int* lpNumberOfBytesWritten) {
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -744,8 +744,8 @@ bool ConsoleSaveFileSplit::writeFile(FileEntry* file, const void* lpBuffer,
 bool ConsoleSaveFileSplit::zeroFile(FileEntry* file,
                                     unsigned int nNumberOfBytesToWrite,
                                     unsigned int* lpNumberOfBytesWritten) {
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -812,8 +812,8 @@ bool ConsoleSaveFileSplit::readFile(FileEntry* file, void* lpBuffer,
                                     unsigned int nNumberOfBytesToRead,
                                     unsigned int* lpNumberOfBytesRead) {
     unsigned int actualBytesToRead;
-    assert(pvSaveMem != NULL);
-    if (pvSaveMem == NULL) {
+    assert(pvSaveMem != nullptr);
+    if (pvSaveMem == nullptr) {
         return false;
     }
 
@@ -1026,7 +1026,7 @@ void ConsoleSaveFileSplit::MoveDataBeyond(FileEntry* file,
             (desiredSize + (CSF_PAGE_SIZE - 1)) / CSF_PAGE_SIZE;
         void* pvRet = VirtualAlloc(pvHeap, pagesRequired * CSF_PAGE_SIZE,
                                    COMMIT_ALLOCATION, PAGE_READWRITE);
-        if (pvRet == NULL) {
+        if (pvRet == nullptr) {
             // Out of physical memory
             __debugbreak();
         }
@@ -1327,10 +1327,10 @@ void ConsoleSaveFileSplit::Flush(bool autosave, bool updateThumbnail) {
     std::uint8_t* compData =
         (std::uint8_t*)StorageManager.AllocateSaveData(compLength);
 
-    // If we failed to allocate then compData will be NULL
+    // If we failed to allocate then compData will be nullptr
     // Pre-calculate the compressed data size so that we can attempt to allocate
     // a smaller buffer
-    if (compData == NULL) {
+    if (compData == nullptr) {
         // Length should be 0 here so that the compression call knows that we
         // want to know the length back
         compLength = 0;
@@ -1357,7 +1357,7 @@ void ConsoleSaveFileSplit::Flush(bool autosave, bool updateThumbnail) {
         compData = (std::uint8_t*)StorageManager.AllocateSaveData(compLength);
     }
 
-    if (compData != NULL) {
+    if (compData != nullptr) {
         // Re-compress all save data before we save it to disk
         PIXBeginNamedEvent(0, "Actual save compression");
         // Save the start time
@@ -1381,10 +1381,10 @@ void ConsoleSaveFileSplit::Flush(bool autosave, bool updateThumbnail) {
                         compLength);
 
         if (updateThumbnail) {
-            std::uint8_t* pbThumbnailData = NULL;
+            std::uint8_t* pbThumbnailData = nullptr;
             unsigned int dwThumbnailDataSize = 0;
 
-            std::uint8_t* pbDataSaveImage = NULL;
+            std::uint8_t* pbDataSaveImage = nullptr;
             unsigned int dwDataSizeSaveImage = 0;
 
 #if (defined _XBOX || defined _DURANGO)
@@ -1399,8 +1399,8 @@ void ConsoleSaveFileSplit::Flush(bool autosave, bool updateThumbnail) {
 
             int64_t seed = 0;
             bool hasSeed = false;
-            if (MinecraftServer::getInstance() != NULL &&
-                MinecraftServer::getInstance()->levels[0] != NULL) {
+            if (MinecraftServer::getInstance() != nullptr &&
+                MinecraftServer::getInstance()->levels[0] != nullptr) {
                 seed = MinecraftServer::getInstance()
                            ->levels[0]
                            ->getLevelData()
@@ -1464,7 +1464,7 @@ int ConsoleSaveFileSplit::SaveRegionFilesCallback(void* lpParam, bool bRes) {
 
 #ifndef _CONTENT_PACKAGE
 void ConsoleSaveFileSplit::DebugFlushToFile(
-    void* compressedData /*= NULL*/, unsigned int compressedDataSize /*= 0*/) {
+    void* compressedData /*= nullptr*/, unsigned int compressedDataSize /*= 0*/) {
     LockSaveAccess();
 
     finalizeWrite();
@@ -1498,7 +1498,7 @@ void ConsoleSaveFileSplit::DebugFlushToFile(
         targetFileDir.getPath() + std::wstring(fileName);
     bool writeSucceeded = false;
 
-    if (compressedData != NULL && compressedDataSize > 0) {
+    if (compressedData != nullptr && compressedDataSize > 0) {
         writeSucceeded = PortableFileIO::WriteBinaryFile(
             outputPath, compressedData, compressedDataSize);
         numberOfBytesWritten = writeSucceeded ? compressedDataSize : 0;
@@ -1529,13 +1529,13 @@ std::vector<FileEntry*>* ConsoleSaveFileSplit::getFilesWithPrefix(
 
 std::vector<FileEntry*>* ConsoleSaveFileSplit::getRegionFilesByDimension(
     unsigned int dimensionIndex) {
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
 
     for (AUTO_VAR(it, regionFiles.begin()); it != regionFiles.end(); ++it) {
         unsigned int entryDimension = ((it->first) >> 16) & 0xFF;
 
         if (entryDimension == dimensionIndex) {
-            if (files == NULL) {
+            if (files == nullptr) {
                 files = new std::vector<FileEntry*>();
             }
 

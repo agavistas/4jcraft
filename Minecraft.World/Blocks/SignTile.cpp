@@ -22,7 +22,7 @@ void SignTile::updateDefaultShape() {
     this->setShape(0.5f - r, 0, 0.5f - r, 0.5f + r, h, 0.5f + r);
 }
 
-AABB* SignTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* SignTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 AABB* SignTile::getTileAABB(Level* level, int x, int y, int z) {
     updateShape(level, x, y, z);

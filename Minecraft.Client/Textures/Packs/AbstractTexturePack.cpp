@@ -12,15 +12,15 @@ AbstractTexturePack::AbstractTexturePack(std::uint32_t id, File* file,
     : id(id), name(name) {
     // 4J init
     textureId = -1;
-    m_colourTable = NULL;
+    m_colourTable = nullptr;
 
     this->file = file;
     this->fallback = fallback;
 
-    m_iconData = NULL;
+    m_iconData = nullptr;
     m_iconSize = 0;
 
-    m_comparisonData = NULL;
+    m_comparisonData = nullptr;
     m_comparisonSize = 0;
 
     // 4J Stu - These calls need to be in the most derived version of the class
@@ -74,8 +74,8 @@ void AbstractTexturePack::loadComparison() {
 void AbstractTexturePack::loadDescription() {
     // 4J Unused currently
 #if 0
-	InputStream *inputStream = NULL;
-	BufferedReader *br = NULL;
+	InputStream *inputStream = nullptr;
+	BufferedReader *br = nullptr;
 	//try {
 	inputStream = getResourceImplementation(L"/pack.txt");
 	br = new BufferedReader(new InputStreamReader(inputStream));
@@ -85,12 +85,12 @@ void AbstractTexturePack::loadDescription() {
 	//} finally {
 	// TODO [EB]: use IOUtils.closeSilently()
 	//	try {
-	if (br != NULL)
+	if (br != nullptr)
 	{
 		br->close();
 		delete br;
 	}
-	if (inputStream != NULL)
+	if (inputStream != nullptr)
 	{
 		inputStream->close();
 		delete inputStream;
@@ -108,7 +108,7 @@ InputStream* AbstractTexturePack::getResource(
 {
     app.DebugPrintf("texture - %ls\n", name.c_str());
     InputStream* is = getResourceImplementation(name);
-    if (is == NULL && fallback != NULL && allowFallback) {
+    if (is == nullptr && fallback != nullptr && allowFallback) {
         is = fallback->getResource(name, true);
     }
 
@@ -123,13 +123,13 @@ InputStream* AbstractTexturePack::getResource(
 //}
 
 void AbstractTexturePack::unload(Textures* textures) {
-    if (iconImage != NULL && textureId != -1) {
+    if (iconImage != nullptr && textureId != -1) {
         textures->releaseTexture(textureId);
     }
 }
 
 void AbstractTexturePack::load(Textures* textures) {
-    if (iconImage != NULL) {
+    if (iconImage != nullptr) {
         if (textureId == -1) {
             textureId = textures->getTexture(iconImage);
         }
@@ -145,7 +145,7 @@ bool AbstractTexturePack::hasFile(const std::wstring& name,
                                   bool allowFallback) {
     bool hasFile = this->hasFile(name);
 
-    return !hasFile && (allowFallback && fallback != NULL)
+    return !hasFile && (allowFallback && fallback != nullptr)
                ? fallback->hasFile(name, allowFallback)
                : hasFile;
 }
@@ -227,7 +227,7 @@ void AbstractTexturePack::loadDefaultUI() {
              c_ModuleHandle, L"media", L"media/skin_Minecraft.xur");
 
     XuiFreeVisuals(L"");
-    app.LoadSkin(szResourceLocator, NULL);  // L"TexturePack");
+    app.LoadSkin(szResourceLocator, nullptr);  // L"TexturePack");
     // CXuiSceneBase::GetInstance()->SetVisualPrefix(L"TexturePack");
     CXuiSceneBase::GetInstance()->SkinChanged(
         CXuiSceneBase::GetInstance()->m_hObj);
@@ -247,7 +247,7 @@ void AbstractTexturePack::loadDefaultColourTable() {
     // need to check if it's a BD build, so pass in the name
     File coloursFile(
         AbstractTexturePack::getPath(
-            true, app.GetBootedFromDiscPatch() ? "colours.col" : NULL)
+            true, app.GetBootedFromDiscPatch() ? "colours.col" : nullptr)
             .append(L"res/colours.col"));
 
 #else
@@ -262,7 +262,7 @@ void AbstractTexturePack::loadDefaultColourTable() {
         FileInputStream fis(coloursFile);
         fis.read(data, 0, dataLength);
         fis.close();
-        if (m_colourTable != NULL) delete m_colourTable;
+        if (m_colourTable != nullptr) delete m_colourTable;
         m_colourTable = new ColourTable(data.data, dataLength);
 
         delete[] data.data;
@@ -296,7 +296,7 @@ void AbstractTexturePack::loadDefaultHTMLColourTable() {
                   L"media", L"media/");
         HXUIOBJ hScene;
         HRESULT hr = XuiSceneCreate(szResourceLocator,
-                                    L"xuiscene_colourtable.xur", NULL, &hScene);
+                                    L"xuiscene_colourtable.xur", nullptr, &hScene);
 
         if (HRESULT_SUCCEEDED(hr)) {
             loadHTMLColourTableFromXuiScene(hScene);
@@ -318,7 +318,7 @@ void AbstractTexturePack::loadHTMLColourTableFromXuiScene(HXUIOBJ hObj) {
     HXUIOBJ child;
     HRESULT hr = XuiElementGetFirstChild(hObj, &child);
 
-    while (HRESULT_SUCCEEDED(hr) && child != NULL) {
+    while (HRESULT_SUCCEEDED(hr) && child != nullptr) {
         LPCWSTR childName;
         XuiElementGetId(child, &childName);
         m_colourTable->setColour(childName, XuiTextElementGetText(child));
@@ -369,14 +369,14 @@ std::wstring AbstractTexturePack::getXuiRootPath() {
 }
 
 std::uint8_t* AbstractTexturePack::getPackIcon(std::uint32_t& imageBytes) {
-    if (m_iconSize == 0 || m_iconData == NULL) loadIcon();
+    if (m_iconSize == 0 || m_iconData == nullptr) loadIcon();
     imageBytes = m_iconSize;
     return m_iconData;
 }
 
 std::uint8_t* AbstractTexturePack::getPackComparison(
     std::uint32_t& imageBytes) {
-    if (m_comparisonSize == 0 || m_comparisonData == NULL) loadComparison();
+    if (m_comparisonSize == 0 || m_comparisonData == nullptr) loadComparison();
 
     imageBytes = m_comparisonSize;
     return m_comparisonData;

@@ -245,7 +245,7 @@ void AchievementScreen::renderBg(int xm, int ym, float a) {
 	for (AUTO_VAR(it, Achievements::achievements->begin()); it != itEnd; it++)
 	{
         Achievement *ach = *it; //Achievements::achievements->at(i);
-        if (ach->requires == NULL) continue;
+        if (ach->requires == nullptr) continue;
 
         int x1 = ach->x * ACHIEVEMENT_COORD_SCALE - (int) xScroll + 11 + xBigMap;
         int y1 = ach->y * ACHIEVEMENT_COORD_SCALE - (int) yScroll + 11 + yBigMap;
@@ -267,7 +267,7 @@ void AchievementScreen::renderBg(int xm, int ym, float a) {
         vLine(x2, y1, y2, color);
     }
 
-    Achievement *hoveredAchievement = NULL;
+    Achievement *hoveredAchievement = nullptr;
     ItemRenderer *ir = new ItemRenderer();
 
     glPushMatrix();
@@ -356,7 +356,7 @@ void AchievementScreen::renderBg(int xm, int ym, float a) {
     glEnable(GL_TEXTURE_2D);
     Screen::render(xm, ym, a);
 
-    if (hoveredAchievement != NULL)
+    if (hoveredAchievement != nullptr)
 	{
         Achievement *ach = hoveredAchievement;
         std::wstring name = ach->name;

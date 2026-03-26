@@ -348,7 +348,7 @@ HRESULT UIScene_PauseMenu::OnNotifyPressEx(HXUIOBJ hObjPressed,
                     ProfileManager.GetPrimaryPad()) {
                     int playTime = -1;
                     if (pMinecraft->localplayers[pNotifyPressData->UserIndex] !=
-                        NULL) {
+                        nullptr) {
                         playTime =
                             (int)pMinecraft
                                 ->localplayers[pNotifyPressData->UserIndex]
@@ -399,7 +399,7 @@ HRESULT UIScene_PauseMenu::OnNotifyPressEx(HXUIOBJ hObjPressed,
                 } else {
                     int playTime = -1;
                     if (pMinecraft->localplayers[pNotifyPressData->UserIndex] !=
-                        NULL) {
+                        nullptr) {
                         playTime =
                             (int)pMinecraft
                                 ->localplayers[pNotifyPressData->UserIndex]
@@ -420,7 +420,7 @@ HRESULT UIScene_PauseMenu::OnNotifyPressEx(HXUIOBJ hObjPressed,
                     ProfileManager.GetPrimaryPad()) {
                     int playTime = -1;
                     if (pMinecraft->localplayers[pNotifyPressData->UserIndex] !=
-                        NULL) {
+                        nullptr) {
                         playTime =
                             (int)pMinecraft
                                 ->localplayers[pNotifyPressData->UserIndex]
@@ -442,7 +442,7 @@ HRESULT UIScene_PauseMenu::OnNotifyPressEx(HXUIOBJ hObjPressed,
                 } else {
                     int playTime = -1;
                     if (pMinecraft->localplayers[pNotifyPressData->UserIndex] !=
-                        NULL) {
+                        nullptr) {
                         playTime =
                             (int)pMinecraft
                                 ->localplayers[pNotifyPressData->UserIndex]
@@ -666,7 +666,7 @@ HRESULT UIScene_PauseMenu::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 
@@ -860,7 +860,7 @@ int UIScene_PauseMenu::WarningTrialTexturePackReturned(
             // bandwidth...
             XBackgroundDownloadSetMode(XBACKGROUND_DOWNLOAD_MODE_ALWAYS_ALLOW);
 
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
         }
     } else {
         TelemetryManager->RecordUpsellResponded(
@@ -1127,7 +1127,7 @@ void UIScene_PauseMenu::_ExitWorld(LPVOID lpParameter) {
 
     bool saveStats = true;
     if (pMinecraft->isClientSide() || g_NetworkManager.IsInSession()) {
-        if (lpParameter != NULL) {
+        if (lpParameter != nullptr) {
             // 4J-PB - check if we have lost connection to Live
             if (ProfileManager.GetLiveConnectionStatus() !=
                 XONLINE_S_LOGON_CONNECTION_ESTABLISHED) {
@@ -1203,26 +1203,26 @@ void UIScene_PauseMenu::_ExitWorld(LPVOID lpParameter) {
             if (ProfileManager.IsSignedIn(ProfileManager.GetPrimaryPad()))
                 ui.RequestMessageBox(exitReasonTitleId, exitReasonStringId,
                                      uiIDA, 1, ProfileManager.GetPrimaryPad(),
-                                     NULL, NULL, app.GetStringTable());
+                                     nullptr, nullptr, app.GetStringTable());
             exitReasonStringId = -1;
 
             // 4J - Force a disconnection, this handles the situation that the
             // server has already disconnected
-            if (pMinecraft->levels[0] != NULL)
+            if (pMinecraft->levels[0] != nullptr)
                 pMinecraft->levels[0]->disconnect(false);
-            if (pMinecraft->levels[1] != NULL)
+            if (pMinecraft->levels[1] != nullptr)
                 pMinecraft->levels[1]->disconnect(false);
-            if (pMinecraft->levels[2] != NULL)
+            if (pMinecraft->levels[2] != nullptr)
                 pMinecraft->levels[2]->disconnect(false);
         } else {
             exitReasonStringId = IDS_EXITING_GAME;
             pMinecraft->progressRenderer->progressStartNoAbort(
                 IDS_EXITING_GAME);
-            if (pMinecraft->levels[0] != NULL)
+            if (pMinecraft->levels[0] != nullptr)
                 pMinecraft->levels[0]->disconnect();
-            if (pMinecraft->levels[1] != NULL)
+            if (pMinecraft->levels[1] != nullptr)
                 pMinecraft->levels[1]->disconnect();
-            if (pMinecraft->levels[2] != NULL)
+            if (pMinecraft->levels[2] != nullptr)
                 pMinecraft->levels[2]->disconnect();
         }
 
@@ -1238,7 +1238,7 @@ void UIScene_PauseMenu::_ExitWorld(LPVOID lpParameter) {
         // 4J Stu - Leave the session once the disconnect packet has been sent
         g_NetworkManager.LeaveGame(FALSE);
     } else {
-        if (lpParameter != NULL &&
+        if (lpParameter != nullptr &&
             ProfileManager.IsSignedIn(ProfileManager.GetPrimaryPad())) {
             switch (app.GetDisconnectReason()) {
                 case DisconnectPacket::eDisconnect_Kicked:
@@ -1288,7 +1288,7 @@ void UIScene_PauseMenu::_ExitWorld(LPVOID lpParameter) {
             unsigned int uiIDA[1];
             uiIDA[0] = IDS_CONFIRM_OK;
             ui.RequestMessageBox(exitReasonTitleId, exitReasonStringId, uiIDA,
-                                 1, ProfileManager.GetPrimaryPad(), NULL, NULL,
+                                 1, ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                                  app.GetStringTable());
             exitReasonStringId = -1;
         }

@@ -80,7 +80,7 @@ void CConsoleMinecraftApp::TemporaryCreateGameStart() {
 
     NetworkGameInitData* param = new NetworkGameInitData();
     param->seed = seedValue;
-    param->saveData = NULL;
+    param->saveData = nullptr;
 
     app.SetGameHostOption(eGameHostOption_Difficulty, 0);
     app.SetGameHostOption(eGameHostOption_FriendsOfFriends, 0);

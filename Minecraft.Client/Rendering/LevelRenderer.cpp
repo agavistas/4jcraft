@@ -129,11 +129,11 @@ const int LevelRenderer::DIMENSION_OFFSETS[3] = {
 #endif
 
 LevelRenderer::LevelRenderer(Minecraft* mc, Textures* textures) {
-    breakingTextures = NULL;
+    breakingTextures = nullptr;
 
     for (int i = 0; i < 4; i++) {
-        level[i] = NULL;
-        tileRenderer[i] = NULL;
+        level[i] = nullptr;
+        tileRenderer[i] = nullptr;
         xOld[i] = -9999;
         yOld[i] = -9999;
         zOld[i] = -9999;
@@ -159,7 +159,7 @@ LevelRenderer::LevelRenderer(Minecraft* mc, Textures* textures) {
     totalChunks = offscreenChunks = occludedChunks = renderedChunks =
         emptyChunks = 0;
     for (int i = 0; i < 4; i++) {
-        //		sortedChunks[i] = NULL;	// 4J - removed - not sorting
+        //		sortedChunks[i] = nullptr;	// 4J - removed - not sorting
         // our chunks anymore
         chunks[i] = ClipChunkArray();
         lastPlayerCount[i] = 0;
@@ -343,7 +343,7 @@ void LevelRenderer::renderStars() {
 }
 
 void LevelRenderer::setLevel(int playerIndex, MultiPlayerLevel* level) {
-    if (this->level[playerIndex] != NULL) {
+    if (this->level[playerIndex] != nullptr) {
         // Remove listener for this level if this is the last player referencing
         // it
         Level* prevLevel = this->level[playerIndex];
@@ -361,11 +361,11 @@ void LevelRenderer::setLevel(int playerIndex, MultiPlayerLevel* level) {
     zOld[playerIndex] = -9999;
 
     this->level[playerIndex] = level;
-    if (tileRenderer[playerIndex] != NULL) {
+    if (tileRenderer[playerIndex] != nullptr) {
         delete tileRenderer[playerIndex];
     }
     tileRenderer[playerIndex] = new TileRenderer(level);
-    if (level != NULL) {
+    if (level != nullptr) {
         // If we're the only player referencing this level, add a new listener
         // for it
         int refCount = 0;
@@ -380,24 +380,24 @@ void LevelRenderer::setLevel(int playerIndex, MultiPlayerLevel* level) {
     } else {
         //		printf("NULLing player %d, chunks @
         // 0x%x\n",playerIndex,chunks[playerIndex]);
-        if (chunks[playerIndex].data != NULL) {
+        if (chunks[playerIndex].data != nullptr) {
             for (unsigned int i = 0; i < chunks[playerIndex].length; i++) {
                 chunks[playerIndex][i].chunk->_delete();
                 delete chunks[playerIndex][i].chunk;
             }
             delete chunks[playerIndex].data;
-            chunks[playerIndex].data = NULL;
+            chunks[playerIndex].data = nullptr;
             chunks[playerIndex].length = 0;
             //			delete sortedChunks[playerIndex];	// 4J -
             // removed - not sorting our chunks anymore
-            // sortedChunks[playerIndex] = NULL;	// 4J - removed - not
+            // sortedChunks[playerIndex] = nullptr;	// 4J - removed - not
             // sorting our chunks anymore
         }
 
         // 4J Stu - If we do this for splitscreen players leaving, then all the
         // tile entities in the world dissappear We should only do this when
         // actually exiting the game, so only when the primary player sets there
-        // level to NULL
+        // level to nullptr
         if (playerIndex == ProfileManager.GetPrimaryPad())
             renderableTileEntities.clear();
     }
@@ -429,7 +429,7 @@ void LevelRenderer::allChanged(int playerIndex) {
     // called then (on 360 at least) we can get a deadlock when starting a game
     // in splitscreen.
     // EnterCriticalSection(&m_csDirtyChunks);
-    if (level[playerIndex] == NULL) {
+    if (level[playerIndex] == nullptr) {
         return;
     }
 
@@ -453,7 +453,7 @@ void LevelRenderer::allChanged(int playerIndex) {
     yChunks = Level::maxBuildHeight / CHUNK_SIZE;
     zChunks = dist;
 
-    if (chunks[playerIndex].data != NULL) {
+    if (chunks[playerIndex].data != nullptr) {
         for (unsigned int i = 0; i < chunks[playerIndex].length; i++) {
             chunks[playerIndex][i].chunk->_delete();
             delete chunks[playerIndex][i].chunk;
@@ -477,7 +477,7 @@ void LevelRenderer::allChanged(int playerIndex) {
     zMaxChunk = zChunks;
 
     // 4J removed - we now only fully clear this on exiting the game (setting
-    // level to NULL). Apart from that, the chunk rebuilding is responsible for
+    // level to nullptr). Apart from that, the chunk rebuilding is responsible for
     // maintaining this
     //	renderableTileEntities.clear();
 
@@ -505,9 +505,9 @@ void LevelRenderer::allChanged(int playerIndex) {
     }
     nonStackDirtyChunksAdded();
 
-    if (level[playerIndex] != NULL) {
+    if (level[playerIndex] != nullptr) {
         std::shared_ptr<Entity> player = mc->cameraTargetPlayer;
-        if (player != NULL) {
+        if (player != nullptr) {
             this->resortChunks(Mth::floor(player->x), Mth::floor(player->y),
                                Mth::floor(player->z));
             //			sort(sortedChunks[playerIndex]->begin(),sortedChunks[playerIndex]->end(),
@@ -587,7 +587,7 @@ void LevelRenderer::renderEntities(Vec3* cam, Culler* culler, float a) {
         // Render the mob if the mob's leash holder is within the culler
         if (!shouldRender && entity->instanceof(eTYPE_MOB)) {
             std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(entity);
-            if (mob->isLeashed() && (mob->getLeashHolder() != NULL)) {
+            if (mob->isLeashed() && (mob->getLeashHolder() != nullptr)) {
                 std::shared_ptr<Entity> leashHolder = mob->getLeashHolder();
                 shouldRender = culler->isVisible(leashHolder->bb);
             }
@@ -1073,7 +1073,7 @@ void LevelRenderer::renderSky(float alpha) {
 
     float* c = level[playerIndex]->dimension->getSunriseColor(
         level[playerIndex]->getTimeOfDay(alpha), alpha);
-    if (c != NULL) {
+    if (c != nullptr) {
         glDisable(GL_TEXTURE_2D);
         glShadeModel(GL_SMOOTH);
 
@@ -1916,7 +1916,7 @@ bool LevelRenderer::updateDirtyChunks() {
     std::list<std::pair<ClipChunk*, int> > nearestClipChunks;
 #endif
 
-    ClipChunk* nearChunk = NULL;  // Nearest chunk that is dirty
+    ClipChunk* nearChunk = nullptr;  // Nearest chunk that is dirty
     int veryNearCount = 0;
     int minDistSq = 0x7fffffff;  // Distances to this chunk
 
@@ -2006,8 +2006,8 @@ bool LevelRenderer::updateDirtyChunks() {
             g_findNearestChunkDataIn.chunkLengths[i] = chunks[i].length;
             g_findNearestChunkDataIn.level[i] = level[i];
             g_findNearestChunkDataIn.playerData[i].bValid =
-                mc->localplayers[i] != NULL;
-            if (mc->localplayers[i] != NULL) {
+                mc->localplayers[i] != nullptr;
+            if (mc->localplayers[i] != nullptr) {
                 g_findNearestChunkDataIn.playerData[i].x =
                     mc->localplayers[i]->x;
                 g_findNearestChunkDataIn.playerData[i].y =
@@ -2015,7 +2015,7 @@ bool LevelRenderer::updateDirtyChunks() {
                 g_findNearestChunkDataIn.playerData[i].z =
                     mc->localplayers[i]->z;
             }
-            if (level[i] != NULL) {
+            if (level[i] != nullptr) {
                 g_findNearestChunkDataIn.multiplayerChunkCache[i].XZOFFSET =
                     ((MultiPlayerChunkCache*)(level[i]->chunkSource))->XZOFFSET;
                 g_findNearestChunkDataIn.multiplayerChunkCache[i].XZSIZE =
@@ -2043,14 +2043,14 @@ bool LevelRenderer::updateDirtyChunks() {
 #endif
         // Find nearest chunk that is dirty
         for (int p = 0; p < XUSER_MAX_COUNT; p++) {
-            // It's possible that the localplayers member can be set to NULL on
+            // It's possible that the localplayers member can be set to nullptr on
             // the main thread when a player chooses to exit the game So take a
             // reference to the player object now. As it is a shared_ptr it
             // should live as long as we need it
             std::shared_ptr<LocalPlayer> player = mc->localplayers[p];
-            if (player == NULL) continue;
-            if (chunks[p].data == NULL) continue;
-            if (level[p] == NULL) continue;
+            if (player == nullptr) continue;
+            if (chunks[p].data == nullptr) continue;
+            if (level[p] == nullptr) continue;
             if (chunks[p].length != xChunks * zChunks * CHUNK_Y_COUNT) continue;
             int px = (int)player->x;
             int py = (int)player->y;
@@ -2188,7 +2188,7 @@ bool LevelRenderer::updateDirtyChunks() {
         PIXEndNamedEvent();
     }
 
-    Chunk* chunk = NULL;
+    Chunk* chunk = nullptr;
 #ifdef _LARGE_WORLDS
     if (!nearestClipChunks.empty()) {
         int index = 0;
@@ -2366,7 +2366,7 @@ void LevelRenderer::renderHit(std::shared_ptr<Player> player, HitResult* h,
         ((float)(Mth::sin(Minecraft::currentTimeMillis() / 100.0f)) * 0.2f +
          0.4f) *
             0.5f);
-    if (mode != 0 && inventoryItem != NULL) {
+    if (mode != 0 && inventoryItem != nullptr) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         float br =
             (Mth::sin(Minecraft::currentTimeMillis() / 100.0f) * 0.2f + 0.8f);
@@ -2427,8 +2427,8 @@ void LevelRenderer::renderDestroyAnimation(Tesselator* t,
                 int iPad = mc->player->GetXboxPad();  // 4J added
                 int tileId = level[iPad]->getTile(block->getX(), block->getY(),
                                                   block->getZ());
-                Tile* tile = tileId > 0 ? Tile::tiles[tileId] : NULL;
-                if (tile == NULL) tile = Tile::stone;
+                Tile* tile = tileId > 0 ? Tile::tiles[tileId] : nullptr;
+                if (tile == nullptr) tile = Tile::stone;
                 tileRenderer[iPad]->tesselateInWorldFixedTexture(
                     tile, block->getX(), block->getY(), block->getZ(),
                     breakingTextures
@@ -2524,7 +2524,7 @@ void LevelRenderer::setDirty(int x0, int y0, int z0, int x1, int y1, int z1,
     // 4J - level is passed if this is coming from setTilesDirty, which could
     // come from when connection is being ticked outside of normal level tick,
     // and player won't be set up
-    if (level == NULL) level = this->level[mc->player->GetXboxPad()];
+    if (level == nullptr) level = this->level[mc->player->GetXboxPad()];
     //	EnterCriticalSection(&m_csDirtyChunks);
     int _x0 = Mth::intFloorDiv(x0, CHUNK_XZSIZE);
     int _y0 = Mth::intFloorDiv(y0, CHUNK_SIZE);
@@ -2550,7 +2550,7 @@ void LevelRenderer::setDirty(int x0, int y0, int z0, int x1, int y1, int z1,
                 // that the int Is a pointer here. Our Index has a a valid range
                 // from 0 to something quite big, but including zero. The lock
                 // free queue, since it thinks it is dealing with pointers, uses
-                // a NULL pointer to signify that a Pop hasn't succeeded. We
+                // a nullptr pointer to signify that a Pop hasn't succeeded. We
                 // also want to reserve one special value (of 1 ) for use when
                 // multiple chunks not individually listed are made dirty.
                 // Therefore adding 2 to our index value here to move our valid
@@ -2624,11 +2624,11 @@ void LevelRenderer::setDirty(int x0, int y0, int z0, int x1, int y1, int z1,
 }
 
 void LevelRenderer::tileChanged(int x, int y, int z) {
-    setDirty(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1, NULL);
+    setDirty(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1, nullptr);
 }
 
 void LevelRenderer::tileLightChanged(int x, int y, int z) {
-    setDirty(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1, NULL);
+    setDirty(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1, nullptr);
 }
 
 void LevelRenderer::setTilesDirty(int x0, int y0, int z0, int x1, int y1,
@@ -2855,7 +2855,7 @@ void LevelRenderer::playSoundExceptPlayer(std::shared_ptr<Player> player,
 void LevelRenderer::addParticle(const wstring& name, double x, double y, double
 z, double xa, double ya, double za)
 {
-if (mc == NULL || mc->cameraTargetPlayer == NULL || mc->particleEngine == NULL)
+if (mc == nullptr || mc->cameraTargetPlayer == nullptr || mc->particleEngine == nullptr)
 return;
 
 double xd = mc->cameraTargetPlayer->x - x;
@@ -2910,8 +2910,8 @@ void LevelRenderer::addParticle(ePARTICLE_TYPE eParticleType, double x,
 std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
     ePARTICLE_TYPE eParticleType, double x, double y, double z, double xa,
     double ya, double za) {
-    if (mc == NULL || mc->cameraTargetPlayer == NULL ||
-        mc->particleEngine == NULL) {
+    if (mc == nullptr || mc->cameraTargetPlayer == nullptr ||
+        mc->particleEngine == nullptr) {
         return nullptr;
     }
 
@@ -2949,7 +2949,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
     }
 
     // 4J - this is a bit of hack to get communication through from the level
-    // itself, but if Minecraft::animateTickLevel is NULL then we are to behave
+    // itself, but if Minecraft::animateTickLevel is nullptr then we are to behave
     // as normal, and if it is set, then we should use that as a pointer to the
     // level the particle is to be created with rather than try to work it out
     // from the current player. This is because in this state we are calling
@@ -2957,7 +2957,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
     // players for a particular level. Also don't do distance clipping as it
     // isn't for a particular player, and distance is already taken into account
     // before we get here anyway by the code in Level::animateTickDoWork
-    if (mc->animateTickLevel == NULL) {
+    if (mc->animateTickLevel == nullptr) {
         double particleDistanceSquared = 16 * 16;
         double xd = 0.0f;
         double yd = 0.0f;
@@ -2969,7 +2969,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
         bool inRange = false;
         for (unsigned int i = 0; i < XUSER_MAX_COUNT; ++i) {
             std::shared_ptr<Player> thisPlayer = mc->localplayers[i];
-            if (thisPlayer != NULL && level[i] == lev) {
+            if (thisPlayer != nullptr && level[i] == lev) {
                 xd = thisPlayer->x - x;
                 yd = thisPlayer->y - y;
                 zd = thisPlayer->z - z;
@@ -3214,7 +3214,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
             }
     }
 
-    if (particle != NULL) {
+    if (particle != nullptr) {
         mc->particleEngine->add(particle);
     }
 
@@ -3280,7 +3280,7 @@ void LevelRenderer::globalLevelEvent(int type, int sourceX, int sourceY,
     switch (type) {
         case LevelEvent::SOUND_WITHER_BOSS_SPAWN:
         case LevelEvent::SOUND_DRAGON_DEATH:
-            if (mc->cameraTargetPlayer != NULL) {
+            if (mc->cameraTargetPlayer != nullptr) {
                 // play the sound at an offset from the player
                 double dx = sourceX - mc->cameraTargetPlayer->x;
                 double dy = sourceY - mc->cameraTargetPlayer->y;
@@ -3316,7 +3316,7 @@ void LevelRenderer::levelEvent(std::shared_ptr<Player> source, int type, int x,
     switch (type) {
             // case LevelEvent::SOUND_WITHER_BOSS_SPAWN:
         case LevelEvent::SOUND_DRAGON_DEATH:
-            if (mc->cameraTargetPlayer != NULL) {
+            if (mc->cameraTargetPlayer != nullptr) {
                 // play the sound at an offset from the player
                 double dx = x - mc->cameraTargetPlayer->x;
                 double dy = y - mc->cameraTargetPlayer->y;
@@ -3425,7 +3425,7 @@ void LevelRenderer::levelEvent(std::shared_ptr<Player> source, int type, int x,
                 std::shared_ptr<Particle> spellParticle =
                     addParticleInternal(particleName, xp + xs * 0.1, yp + 0.3,
                                         zp + zs * 0.1, xs, ys, zs);
-                if (spellParticle != NULL) {
+                if (spellParticle != nullptr) {
                     float randBrightness = 0.75f + random->nextFloat() * 0.25f;
                     spellParticle->setColor(red * randBrightness,
                                             green * randBrightness,
@@ -3455,7 +3455,7 @@ void LevelRenderer::levelEvent(std::shared_ptr<Player> source, int type, int x,
                 std::shared_ptr<Particle> acidParticle =
                     addParticleInternal(particleName, xp + xs * 0.1, yp + 0.3,
                                         zp + zs * 0.1, xs, ys, zs);
-                if (acidParticle != NULL) {
+                if (acidParticle != nullptr) {
                     float randBrightness = 0.75f + random->nextFloat() * 0.25f;
                     acidParticle->setPower((float)dist);
                 }
@@ -3537,7 +3537,7 @@ void LevelRenderer::levelEvent(std::shared_ptr<Player> source, int type, int x,
         case LevelEvent::SOUND_PLAY_RECORDING: {
             RecordingItem* rci =
                 dynamic_cast<RecordingItem*>(Item::items[data]);
-            if (rci != NULL) {
+            if (rci != nullptr) {
                 level[playerIndex]->playStreamingMusic(rci->recording, x, y, z);
             } else {
                 // 4J-PB - only play streaming music if there isn't already some
@@ -3545,7 +3545,7 @@ void LevelRenderer::levelEvent(std::shared_ptr<Player> source, int type, int x,
                 // started playing already
                 if (!mc->soundEngine->GetIsPlayingStreamingGameMusic()) {
                     level[playerIndex]->playStreamingMusic(
-                        L"", x, y, z);  // 4J - used to pass NULL, but using
+                        L"", x, y, z);  // 4J - used to pass nullptr, but using
                                         // empty string here now instead
                 }
             }
@@ -3630,12 +3630,12 @@ void LevelRenderer::destroyTileProgress(int id, int x, int y, int z,
         }
         // destroyingBlocks.remove(id);
     } else {
-        BlockDestructionProgress* entry = NULL;
+        BlockDestructionProgress* entry = nullptr;
 
         AUTO_VAR(it, destroyingBlocks.find(id));
         if (it != destroyingBlocks.end()) entry = it->second;
 
-        if (entry == NULL || entry->getX() != x || entry->getY() != y ||
+        if (entry == nullptr || entry->getX() != x || entry->getY() != y ||
             entry->getZ() != z) {
             entry = new BlockDestructionProgress(id, x, y, z);
             destroyingBlocks.insert(
@@ -3889,7 +3889,7 @@ void LevelRenderer::DestroyedTileManager::destroyingTileAt(Level* level, int x,
                               (float)(y + 1), (float)(z + 1));
     Tile* tile = Tile::tiles[level->getTile(x, y, z)];
 
-    if (tile != NULL) {
+    if (tile != nullptr) {
         tile->addAABBs(level, x, y, z, box, &recentTile->boxes, nullptr);
     }
 

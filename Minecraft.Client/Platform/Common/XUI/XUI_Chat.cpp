@@ -33,7 +33,7 @@ HRESULT CScene_Chat::OnTimer(XUIMessageTimer* pXUIMessageTimer,
             m_Labels[i].SetOpacity(0);
         }
     }
-    if (pMinecraft->localplayers[m_iPad] != NULL) {
+    if (pMinecraft->localplayers[m_iPad] != nullptr) {
         m_Jukebox.SetText(pGui->getJukeboxMessage(m_iPad).c_str());
         m_Jukebox.SetOpacity(pGui->getJukeboxOpacity(m_iPad));
     }

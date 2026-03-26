@@ -16,19 +16,19 @@ int SlotProgressControl::GetValue() {
     void* pvUserData;
     XuiElementGetUserData(hParent, &pvUserData);
 
-    if (pvUserData != NULL) {
+    if (pvUserData != nullptr) {
         SlotControlUserDataContainer* pUserDataContainer =
             (SlotControlUserDataContainer*)pvUserData;
 
         std::shared_ptr<ItemInstance> item = std::shared_ptr<ItemInstance>();
 
-        if (pUserDataContainer->slot != NULL) {
+        if (pUserDataContainer->slot != nullptr) {
             item = pUserDataContainer->slot->getItem();
         } else {
             item = pUserDataContainer->item;
         }
 
-        if (item != NULL) {
+        if (item != nullptr) {
             // TODO Should use getDamage instead even though it returns the same
             // value
             if (item->isDamaged())
@@ -58,19 +58,19 @@ void SlotProgressControl::GetRange(int* pnRangeMin, int* pnRangeMax) {
     void* pvUserData;
     XuiElementGetUserData(hParent, &pvUserData);
 
-    if (pvUserData != NULL) {
+    if (pvUserData != nullptr) {
         SlotControlUserDataContainer* pUserDataContainer =
             (SlotControlUserDataContainer*)pvUserData;
 
         std::shared_ptr<ItemInstance> item = std::shared_ptr<ItemInstance>();
 
-        if (pUserDataContainer->slot != NULL) {
+        if (pUserDataContainer->slot != nullptr) {
             item = pUserDataContainer->slot->getItem();
         } else {
             item = pUserDataContainer->item;
         }
 
-        if (item != NULL) {
+        if (item != nullptr) {
             *pnRangeMax = item->getMaxDamage();
         }
     }

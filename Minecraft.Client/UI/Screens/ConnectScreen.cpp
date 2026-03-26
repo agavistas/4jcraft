@@ -51,7 +51,7 @@ catch (Exception e) {
 }
 
 void ConnectScreen::tick() {
-    if (connection != NULL) {
+    if (connection != nullptr) {
         connection->tick();
     }
 }
@@ -69,7 +69,7 @@ void ConnectScreen::init() {
 void ConnectScreen::buttonClicked(Button* button) {
     if (button->id == 0) {
         aborted = true;
-        if (connection != NULL) connection->close();
+        if (connection != nullptr) connection->close();
         minecraft->setScreen(new TitleScreen());
     }
 }
@@ -79,7 +79,7 @@ void ConnectScreen::render(int xm, int ym, float a) {
 
     Language* language = Language::getInstance();
 
-    if (connection == NULL) {
+    if (connection == nullptr) {
         drawCenteredString(font, language->getElement(L"connect.connecting"),
                            width / 2, height / 2 - 50, 0xffffff);
         drawCenteredString(font, L"", width / 2, height / 2 - 10, 0xffffff);

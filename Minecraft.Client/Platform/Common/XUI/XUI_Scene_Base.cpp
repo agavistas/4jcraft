@@ -22,14 +22,14 @@
 
 #define PRESS_START_TIMER 0
 
-CXuiSceneBase* CXuiSceneBase::Instance = NULL;
+CXuiSceneBase* CXuiSceneBase::Instance = nullptr;
 unsigned int CXuiSceneBase::m_trialTimerLimitSecs =
     DYNAMIC_CONFIG_DEFAULT_TRIAL_TIME;
 //----------------------------------------------------------------------------------
 // Performs initialization tasks - retrieves controls.
 //----------------------------------------------------------------------------------
 HRESULT CXuiSceneBase::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
-    ASSERT(CXuiSceneBase::Instance == NULL);
+    ASSERT(CXuiSceneBase::Instance == nullptr);
     CXuiSceneBase::Instance = this;
 
     m_iWrongTexturePackTickC =
@@ -42,7 +42,7 @@ HRESULT CXuiSceneBase::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     CXuiElement xuiElement = m_hObj;
     HXUIOBJ hTemp;
 
-    m_hEmptyQuadrantLogo = NULL;
+    m_hEmptyQuadrantLogo = nullptr;
     XuiElementGetChildById(m_hObj, L"EmptyQuadrantLogo", &m_hEmptyQuadrantLogo);
 
     D3DXVECTOR3 lastPos;
@@ -50,8 +50,8 @@ HRESULT CXuiSceneBase::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
         for (unsigned int i = 0; i < BUTTONS_TOOLTIP_MAX; ++i) {
             m_visible[idx][i] = false;
             m_iCurrentTooltipTextID[idx][i] = -1;
-            hTooltipText[idx][i] = NULL;
-            hTooltipTextSmall[idx][i] = NULL;
+            hTooltipText[idx][i] = nullptr;
+            hTooltipTextSmall[idx][i] = nullptr;
             // set all tooltips to shown FALSE by default
             m_Buttons[idx][i].SetShow(FALSE);
             m_ButtonsSmall[idx][i].SetShow(FALSE);
@@ -102,7 +102,7 @@ HRESULT CXuiSceneBase::OnTimer(XUIMessageTimer* pData, BOOL& rfHandled) {
         // clear the quadrants
         m_iQuadrantsMask = 0;
 
-        HXUIOBJ hObj = NULL, hQuadrant;
+        HXUIOBJ hObj = nullptr, hQuadrant;
 
         HRESULT hr = XuiControlGetVisual(m_PressStart.m_hObj, &hObj);
 
@@ -135,8 +135,8 @@ HRESULT CXuiSceneBase::OnSkinChanged(BOOL& bHandled) {
     // Clear visuals held for tooltips
     for (unsigned int idx = 0; idx < XUSER_MAX_COUNT; ++idx) {
         for (unsigned int i = 0; i < BUTTONS_TOOLTIP_MAX; ++i) {
-            hTooltipText[idx][i] = NULL;
-            hTooltipTextSmall[idx][i] = NULL;
+            hTooltipText[idx][i] = nullptr;
+            hTooltipTextSmall[idx][i] = nullptr;
         }
     }
 
@@ -168,7 +168,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
             // Is it available?
             TexturePack* pRequiredTPack = pMinecraft->skins->getTexturePackById(
                 app.GetRequiredTexturePackID());
-            if (pRequiredTPack != NULL) {
+            if (pRequiredTPack != nullptr) {
                 // we can switch to the required pack
                 // reset the timer
                 m_iWrongTexturePackTickC = 20 * 60 * 5;  // reset to 5 minutes
@@ -195,7 +195,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
         }
     }
 
-    if (EnderDragonRenderer::bossInstance == NULL) {
+    if (EnderDragonRenderer::bossInstance == nullptr) {
         if (m_ticksWithNoBoss <= 20) {
             ++m_ticksWithNoBoss;
         }
@@ -205,7 +205,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
         m_ticksWithNoBoss = 0;
 
         for (unsigned int i = 0; i < XUSER_MAX_COUNT; ++i) {
-            if (pMinecraft->localplayers[i] != NULL &&
+            if (pMinecraft->localplayers[i] != nullptr &&
                 pMinecraft->localplayers[i]->dimension == 1 &&
                 !ui.GetMenuDisplayed(i) &&
                 app.GetGameSettings(i, eGameSetting_DisplayHUD)) {
@@ -230,7 +230,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                             m_BossHealthProgress1[i].SetShow(TRUE);
                             m_BossHealthProgress2[i].SetShow(FALSE);
                             m_BossHealthProgress3[i].SetShow(FALSE);
-                            if (m_BossHealthProgress1_small[i] != NULL) {
+                            if (m_BossHealthProgress1_small[i] != nullptr) {
                                 m_BossHealthProgress1_small[i].SetShow(FALSE);
                                 m_BossHealthProgress2_small[i].SetShow(FALSE);
                                 m_BossHealthProgress3_small[i].SetShow(FALSE);
@@ -242,7 +242,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                             m_BossHealthProgress1[i].SetShow(FALSE);
                             m_BossHealthProgress2[i].SetShow(TRUE);
                             m_BossHealthProgress3[i].SetShow(FALSE);
-                            if (m_BossHealthProgress1_small[i] != NULL) {
+                            if (m_BossHealthProgress1_small[i] != nullptr) {
                                 m_BossHealthProgress1_small[i].SetShow(FALSE);
                                 m_BossHealthProgress2_small[i].SetShow(FALSE);
                                 m_BossHealthProgress3_small[i].SetShow(FALSE);
@@ -254,7 +254,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                             m_BossHealthProgress1[i].SetShow(FALSE);
                             m_BossHealthProgress2[i].SetShow(FALSE);
                             m_BossHealthProgress3[i].SetShow(TRUE);
-                            if (m_BossHealthProgress1_small[i] != NULL) {
+                            if (m_BossHealthProgress1_small[i] != nullptr) {
                                 m_BossHealthProgress1_small[i].SetShow(FALSE);
                                 m_BossHealthProgress2_small[i].SetShow(FALSE);
                                 m_BossHealthProgress3_small[i].SetShow(FALSE);
@@ -275,7 +275,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                                 m_BossHealthProgress1[i].SetShow(TRUE);
                                 m_BossHealthProgress2[i].SetShow(FALSE);
                                 m_BossHealthProgress3[i].SetShow(FALSE);
-                                if (m_BossHealthProgress1_small[i] != NULL) {
+                                if (m_BossHealthProgress1_small[i] != nullptr) {
                                     m_BossHealthProgress1_small[i].SetShow(
                                         FALSE);
                                     m_BossHealthProgress2_small[i].SetShow(
@@ -290,7 +290,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                                 m_BossHealthProgress1[i].SetShow(FALSE);
                                 m_BossHealthProgress2[i].SetShow(TRUE);
                                 m_BossHealthProgress3[i].SetShow(FALSE);
-                                if (m_BossHealthProgress1_small[i] != NULL) {
+                                if (m_BossHealthProgress1_small[i] != nullptr) {
                                     m_BossHealthProgress1_small[i].SetShow(
                                         FALSE);
                                     m_BossHealthProgress2_small[i].SetShow(
@@ -304,7 +304,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                                 m_BossHealthProgress1[i].SetShow(FALSE);
                                 m_BossHealthProgress2[i].SetShow(FALSE);
                                 m_BossHealthProgress3[i].SetShow(TRUE);
-                                if (m_BossHealthProgress1_small[i] != NULL) {
+                                if (m_BossHealthProgress1_small[i] != nullptr) {
                                     m_BossHealthProgress1_small[i].SetShow(
                                         FALSE);
                                     m_BossHealthProgress2_small[i].SetShow(
@@ -442,7 +442,7 @@ void CXuiSceneBase::_TickAllBaseScenes() {
                            !(app.GetXuiAction(i) ==
                              eAppAction_AutosaveSaveGameCapturedThumbnail) &&
                            app.GetGameSettings(i, eGameSetting_DisplayHUD) != 0;
-        if (bDisplayGui && pMinecraft->localplayers[i] != NULL) {
+        if (bDisplayGui && pMinecraft->localplayers[i] != nullptr) {
             XuiElementSetShow(app.GetCurrentHUDScene(i), TRUE);
         } else {
             XuiElementSetShow(app.GetCurrentHUDScene(i), FALSE);
@@ -464,7 +464,7 @@ HRESULT CXuiSceneBase::_SetTooltipText(unsigned int iPad,
 
     XUIRect xuiRect, xuiRectSmall;
     HRESULT hr = S_OK;
-    LPCWSTR pString = NULL;
+    LPCWSTR pString = nullptr;
     float fWidth, fHeight;
 
     // Want to be able to show just a button (for RB LB)
@@ -472,8 +472,8 @@ HRESULT CXuiSceneBase::_SetTooltipText(unsigned int iPad,
         pString = app.GetString(iTextID);
     }
 
-    if (hTooltipText[iPad][uiTooltip] == NULL) {
-        HXUIOBJ hObj = NULL;
+    if (hTooltipText[iPad][uiTooltip] == nullptr) {
+        HXUIOBJ hObj = nullptr;
         hr = XuiControlGetVisual(m_Buttons[iPad][uiTooltip].m_hObj, &hObj);
         hr = XuiElementGetChildById(hObj, L"text_ButtonText",
                                     &hTooltipText[iPad][uiTooltip]);
@@ -481,8 +481,8 @@ HRESULT CXuiSceneBase::_SetTooltipText(unsigned int iPad,
                                    &m_vPosTextInTooltip[uiTooltip]);
     }
 
-    if (hTooltipTextSmall[iPad][uiTooltip] == NULL) {
-        HXUIOBJ hObj = NULL;
+    if (hTooltipTextSmall[iPad][uiTooltip] == nullptr) {
+        HXUIOBJ hObj = nullptr;
         hr = XuiControlGetVisual(m_ButtonsSmall[iPad][uiTooltip].m_hObj, &hObj);
         hr = XuiElementGetChildById(hObj, L"text_ButtonText",
                                     &hTooltipTextSmall[iPad][uiTooltip]);
@@ -826,7 +826,7 @@ HRESULT CXuiSceneBase::_ShowBackground(unsigned int iPad, bool show) {
         hr = XuiElementGetChildById(hVisual, L"NightGroup", &hNight);
         hr = XuiElementGetChildById(hVisual, L"DayGroup", &hDay);
 
-        if (show && pMinecraft->level != NULL) {
+        if (show && pMinecraft->level != nullptr) {
             __int64 i64TimeOfDay = 0;
             // are we in the Nether? - Leave the time as 0 if we are, so we show
             // daylight
@@ -872,7 +872,7 @@ HRESULT CXuiSceneBase::_ShowPressStart(unsigned int iPad) {
     m_PressStart.SetShow(TRUE);
     // retrieve the visual for this quadrant
 
-    HXUIOBJ hObj = NULL, hQuadrant;
+    HXUIOBJ hObj = nullptr, hQuadrant;
     HRESULT hr = XuiControlGetVisual(m_PressStart.m_hObj, &hObj);
     hr = XuiElementGetChildById(hObj, L"text_ButtonText", &hQuadrant);
     memset(&xuiRect, 0, sizeof(xuiRect));
@@ -988,7 +988,7 @@ bool CXuiSceneBase::_PressStartPlaying(unsigned int iPad) {
 HRESULT CXuiSceneBase::_SetPlayerBaseScenePosition(
     unsigned int iPad, EBaseScenePosition position) {
     // turn off the empty quadrant logo
-    if (m_hEmptyQuadrantLogo != NULL) {
+    if (m_hEmptyQuadrantLogo != nullptr) {
         XuiElementSetShow(m_hEmptyQuadrantLogo, FALSE);
     }
 
@@ -1252,8 +1252,8 @@ HRESULT CXuiSceneBase::_SetPlayerBaseScenePosition(
     // 4J Stu - If we already have some scenes open, then call this to update
     // their positions Fix for #10960 - All Lang: UI: Split-screen: Changing
     // split screen mode (vertical/horizontal) make window layout strange
-    if (Minecraft::GetInstance() != NULL &&
-        Minecraft::GetInstance()->localplayers[iPad] != NULL) {
+    if (Minecraft::GetInstance() != nullptr &&
+        Minecraft::GetInstance()->localplayers[iPad] != nullptr) {
         // 4J-PB - Can only do this once we know what the player's UI settings
         // are, so we need to have the player game settings read
         _UpdateSelectedItemPos(iPad);
@@ -1332,8 +1332,8 @@ void CXuiSceneBase::_UpdateSelectedItemPos(unsigned int iPad) {
         unsigned char ucGuiScale =
             app.GetGameSettings(iPad, eGameSetting_UISize) + 2;
 
-        if (Minecraft::GetInstance() != NULL &&
-            Minecraft::GetInstance()->localgameModes[iPad] != NULL &&
+        if (Minecraft::GetInstance() != nullptr &&
+            Minecraft::GetInstance()->localgameModes[iPad] != nullptr &&
             Minecraft::GetInstance()->localgameModes[iPad]->canHurtPlayer()) {
             // SURVIVAL MODE - Move up further because of hearts, shield and xp
             switch (ucGuiScale) {
@@ -1435,8 +1435,8 @@ void CXuiSceneBase::_UpdateSelectedItemPos(unsigned int iPad) {
             (m_playerBaseScenePosition[iPad] == e_BaseScene_Right)) {
             float scale = 0.5f;
             selectedItemPos.y -= (scale * 88.0f);
-            if (Minecraft::GetInstance() != NULL &&
-                Minecraft::GetInstance()->localgameModes[iPad] != NULL &&
+            if (Minecraft::GetInstance() != nullptr &&
+                Minecraft::GetInstance()->localgameModes[iPad] != nullptr &&
                 Minecraft::GetInstance()
                     ->localgameModes[iPad]
                     ->canHurtPlayer()) {
@@ -1479,7 +1479,7 @@ CXuiSceneBase::EBaseScenePosition CXuiSceneBase::_GetPlayerBasePosition(
 }
 
 void CXuiSceneBase::_SetEmptyQuadrantLogo(int iPad, EBaseScenePosition ePos) {
-    if (m_hEmptyQuadrantLogo != NULL) {
+    if (m_hEmptyQuadrantLogo != nullptr) {
         for (unsigned int i = 0; i < XUSER_MAX_COUNT; ++i) {
             if (m_playerBaseScenePosition[i] == e_BaseScene_Fullscreen) {
                 // Someone is fullscreen, so don't show this
@@ -1601,8 +1601,8 @@ HRESULT CXuiSceneBase::_DisplayGamertag(unsigned int iPad, bool display) {
         if (app.GetGameSettings(ProfileManager.GetPrimaryPad(),
                                 eGameSetting_DisplaySplitscreenGamertags) !=
             0) {
-            if (Minecraft::GetInstance() != NULL &&
-                Minecraft::GetInstance()->localplayers[iPad] != NULL) {
+            if (Minecraft::GetInstance() != nullptr &&
+                Minecraft::GetInstance()->localplayers[iPad] != nullptr) {
                 std::wstring wsGamertag =
                     convStringToWstring(ProfileManager.GetGamertag(iPad));
                 XuiControlSetText(m_hGamerTagA[iPad], wsGamertag.c_str());
@@ -1845,13 +1845,13 @@ void CXuiSceneBase::ReLayout(unsigned int iPad) {
 }
 
 void CXuiSceneBase::TickAllBaseScenes() {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         CXuiSceneBase::Instance->_TickAllBaseScenes();
     }
 }
 
 HRESULT CXuiSceneBase::SetEnableTooltips(unsigned int iPad, bool enabled) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_SetEnableTooltips(iPad, enabled);
     }
     return S_OK;
@@ -1859,14 +1859,14 @@ HRESULT CXuiSceneBase::SetEnableTooltips(unsigned int iPad, bool enabled) {
 
 HRESULT CXuiSceneBase::SetTooltipText(unsigned int iPad, unsigned int tooltip,
                                       int iTextID) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_SetTooltipText(iPad, tooltip, iTextID);
     }
     return S_OK;
 }
 
 HRESULT CXuiSceneBase::RefreshTooltips(unsigned int iPad) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_RefreshTooltips(iPad);
     }
     return S_OK;
@@ -1874,14 +1874,14 @@ HRESULT CXuiSceneBase::RefreshTooltips(unsigned int iPad) {
 
 HRESULT CXuiSceneBase::ShowTooltip(unsigned int iPad, unsigned int tooltip,
                                    bool show) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_ShowTooltip(iPad, tooltip, show);
     }
     return S_OK;
 }
 
 HRESULT CXuiSceneBase::ShowSafeArea(bool show) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_ShowSafeArea(show);
     }
     return S_OK;
@@ -1890,7 +1890,7 @@ HRESULT CXuiSceneBase::ShowSafeArea(bool show) {
 HRESULT CXuiSceneBase::SetTooltips(unsigned int iPad, int iA, int iB, int iX,
                                    int iY, int iLT, int iRT, int iRB, int iLB,
                                    int iLS, bool forceUpdate /*= false*/) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         // Enable all the tooltips. We should disable them in the scenes as
         // required
         CXuiSceneBase::Instance->_SetTooltipsEnabled(iPad);
@@ -1948,7 +1948,7 @@ HRESULT CXuiSceneBase::AnimateKeyPress(unsigned int userIndex,
 
 HRESULT CXuiSceneBase::ShowSavingMessage(unsigned int iPad,
                                          C4JStorage::ESavingMessage eVal) {
-    if (CXuiSceneBase::Instance != NULL) {
+    if (CXuiSceneBase::Instance != nullptr) {
         return CXuiSceneBase::Instance->_ShowSavingMessage(iPad, eVal);
     }
 
@@ -2036,7 +2036,7 @@ HRESULT CXuiSceneBase::UpdatePlayerBasePositions() {
 
     // If the game is not started (or is being held paused for a bit) then
     // display all scenes fullscreen
-    if (pMinecraft == NULL) {
+    if (pMinecraft == nullptr) {
         for (unsigned int idx = 0; idx < XUSER_MAX_COUNT; ++idx) {
             padPositions[idx] = e_BaseScene_Fullscreen;
         }
@@ -2057,7 +2057,7 @@ HRESULT CXuiSceneBase::UpdatePlayerBasePositions() {
     // We are in splitscreen so work out where each player should be
     else {
         for (unsigned int idx = 0; idx < XUSER_MAX_COUNT; ++idx) {
-            if (pMinecraft->localplayers[idx] != NULL) {
+            if (pMinecraft->localplayers[idx] != nullptr) {
                 if (pMinecraft->localplayers[idx]->m_iScreenSection ==
                     C4JRender::VIEWPORT_TYPE_FULLSCREEN) {
                     DisplayGamertag(idx, FALSE);
@@ -2128,7 +2128,7 @@ void CXuiSceneBase::SetEmptyQuadrantLogo(int iScreenSection) {
     int iPad;
     // find the empty player
     for (iPad = 0; iPad < XUSER_MAX_COUNT; ++iPad) {
-        if (pMinecraft->localplayers[iPad] == NULL) {
+        if (pMinecraft->localplayers[iPad] == nullptr) {
             switch (iScreenSection) {
                 case C4JRender::VIEWPORT_TYPE_QUADRANT_TOP_LEFT:
                     ePos = e_BaseScene_Top_Left;

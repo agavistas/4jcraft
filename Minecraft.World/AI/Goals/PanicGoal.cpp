@@ -13,11 +13,11 @@ PanicGoal::PanicGoal(PathfinderMob* mob, double speedModifier) {
 }
 
 bool PanicGoal::canUse() {
-    if (mob->getLastHurtByMob() == NULL && !mob->isOnFire()) return false;
+    if (mob->getLastHurtByMob() == nullptr && !mob->isOnFire()) return false;
     Vec3* pos = RandomPos::getPos(
         std::dynamic_pointer_cast<PathfinderMob>(mob->shared_from_this()), 5,
         4);
-    if (pos == NULL) return false;
+    if (pos == nullptr) return false;
     posX = pos->x;
     posY = pos->y;
     posZ = pos->z;

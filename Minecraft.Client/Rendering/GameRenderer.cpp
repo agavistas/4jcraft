@@ -105,8 +105,8 @@ GameRenderer::GameRenderer(Minecraft* mc) {
     zoom = 1;
     zoom_x = 0;
     zoom_y = 0;
-    rainXa = NULL;
-    rainZa = NULL;
+    rainXa = nullptr;
+    rainZa = nullptr;
     lastActiveTime = Minecraft::currentTimeMillis();
     lastNsTime = 0;
     random = new Random();
@@ -137,7 +137,7 @@ GameRenderer::GameRenderer(Minecraft* mc) {
     }
 
     this->mc = mc;
-    itemInHandRenderer = NULL;
+    itemInHandRenderer = nullptr;
 
     // 4J-PB - set up the local players iteminhand renderers here - needs to be
     // done with lighting enabled so that the render geometry gets compiled
@@ -175,7 +175,7 @@ GameRenderer::GameRenderer(Minecraft* mc) {
     m_updateEvents->Set(eUpdateEventIsFinished);
 
     InitializeCriticalSection(&m_csDeleteStack);
-    m_updateThread = new C4JThread(runUpdate, NULL, "Chunk update");
+    m_updateThread = new C4JThread(runUpdate, nullptr, "Chunk update");
 #ifdef __PS3__
     m_updateThread->SetPriority(THREAD_PRIORITY_ABOVE_NORMAL);
 #endif  // __PS3__
@@ -186,8 +186,8 @@ GameRenderer::GameRenderer(Minecraft* mc) {
 
 // 4J Stu Added to go with 1.8.2 change
 GameRenderer::~GameRenderer() {
-    if (rainXa != NULL) delete[] rainXa;
-    if (rainZa != NULL) delete[] rainZa;
+    if (rainXa != nullptr) delete[] rainXa;
+    if (rainZa != nullptr) delete[] rainZa;
 }
 
 void GameRenderer::tick(bool first)  // 4J - add bFirst
@@ -216,7 +216,7 @@ void GameRenderer::tick(bool first)  // 4J - add bFirst
         accumulatedSmoothYO = 0;
     }
 
-    if (mc->cameraTargetPlayer == NULL) {
+    if (mc->cameraTargetPlayer == nullptr) {
         mc->cameraTargetPlayer = std::dynamic_pointer_cast<Mob>(mc->player);
     }
 
@@ -254,8 +254,8 @@ void GameRenderer::tick(bool first)  // 4J - add bFirst
 }
 
 void GameRenderer::pick(float a) {
-    if (mc->cameraTargetPlayer == NULL) return;
-    if (mc->level == NULL) return;
+    if (mc->cameraTargetPlayer == nullptr) return;
+    if (mc->level == nullptr) return;
 
     mc->crosshairPickMob = nullptr;
 
@@ -286,7 +286,7 @@ void GameRenderer::pick(float a) {
         if ((hitx < minxz) || (hitx > maxxz) || (hitz < minxz) ||
             (hitz > maxxz)) {
             delete mc->hitResult;
-            mc->hitResult = NULL;
+            mc->hitResult = nullptr;
         }
     }
 
@@ -300,7 +300,7 @@ void GameRenderer::pick(float a) {
         range = dist;
     }
 
-    if (mc->hitResult != NULL) {
+    if (mc->hitResult != nullptr) {
         dist = mc->hitResult->pos->distanceTo(from);
     }
 
@@ -328,7 +328,7 @@ void GameRenderer::pick(float a) {
                 hovered = e;
                 nearest = 0;
             }
-        } else if (p != NULL) {
+        } else if (p != nullptr) {
             double dd = from->distanceTo(p->pos);
             std::shared_ptr<Entity> ridingEntity =
                 mc->cameraTargetPlayer->riding;
@@ -346,9 +346,9 @@ void GameRenderer::pick(float a) {
         delete p;
     }
 
-    if (hovered != NULL) {
-        if (nearest < dist || (mc->hitResult == NULL)) {
-            if (mc->hitResult != NULL) delete mc->hitResult;
+    if (hovered != nullptr) {
+        if (nearest < dist || (mc->hitResult == nullptr)) {
+            if (mc->hitResult != nullptr) delete mc->hitResult;
             mc->hitResult = new HitResult(hovered);
             if (hovered->instanceof(eTYPE_LIVINGENTITY)) {
                 mc->crosshairPickMob =
@@ -526,7 +526,7 @@ void GameRenderer::moveCameraToPlayer(float a) {
                 HitResult* hr = mc->level->clip(
                     Vec3::newTemp(x + xo, y + yo, z + zo),
                     Vec3::newTemp(x - xd + xo, y - yd + yo, z - zd + zo));
-                if (hr != NULL) {
+                if (hr != nullptr) {
                     double dist = hr->pos->distanceTo(Vec3::newTemp(x, y, z));
                     if (dist < cameraDist) cameraDist = dist;
                     delete hr;
@@ -680,7 +680,7 @@ void GameRenderer::renderItemInHand(float a, int eye) {
 
     // 4J-PB - to turn off the hand for screenshots, but not when the item held
     // is a map
-    if (localplayer != NULL) {
+    if (localplayer != nullptr) {
         std::shared_ptr<ItemInstance> item =
             localplayer->inventory->getSelected();
         if (!(item && item->getItem()->id == Item::map_Id) &&
@@ -873,7 +873,7 @@ void GameRenderer::updateLightTexture(float a) {
         // Loop over all the players
         std::shared_ptr<MultiplayerLocalPlayer> player =
             Minecraft::GetInstance()->localplayers[j];
-        if (player == NULL) continue;
+        if (player == nullptr) continue;
 
         Level* level = player->level;  // 4J - was mc->level when it was just to
                                        // update the one light texture
@@ -1052,7 +1052,7 @@ void GameRenderer::render(float a, bool bFirst) {
 
     int maxFps = getFpsCap(mc->options->framerateLimit);
 
-    if (mc->level != NULL) {
+    if (mc->level != nullptr) {
         if (mc->options->framerateLimit == 0) {
             renderLevel(a, 0);
         } else {
@@ -1061,8 +1061,8 @@ void GameRenderer::render(float a, bool bFirst) {
 
         lastNsTime = System::nanoTime();
 
-        if (!mc->options->hideGui || mc->screen != NULL) {
-            mc->gui->render(a, mc->screen != NULL, xMouse, yMouse);
+        if (!mc->options->hideGui || mc->screen != nullptr) {
+            mc->gui->render(a, mc->screen != nullptr, xMouse, yMouse);
         }
     } else {
         glViewport(0, 0, mc->width, mc->height);
@@ -1075,10 +1075,10 @@ void GameRenderer::render(float a, bool bFirst) {
         lastNsTime = System::nanoTime();
     }
 
-    if (mc->screen != NULL) {
+    if (mc->screen != nullptr) {
         glClear(GL_DEPTH_BUFFER_BIT);
         mc->screen->render(xMouse, yMouse, a);
-        if (mc->screen != NULL && mc->screen->particles != NULL)
+        if (mc->screen != nullptr && mc->screen->particles != nullptr)
             mc->screen->particles->render(a);
     }
 }
@@ -1247,7 +1247,7 @@ void GameRenderer::renderLevel(float a, int64_t until) {
     bool updateChunks =
         (mc->player == mc->localplayers[ProfileManager.GetPrimaryPad()]);
 
-    //	if (mc->cameraTargetPlayer == NULL)	// 4J - removed condition as we
+    //	if (mc->cameraTargetPlayer == nullptr)	// 4J - removed condition as we
     // want to update this is mc->player changes for different local players
     {
         mc->cameraTargetPlayer = mc->player;
@@ -1390,7 +1390,7 @@ void GameRenderer::renderLevel(float a, int64_t until) {
             PIXEndNamedEvent();
             turnOffLightLayer(a);  // 4J - brought forward from 1.8.2
 
-            if ((mc->hitResult != NULL) &&
+            if ((mc->hitResult != nullptr) &&
                 cameraEntity->isUnderLiquid(Material::water) &&
                 cameraEntity->instanceof(
                     eTYPE_PLAYER))  //&& !mc->options.hideGui)
@@ -1472,7 +1472,7 @@ void GameRenderer::renderLevel(float a, int64_t until) {
         if ((zoom == 1) &&
             cameraEntity->instanceof(eTYPE_PLAYER))  //&& !mc->options.hideGui)
         {
-            if (mc->hitResult != NULL &&
+            if (mc->hitResult != nullptr &&
                 !cameraEntity->isUnderLiquid(Material::water)) {
                 std::shared_ptr<Player> player =
                     std::dynamic_pointer_cast<Player>(cameraEntity);
@@ -1626,7 +1626,7 @@ void GameRenderer::renderSnowAndRain(float a) {
 
     turnOnLightLayer(a);
 
-    if (rainXa == NULL) {
+    if (rainXa == nullptr) {
         rainXa = new float[32 * 32];
         rainZa = new float[32 * 32];
 
@@ -1872,7 +1872,7 @@ void GameRenderer::setupClearColor(float a) {
         if (d > 0) {
             float* c =
                 level->dimension->getSunriseColor(level->getTimeOfDay(a), a);
-            if (c != NULL) {
+            if (c != nullptr) {
                 d *= c[3];
                 fr = fr * (1 - d) + c[0] * d;
                 fg = fg * (1 - d) + c[1] * d;

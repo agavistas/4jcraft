@@ -5,7 +5,7 @@
 HRESULT CXuiControl4JComboBox::OnInit(XUIMessageInit* pInitData,
                                       BOOL& bHandled) {
     m_ListData.nItems = 0;
-    m_ListData.pItems = NULL;
+    m_ListData.pItems = nullptr;
 
     return S_OK;
 }
@@ -23,7 +23,7 @@ void CXuiControl4JComboBox::SetData(LIST_ITEM_INFO* pItems, int iCount) {
 }
 
 int CXuiControl4JComboBox::GetSelectedIndex() {
-    return XuiListGetCurSel(GetListObject(), NULL);
+    return XuiListGetCurSel(GetListObject(), nullptr);
 }
 
 // Gets called every frame
@@ -69,7 +69,7 @@ HRESULT CXuiControl4JComboBox::OnGetSourceDataImage(
 
 HRESULT CXuiControl4JComboBox::OnGetItemEnable(
     XUIMessageGetItemEnable* pGetItemEnableData, BOOL& bHandled) {
-    if (m_ListData.pItems != NULL && m_ListData.nItems != 0) {
+    if (m_ListData.pItems != nullptr && m_ListData.nItems != 0) {
         pGetItemEnableData->bEnabled =
             m_ListData.pItems[pGetItemEnableData->iItem].fEnabled;
     }

@@ -25,7 +25,7 @@ WCHAR* CScene_SkinSelect::wchDefaultNamesA[] = {
 HRESULT CScene_SkinSelect::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_iPad = *(int*)pInitData->pvInitData;
     // if we're not in the game, we need to use basescene 0
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
     m_bIgnoreInput = false;
 
     // 4J Stu - Added this so that we have skins loaded
@@ -44,7 +44,7 @@ HRESULT CScene_SkinSelect::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     m_skinIndex = 0;
     m_currentSkinPath = app.GetPlayerSkinName(m_iPad);
     m_originalSkinId = app.GetPlayerSkinId(m_iPad);
-    m_currentPack = NULL;
+    m_currentPack = nullptr;
     m_bSlidingSkins = false;
     m_bAnimatingMove = false;
     currentPackCount = 0;
@@ -83,7 +83,7 @@ HRESULT CScene_SkinSelect::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
             m_currentPack =
                 app.m_dlcManager.getPackContainingSkin(m_currentSkinPath);
             bool bFound;
-            if (m_currentPack != NULL) {
+            if (m_currentPack != nullptr) {
                 m_packIndex =
                     app.m_dlcManager.getPackIndex(m_currentPack, bFound,
                                                   DLCManager::e_DLCType_Skin) +
@@ -226,7 +226,7 @@ HRESULT CScene_SkinSelect::OnKeyDown(XUIMessageInput* pInputData,
                     }
                     break;
                 default:
-                    if (m_currentPack != NULL) {
+                    if (m_currentPack != nullptr) {
                         DLCSkinFile* skinFile =
                             m_currentPack->getSkinFile(m_skinIndex);
 
@@ -266,7 +266,7 @@ HRESULT CScene_SkinSelect::OnKeyDown(XUIMessageInput* pInputData,
                                                 ->getPurchaseOfferId());
                                     ULONGLONG ullOfferID_Full;
 
-                                    if (pDLCInfo != NULL) {
+                                    if (pDLCInfo != nullptr) {
                                         ullOfferID_Full =
                                             pDLCInfo->ullOfferID_Full;
                                     } else {
@@ -616,8 +616,8 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
     std::wstring skinOrigin = L"";
     bool bSkinIsFree = false;
     bool bLicensed = false;
-    DLCSkinFile* skinFile = NULL;
-    DLCPack* Pack = NULL;
+    DLCSkinFile* skinFile = nullptr;
+    DLCPack* Pack = nullptr;
     int sidePreviewControlsL, sidePreviewControlsR;
     bool bNoSkinsToShow = false;
 
@@ -625,7 +625,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
     m_selectedGroup.SetShow(FALSE);
     m_skinDetails.SetShow(FALSE);
 
-    if (m_currentPack != NULL) {
+    if (m_currentPack != nullptr) {
         skinFile = m_currentPack->getSkinFile(m_skinIndex);
         m_selectedSkinPath = skinFile->getPath();
         m_selectedCapePath =
@@ -654,7 +654,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
     } else {
         m_selectedSkinPath = L"";
         m_selectedCapePath = L"";
-        m_vAdditionalSkinBoxes = NULL;
+        m_vAdditionalSkinBoxes = nullptr;
 
         switch (m_packIndex) {
             case SKIN_SELECT_PACK_DEFAULT:
@@ -734,13 +734,13 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
         // already
         std::vector<ModelPart*>* pAdditionalModelParts =
             app.GetAdditionalModelParts(skinFile->getSkinID());
-        if (pAdditionalModelParts == NULL) {
+        if (pAdditionalModelParts == nullptr) {
             pAdditionalModelParts = app.SetAdditionalSkinBoxes(
                 skinFile->getSkinID(), m_vAdditionalSkinBoxes);
         }
     }
 
-    if (skinFile != NULL) {
+    if (skinFile != nullptr) {
         app.SetAnimOverrideBitmask(skinFile->getSkinID(),
                                    skinFile->getAnimOverrideBitmask());
     }
@@ -755,7 +755,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
 
     std::wstring otherSkinPath = L"";
     std::wstring otherCapePath = L"";
-    std::vector<SKIN_BOX*>* othervAdditionalSkinBoxes = NULL;
+    std::vector<SKIN_BOX*>* othervAdditionalSkinBoxes = nullptr;
     wchar_t chars[256];
 
     // turn off all displays
@@ -789,10 +789,10 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
 
     for (int i = 0; i < sidePreviewControlsR; ++i) {
         if (showNext) {
-            skinFile = NULL;
+            skinFile = nullptr;
             m_previewNextControls[i]->SetShow(TRUE);
 
-            if (m_currentPack != NULL) {
+            if (m_currentPack != nullptr) {
                 skinFile = m_currentPack->getSkinFile(nextIndex);
                 otherSkinPath = skinFile->getPath();
                 otherCapePath = skinFile->getParameterAsString(
@@ -802,7 +802,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
             } else {
                 otherSkinPath = L"";
                 otherCapePath = L"";
-                othervAdditionalSkinBoxes = NULL;
+                othervAdditionalSkinBoxes = nullptr;
                 switch (m_packIndex) {
                     case SKIN_SELECT_PACK_DEFAULT:
                         backupTexture = getTextureId(nextIndex);
@@ -836,13 +836,13 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
                 othervAdditionalSkinBoxes->size() != 0) {
                 std::vector<ModelPart*>* pAdditionalModelParts =
                     app.GetAdditionalModelParts(skinFile->getSkinID());
-                if (pAdditionalModelParts == NULL) {
+                if (pAdditionalModelParts == nullptr) {
                     pAdditionalModelParts = app.SetAdditionalSkinBoxes(
                         skinFile->getSkinID(), othervAdditionalSkinBoxes);
                 }
             }
             // 4J-PB - anim override needs set before SetTexture
-            if (skinFile != NULL) {
+            if (skinFile != nullptr) {
                 app.SetAnimOverrideBitmask(skinFile->getSkinID(),
                                            skinFile->getAnimOverrideBitmask());
             }
@@ -855,10 +855,10 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
 
     for (int i = 0; i < sidePreviewControlsL; ++i) {
         if (showPrevious) {
-            skinFile = NULL;
+            skinFile = nullptr;
             m_previewPreviousControls[i]->SetShow(TRUE);
 
-            if (m_currentPack != NULL) {
+            if (m_currentPack != nullptr) {
                 skinFile = m_currentPack->getSkinFile(previousIndex);
                 otherSkinPath = skinFile->getPath();
                 otherCapePath = skinFile->getParameterAsString(
@@ -868,7 +868,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
             } else {
                 otherSkinPath = L"";
                 otherCapePath = L"";
-                othervAdditionalSkinBoxes = NULL;
+                othervAdditionalSkinBoxes = nullptr;
                 switch (m_packIndex) {
                     case SKIN_SELECT_PACK_DEFAULT:
                         backupTexture = getTextureId(previousIndex);
@@ -903,7 +903,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
                 othervAdditionalSkinBoxes->size() != 0) {
                 std::vector<ModelPart*>* pAdditionalModelParts =
                     app.GetAdditionalModelParts(skinFile->getSkinID());
-                if (pAdditionalModelParts == NULL) {
+                if (pAdditionalModelParts == nullptr) {
                     pAdditionalModelParts = app.SetAdditionalSkinBoxes(
                         skinFile->getSkinID(), othervAdditionalSkinBoxes);
                 }
@@ -922,7 +922,7 @@ void CScene_SkinSelect::handleSkinIndexChanged() {
     }
 
     // update the tooltips
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
     if (bNoSkinsToShow) {
         if (bNotInGame) {
@@ -960,10 +960,10 @@ void CScene_SkinSelect::handlePackIndexChanged() {
         m_currentPack = app.m_dlcManager.getPack(
             m_packIndex - SKIN_SELECT_MAX_DEFAULTS, DLCManager::e_DLCType_Skin);
     } else {
-        m_currentPack = NULL;
+        m_currentPack = nullptr;
     }
     m_skinIndex = 0;
-    if (m_currentPack != NULL) {
+    if (m_currentPack != nullptr) {
         bool found;
         unsigned int currentSkinIndex =
             m_currentPack->getSkinIndexAt(m_currentSkinPath, found);
@@ -1144,7 +1144,7 @@ int CScene_SkinSelect::getNextSkinIndex(int sourceIndex) {
             if (m_packIndex == SKIN_SELECT_PACK_DEFAULT &&
                 nextSkin >= eDefaultSkins_Count) {
                 nextSkin = eDefaultSkins_ServerSelected;
-            } else if (m_currentPack != NULL &&
+            } else if (m_currentPack != nullptr &&
                        nextSkin >= m_currentPack->getSkinCount()) {
                 nextSkin = 0;
             }
@@ -1168,7 +1168,7 @@ int CScene_SkinSelect::getPreviousSkinIndex(int sourceIndex) {
             if (previousSkin == 0) {
                 if (m_packIndex == SKIN_SELECT_PACK_DEFAULT) {
                     previousSkin = eDefaultSkins_Count - 1;
-                } else if (m_currentPack != NULL) {
+                } else if (m_currentPack != nullptr) {
                     previousSkin = m_currentPack->getSkinCount() - 1;
                 }
             } else {
@@ -1244,7 +1244,7 @@ int CScene_SkinSelect::UnlockSkinReturned(void* pParam, int iPad,
             DLC_INFO* pDLCInfo = app.GetDLCInfoForTrialOfferID(
                 pScene->m_currentPack->getPurchaseOfferId());
 
-            if (pDLCInfo != NULL) {
+            if (pDLCInfo != nullptr) {
                 ullIndexA[0] = pDLCInfo->ullOfferID_Full;
             } else {
                 ullIndexA[0] = pScene->m_currentPack->getPurchaseOfferId();
@@ -1252,7 +1252,7 @@ int CScene_SkinSelect::UnlockSkinReturned(void* pParam, int iPad,
 
             // If we're in-game, then we need to enable DLC downloads. They'll
             // be set back to Auto on leaving the pause menu
-            if (Minecraft::GetInstance()->level != NULL) {
+            if (Minecraft::GetInstance()->level != nullptr) {
                 // need to allow downloads here, or the player would need to
                 // quit the game to let the download of a skin pack happen. This
                 // might affect the network traffic, since the download could
@@ -1261,7 +1261,7 @@ int CScene_SkinSelect::UnlockSkinReturned(void* pParam, int iPad,
                     XBACKGROUND_DOWNLOAD_MODE_ALWAYS_ALLOW);
             }
 
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
 
             // the license change coming in when the offer has been installed
             // will cause this scene to refresh
@@ -1301,7 +1301,7 @@ HRESULT CScene_SkinSelect::OnCustomMessage_DLCMountingComplete() {
     if (app.m_dlcManager.getPackCount(DLCManager::e_DLCType_Skin) > 0) {
         m_currentPack =
             app.m_dlcManager.getPackContainingSkin(m_currentSkinPath);
-        if (m_currentPack != NULL) {
+        if (m_currentPack != nullptr) {
             bool bFound = false;
             m_packIndex =
                 app.m_dlcManager.getPackIndex(m_currentPack, bFound,
@@ -1323,7 +1323,7 @@ HRESULT CScene_SkinSelect::OnCustomMessage_DLCMountingComplete() {
     updateCurrentFocus();
     m_bIgnoreInput = false;
     app.m_dlcManager.checkForCorruptDLCAndAlert();
-    bool bInGame = (Minecraft::GetInstance()->level != NULL);
+    bool bInGame = (Minecraft::GetInstance()->level != nullptr);
 
     if (bInGame) XBackgroundDownloadSetMode(XBACKGROUND_DOWNLOAD_MODE_AUTO);
 

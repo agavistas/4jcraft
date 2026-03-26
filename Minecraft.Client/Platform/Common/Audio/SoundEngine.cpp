@@ -1173,7 +1173,7 @@ void SoundEngine::init(Options* pOptions) {
 
     m_hBank = AIL_add_soundbank(szBankName, 0);
 
-    if (m_hBank == NULL) {
+    if (m_hBank == nullptr) {
         char* Error = AIL_last_error();
         app.DebugPrintf("Couldn't open soundbank: %s (%s)\n", szBankName,
                         Error);
@@ -1206,7 +1206,7 @@ void SoundEngine::init(Options* pOptions) {
 
     m_bSystemMusicPlaying = false;
 
-    m_openStreamThread = NULL;
+    m_openStreamThread = nullptr;
 
 #ifdef __ORBIS__
     C4JThread::PopAffinity();
@@ -1501,7 +1501,7 @@ void SoundEngine::tick(std::shared_ptr<Mob>* players, float a) {
     if (players) {
         bool bListenerPostionSet = false;
         for (int i = 0; i < MAX_LOCAL_PLAYERS; i++) {
-            if (players[i] != NULL) {
+            if (players[i] != nullptr) {
                 m_ListenerA[i].bValid = true;
                 F32 x, y, z;
                 x = players[i]->xo + (players[i]->x - players[i]->xo) * a;
@@ -1558,7 +1558,7 @@ SoundEngine::SoundEngine() {
     m_iMusicDelay = 0;
     m_validListenerCount = 0;
 
-    m_bHeardTrackA = NULL;
+    m_bHeardTrackA = nullptr;
 
     // Start the streaming music playing some music from the overworld
     SetStreamingSounds(eStream_Overworld_Calm1, eStream_Overworld_piano3,
@@ -1754,7 +1754,7 @@ void SoundEngine::playStreaming(const std::wstring& name, float x, float y,
         bool playerInNether = false;
 
         for (unsigned int i = 0; i < MAX_LOCAL_PLAYERS; i++) {
-            if (pMinecraft->localplayers[i] != NULL) {
+            if (pMinecraft->localplayers[i] != nullptr) {
                 if (pMinecraft->localplayers[i]->dimension ==
                     LevelData::DIMENSION_END) {
                     playerInEnd = true;
@@ -1997,7 +1997,7 @@ void SoundEngine::playMusicUpdate() {
             // proceed to actually playing
             if (!m_openStreamThread->isRunning()) {
                 delete m_openStreamThread;
-                m_openStreamThread = NULL;
+                m_openStreamThread = nullptr;
 
                 HSAMPLE hSample = AIL_stream_sample_handle(m_hStream);
 
@@ -2079,7 +2079,7 @@ void SoundEngine::playMusicUpdate() {
         case eMusicStreamState_OpeningCancel:
             if (!m_openStreamThread->isRunning()) {
                 delete m_openStreamThread;
-                m_openStreamThread = NULL;
+                m_openStreamThread = nullptr;
                 m_StreamState = eMusicStreamState_Stop;
             }
             break;
@@ -2104,7 +2104,7 @@ void SoundEngine::playMusicUpdate() {
                     bool playerInNether = false;
                     Minecraft* pMinecraft = Minecraft::GetInstance();
                     for (unsigned int i = 0; i < MAX_LOCAL_PLAYERS; ++i) {
-                        if (pMinecraft->localplayers[i] != NULL) {
+                        if (pMinecraft->localplayers[i] != nullptr) {
                             if (pMinecraft->localplayers[i]->dimension ==
                                 LevelData::DIMENSION_END) {
                                 playerInEnd = true;
@@ -2236,7 +2236,7 @@ void SoundEngine::playMusicUpdate() {
             bool playerInNether = false;
 
             for (unsigned int i = 0; i < MAX_LOCAL_PLAYERS; i++) {
-                if (pMinecraft->localplayers[i] != NULL) {
+                if (pMinecraft->localplayers[i] != nullptr) {
                     if (pMinecraft->localplayers[i]->dimension ==
                         LevelData::DIMENSION_END) {
                         playerInEnd = true;
@@ -2386,7 +2386,7 @@ bool SoundEngine::isStreamingWavebankReady() { return true; }
 // This is unused by the linux version, it'll need to be changed
 char* SoundEngine::ConvertSoundPathToName(const std::wstring& name,
                                           bool bConvertSpaces) {
-    return NULL;
+    return nullptr;
 }
 
 void ConsoleSoundEngine::tick() {

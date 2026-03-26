@@ -83,7 +83,7 @@ void PistonPieceEntity::moveCollidedEntities(float progress, float amount) {
 
     AABB* aabb =
         Tile::pistonMovingPiece->getAABB(level, x, y, z, id, progress, facing);
-    if (aabb != NULL) {
+    if (aabb != nullptr) {
         std::vector<std::shared_ptr<Entity> >* entities =
             level->getEntities(nullptr, aabb);
         if (!entities->empty()) {
@@ -103,7 +103,7 @@ void PistonPieceEntity::moveCollidedEntities(float progress, float amount) {
 }
 
 void PistonPieceEntity::finalTick() {
-    if (progressO < 1 && level != NULL) {
+    if (progressO < 1 && level != nullptr) {
         progressO = progress = 1;
         level->removeTileEntity(x, y, z);
         setRemoved();

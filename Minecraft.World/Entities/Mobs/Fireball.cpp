@@ -114,9 +114,9 @@ Fireball::Fireball(Level* level, std::shared_ptr<LivingEntity> mob, double xa,
 
 void Fireball::tick() {
     // 4J-PB - Moved forward from 1.2.3
-    // if (!level->isClientSide && (owner == NULL || owner->removed))
+    // if (!level->isClientSide && (owner == nullptr || owner->removed))
     if (!level->isClientSide) {
-        if ((owner != NULL && owner->removed) ||
+        if ((owner != nullptr && owner->removed) ||
             !level->hasChunkAt((int)x, (int)y, (int)z)) {
             app.DebugPrintf(
                 "Fireball removed - owner is null or removed is true for "
@@ -172,7 +172,7 @@ void Fireball::tick() {
 
     from = Vec3::newTemp(x, y, z);
     to = Vec3::newTemp(x + xd, y + yd, z + zd);
-    if (res != NULL) {
+    if (res != nullptr) {
         to = Vec3::newTemp(res->pos->x, res->pos->y, res->pos->z);
     }
     std::shared_ptr<Entity> hitEntity = nullptr;
@@ -189,7 +189,7 @@ void Fireball::tick() {
         float rr = 0.3f;
         AABB* bb = e->bb->grow(rr, rr, rr);
         HitResult* p = bb->clip(from, to);
-        if (p != NULL) {
+        if (p != nullptr) {
             double dd = from->distanceTo(p->pos);
             if (dd < nearest || nearest == 0) {
                 hitEntity = e;
@@ -199,13 +199,13 @@ void Fireball::tick() {
         }
     }
 
-    if (hitEntity != NULL) {
+    if (hitEntity != nullptr) {
         delete res;
         res = new HitResult(hitEntity);
     }
     MemSect(0);
 
-    if (res != NULL) {
+    if (res != nullptr) {
         onHit(res);
     }
     delete res;
@@ -299,9 +299,9 @@ bool Fireball::hurt(DamageSource* source, float damage) {
     if (isInvulnerable()) return false;
     markHurt();
 
-    if (source->getEntity() != NULL) {
+    if (source->getEntity() != nullptr) {
         Vec3* lookAngle = source->getEntity()->getLookAngle();
-        if (lookAngle != NULL) {
+        if (lookAngle != nullptr) {
             xd = lookAngle->x;
             yd = lookAngle->y;
             zd = lookAngle->z;

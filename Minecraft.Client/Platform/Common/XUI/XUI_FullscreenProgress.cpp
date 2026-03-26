@@ -70,9 +70,9 @@ HRESULT CScene_FullscreenProgress::OnInit(XUIMessageInit* pInitData,
 
 // The framework calls this handler when the object is to be destroyed.
 HRESULT CScene_FullscreenProgress::OnDestroy() {
-    if (thread != NULL && thread != INVALID_HANDLE_VALUE) delete thread;
+    if (thread != nullptr && thread != INVALID_HANDLE_VALUE) delete thread;
 
-    if (m_CompletionData != NULL) delete m_CompletionData;
+    if (m_CompletionData != nullptr) delete m_CompletionData;
 
     return S_OK;
 }
@@ -87,7 +87,7 @@ HRESULT CScene_FullscreenProgress::OnKeyDown(XUIMessageInput* pInputData,
             // 4J-JEV: Fix for Xbox360 #162749 - TU17: Save Upload: Content: UI:
             // Player is presented with non-functional Tooltips after the Upload
             // Save For Xbox One is completed.
-            if (m_cancelFunc != NULL && !m_threadCompleted) {
+            if (m_cancelFunc != nullptr && !m_threadCompleted) {
                 m_cancelFunc(m_cancelFuncParam);
                 m_bWasCancelled = true;
             }
@@ -245,7 +245,7 @@ HRESULT CScene_FullscreenProgress::OnTimer(XUIMessageTimer* pTimer,
                 uiIDA[0] = IDS_CONFIRM_OK;
                 StorageManager.RequestMessageBox(
                     IDS_CONNECTION_FAILED, IDS_CONNECTION_LOST_SERVER, uiIDA, 1,
-                    ProfileManager.GetPrimaryPad(), NULL, NULL,
+                    ProfileManager.GetPrimaryPad(), nullptr, nullptr,
                     app.GetStringTable());
 
                 app.NavigateToHomeMenu();
@@ -300,7 +300,7 @@ HRESULT CScene_FullscreenProgress::OnTimer(XUIMessageTimer* pTimer,
                             // This just allows it to be shown
                             Minecraft* pMinecraft = Minecraft::GetInstance();
                             if (pMinecraft->localgameModes
-                                    [ProfileManager.GetPrimaryPad()] != NULL)
+                                    [ProfileManager.GetPrimaryPad()] != nullptr)
                                 pMinecraft
                                     ->localgameModes[ProfileManager
                                                          .GetPrimaryPad()]

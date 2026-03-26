@@ -49,7 +49,7 @@ void ChatScreen::render(int xm, int ym, float a) {
 
 void ChatScreen::mouseClicked(int x, int y, int buttonNum) {
     if (buttonNum == 0) {
-        if (minecraft->gui->selectedName != L"")  // 4J - was NULL comparison
+        if (minecraft->gui->selectedName != L"")  // 4J - was nullptr comparison
         {
             if (message.length() > 0 && message[message.length() - 1] != L' ') {
                 message += L" ";

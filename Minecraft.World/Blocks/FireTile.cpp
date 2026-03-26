@@ -22,7 +22,7 @@ FireTile::FireTile(int id) : Tile(id, Material::fire, false) {
     burnOdds = new int[256];
     memset(burnOdds, 0, sizeof(int) * 256);
 
-    icons = NULL;
+    icons = nullptr;
 
     setTicking(true);
 }
@@ -57,7 +57,7 @@ void FireTile::setFlammable(int id, int flame, int burn) {
     burnOdds[id] = burn;
 }
 
-AABB* FireTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* FireTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 bool FireTile::blocksLight() { return false; }
 

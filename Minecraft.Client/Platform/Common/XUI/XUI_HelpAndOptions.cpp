@@ -12,7 +12,7 @@
 HRESULT CScene_HelpAndOptions::OnInit(XUIMessageInit* pInitData,
                                       BOOL& bHandled) {
     m_iPad = *(int*)pInitData->pvInitData;
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
     MapChildControls();
     XuiControlSetText(m_Buttons[BUTTON_HAO_CHANGESKIN],
@@ -252,7 +252,7 @@ HRESULT CScene_HelpAndOptions::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 
@@ -348,7 +348,7 @@ HRESULT CScene_HelpAndOptions::OnKeyDown(XUIMessageInput* pInputData,
 }
 
 HRESULT CScene_HelpAndOptions::OnNavReturn(HXUIOBJ hObj, BOOL& rfHandled) {
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
     if (bNotInGame) {
         ui.SetTooltips(DEFAULT_XUI_MENU_USER, IDS_TOOLTIPS_SELECT,
@@ -418,7 +418,7 @@ HRESULT CScene_HelpAndOptions::OnTransitionStart(
         // 4J-PB - Going to resize buttons if the text is too big to fit on any
         // of them (Br-pt problem with the length of Unlock Full Game)
         XUIRect xuiRect;
-        HXUIOBJ visual = NULL;
+        HXUIOBJ visual = nullptr;
         HXUIOBJ text;
         float fMaxTextLen = 0.0f;
         float fTextVisualLen;

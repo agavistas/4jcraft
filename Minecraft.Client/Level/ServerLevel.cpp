@@ -40,7 +40,7 @@
 
 WeighedTreasureArray ServerLevel::RANDOM_BONUS_ITEMS;
 
-C4JThread* ServerLevel::m_updateThread = NULL;
+C4JThread* ServerLevel::m_updateThread = nullptr;
 C4JThread::EventArray* ServerLevel::m_updateTrigger;
 CRITICAL_SECTION ServerLevel::m_updateCS[3];
 
@@ -60,7 +60,7 @@ void ServerLevel::staticCtor() {
     InitializeCriticalSection(&m_updateCS[1]);
     InitializeCriticalSection(&m_updateCS[2]);
 
-    m_updateThread = new C4JThread(runUpdate, NULL, "Tile update");
+    m_updateThread = new C4JThread(runUpdate, nullptr, "Tile update");
     m_updateThread->SetProcessor(CPU_CORE_TILE_UPDATE);
 #ifdef __ORBIS__
     m_updateThread->SetPriority(
@@ -146,7 +146,7 @@ ServerLevel::ServerLevel(MinecraftServer* server,
     // shared_ptr<ScoreboardSaveData> scoreboardSaveData =
     // std::dynamic_pointer_cast<ScoreboardSaveData>(
     // savedDataStorage->get(typeid(ScoreboardSaveData),
-    // ScoreboardSaveData::FILE_ID) ); if (scoreboardSaveData == NULL)
+    // ScoreboardSaveData::FILE_ID) ); if (scoreboardSaveData == nullptr)
     //{
     //	scoreboardSaveData = shared_ptr<ScoreboardSaveData>( new
     // ScoreboardSaveData() );
@@ -297,7 +297,7 @@ void ServerLevel::tick() {
     {
         // app.DebugPrintf("Incremental save\n");
         PIXBeginNamedEvent(0, "Incremental save");
-        save(false, NULL);
+        save(false, nullptr);
         PIXEndNamedEvent();
     }
 
@@ -356,7 +356,7 @@ Biome::MobSpawnerData* ServerLevel::getRandomMobSpawnAt(
     MobCategory* mobCategory, int x, int y, int z) {
     std::vector<Biome::MobSpawnerData*>* mobList =
         getChunkSource()->getMobsAt(mobCategory, x, y, z);
-    if (mobList == NULL || mobList->empty()) return NULL;
+    if (mobList == nullptr || mobList->empty()) return nullptr;
 
     return (Biome::MobSpawnerData*)WeighedRandom::getRandomItem(
         random, (std::vector<WeighedRandomItem*>*)mobList);
@@ -467,7 +467,7 @@ void ServerLevel::tickTiles() {
         int z = m_updateTileZ[iLev][i];
         if (hasChunkAt(x, y, z)) {
             int id = getTile(x, y, z);
-            if (Tile::tiles[id] != NULL && Tile::tiles[id]->isTicking()) {
+            if (Tile::tiles[id] != nullptr && Tile::tiles[id]->isTicking()) {
                 /*if(id == 2) ++grassTicks;
                 else if(id == 11) ++lavaTicks;
                 else ++otherTicks;*/
@@ -770,7 +770,7 @@ void ServerLevel::tick(std::shared_ptr<Entity> e, bool actual) {
         e->remove();
     }
     if (!server->isNpcsEnabled() &&
-        (std::dynamic_pointer_cast<Npc>(e) != NULL)) {
+        (std::dynamic_pointer_cast<Npc>(e) != nullptr)) {
         e->remove();
     }
     Level::tick(e, actual);
@@ -849,7 +849,7 @@ void ServerLevel::setInitialSpawn(LevelSettings* levelSettings) {
     int minXZ = -(dimension->getXZSize() * 16) / 2;
     int maxXZ = (dimension->getXZSize() * 16) / 2 - 1;
 
-    if (findBiome != NULL) {
+    if (findBiome != nullptr) {
         xSpawn = findBiome->x;
         zSpawn = findBiome->z;
         delete findBiome;
@@ -899,7 +899,7 @@ void ServerLevel::generateBonusItemsNearSpawn() {
                 std::shared_ptr<ChestTileEntity> chest =
                     std::dynamic_pointer_cast<ChestTileEntity>(
                         getTileEntity(x, y, z));
-                if (chest != NULL) {
+                if (chest != nullptr) {
                     if (chest->isBonusChest) {
                         return;
                     }
@@ -940,7 +940,7 @@ void ServerLevel::save(bool force, ProgressListener* progressListener,
     // 4J-PB - check that saves are enabled
     if (StorageManager.GetSaveDisabled()) return;
 
-    if (progressListener != NULL) {
+    if (progressListener != nullptr) {
         if (bAutosave) {
             progressListener->progressStartNoAbort(
                 IDS_PROGRESS_AUTOSAVING_LEVEL);
@@ -952,7 +952,7 @@ void ServerLevel::save(bool force, ProgressListener* progressListener,
     saveLevelData();
     PIXEndNamedEvent();
 
-    if (progressListener != NULL)
+    if (progressListener != nullptr)
         progressListener->progressStage(IDS_PROGRESS_SAVING_CHUNKS);
 
 #if defined(_XBOX_ONE) || defined(__ORBIS__)
@@ -985,7 +985,7 @@ void ServerLevel::save(bool force, ProgressListener* progressListener,
 
     // if( force && !isClientSide )
     //{
-    //	if (progressListener != NULL)
+    //	if (progressListener != nullptr)
     // progressListener->progressStage(IDS_PROGRESS_SAVING_TO_DISC);
     //	levelStorage->flushSaveFile();
     // }
@@ -1010,7 +1010,7 @@ void ServerLevel::saveToDisc(ProgressListener* progressListener,
         }
     }
 
-    if (progressListener != NULL)
+    if (progressListener != nullptr)
         progressListener->progressStage(IDS_PROGRESS_SAVING_TO_DISC);
     levelStorage->flushSaveFile(autosave);
 }
@@ -1026,7 +1026,7 @@ void ServerLevel::entityAdded(std::shared_ptr<Entity> e) {
     Level::entityAdded(e);
     entitiesById[e->entityId] = e;
     std::vector<std::shared_ptr<Entity> >* es = e->getSubEntities();
-    if (es != NULL) {
+    if (es != nullptr) {
         // for (int i = 0; i < es.length; i++)
         for (AUTO_VAR(it, es->begin()); it != es->end(); ++it) {
             entitiesById.insert(
@@ -1040,7 +1040,7 @@ void ServerLevel::entityRemoved(std::shared_ptr<Entity> e) {
     Level::entityRemoved(e);
     entitiesById.erase(e->entityId);
     std::vector<std::shared_ptr<Entity> >* es = e->getSubEntities();
-    if (es != NULL) {
+    if (es != nullptr) {
         // for (int i = 0; i < es.length; i++)
         for (AUTO_VAR(it, es->begin()); it != es->end(); ++it) {
             entitiesById.erase((*it)->entityId);
@@ -1096,14 +1096,14 @@ std::shared_ptr<Explosion> ServerLevel::explode(std::shared_ptr<Entity> source,
         bool knockbackOnly = false;
         if (sentTo.size()) {
             INetworkPlayer* thisPlayer = player->connection->getNetworkPlayer();
-            if (thisPlayer == NULL) {
+            if (thisPlayer == nullptr) {
                 continue;
             } else {
                 for (unsigned int j = 0; j < sentTo.size(); j++) {
                     std::shared_ptr<ServerPlayer> player2 = sentTo[j];
                     INetworkPlayer* otherPlayer =
                         player2->connection->getNetworkPlayer();
-                    if (otherPlayer != NULL &&
+                    if (otherPlayer != nullptr &&
                         thisPlayer->IsSameSystem(otherPlayer)) {
                         knockbackOnly = true;
                     }
@@ -1548,7 +1548,7 @@ int ServerLevel::runUpdate(void* lpParam) {
                     // 4J Stu - Added shouldTileTick as some tiles won't even do
                     // anything if they are set to tick and use up one of our
                     // updates
-                    if (Tile::tiles[id] != NULL &&
+                    if (Tile::tiles[id] != nullptr &&
                         Tile::tiles[id]->isTicking() &&
                         Tile::tiles[id]->shouldTileTick(
                             m_level[iLev], x + (cx * 16), y, z + (cz * 16))) {

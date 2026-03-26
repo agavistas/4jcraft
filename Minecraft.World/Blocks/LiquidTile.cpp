@@ -106,7 +106,7 @@ bool LiquidTile::shouldRenderFace(LevelSource* level, int x, int y, int z,
     return Tile::shouldRenderFace(level, x, y, z, face);
 }
 
-AABB* LiquidTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* LiquidTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 int LiquidTile::getRenderShape() { return Tile::SHAPE_WATER; }
 
@@ -305,7 +305,7 @@ void LiquidTile::animateTick(Level* level, int x, int y, int z,
 
 double LiquidTile::getSlopeAngle(LevelSource* level, int x, int y, int z,
                                  Material* m) {
-    Vec3* flow = NULL;
+    Vec3* flow = nullptr;
     if (m == Material::water)
         flow = ((LiquidTile*)Tile::water)->getFlow(level, x, y, z);
     if (m == Material::lava)
@@ -376,5 +376,5 @@ Icon* LiquidTile::getTexture(const std::wstring& name) {
     if (name.compare(TEXTURE_WATER_FLOW) == 0) return Tile::water->icons[1];
     if (name.compare(TEXTURE_LAVA_STILL) == 0) return Tile::lava->icons[0];
     if (name.compare(TEXTURE_LAVA_FLOW) == 0) return Tile::lava->icons[1];
-    return NULL;
+    return nullptr;
 }

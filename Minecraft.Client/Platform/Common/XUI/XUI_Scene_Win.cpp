@@ -64,7 +64,7 @@ HRESULT CScene_Win::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
-    if (pMinecraft->localplayers[s_winUserIndex] != NULL) {
+    if (pMinecraft->localplayers[s_winUserIndex] != nullptr) {
         noNoiseString =
             replaceAll(noNoiseString, L"{*PLAYER*}",
                        pMinecraft->localplayers[s_winUserIndex]->name);
@@ -128,7 +128,7 @@ HRESULT CScene_Win::OnKeyDown(XUIMessageInput* pInputData, BOOL& rfHandled) {
             Minecraft* pMinecraft = Minecraft::GetInstance();
             app.CloseAllPlayersXuiScenes();
             for (unsigned int i = 0; i < XUSER_MAX_COUNT; ++i) {
-                if (pMinecraft->localplayers[i] != NULL) {
+                if (pMinecraft->localplayers[i] != nullptr) {
                     app.SetAction(i, eAppAction_Respawn);
                 }
             }
@@ -138,7 +138,7 @@ HRESULT CScene_Win::OnKeyDown(XUIMessageInput* pInputData, BOOL& rfHandled) {
                                                      true);
             // This just allows it to be shown
             if (pMinecraft->localgameModes[ProfileManager.GetPrimaryPad()] !=
-                NULL)
+                nullptr)
                 pMinecraft->localgameModes[ProfileManager.GetPrimaryPad()]
                     ->getTutorial()
                     ->showTutorialPopup(true);
@@ -269,7 +269,7 @@ HRESULT CScene_Win::OnNavReturn(HXUIOBJ hObj, BOOL& rfHandled) {
 
     // This just allows it to be shown
     if (Minecraft::GetInstance()
-            ->localgameModes[ProfileManager.GetPrimaryPad()] != NULL)
+            ->localgameModes[ProfileManager.GetPrimaryPad()] != nullptr)
         Minecraft::GetInstance()
             ->localgameModes[ProfileManager.GetPrimaryPad()]
             ->getTutorial()

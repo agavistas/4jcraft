@@ -19,11 +19,11 @@ bool OfferFlowerGoal::canUse() {
         golem->level->getClosestEntityOfClass(typeid(Villager),
                                               golem->bb->grow(6, 2, 6),
                                               golem->shared_from_this())));
-    return villager.lock() != NULL;
+    return villager.lock() != nullptr;
 }
 
 bool OfferFlowerGoal::canContinueToUse() {
-    return _tick > 0 && villager.lock() != NULL;
+    return _tick > 0 && villager.lock() != nullptr;
 }
 
 void OfferFlowerGoal::start() {

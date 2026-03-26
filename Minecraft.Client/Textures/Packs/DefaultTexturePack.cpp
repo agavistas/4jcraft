@@ -4,7 +4,7 @@
 #include "../../../Minecraft.World/Util/StringHelpers.h"
 
 DefaultTexturePack::DefaultTexturePack()
-    : AbstractTexturePack(0, NULL, L"Minecraft", NULL) {
+    : AbstractTexturePack(0, nullptr, L"Minecraft", nullptr) {
     // 4J Stu - These calls need to be in the most derived version of the class
     loadIcon();
     loadName();  // 4J-PB - added so the PS3 can have localised texture names'
@@ -96,7 +96,7 @@ InputStream* DefaultTexturePack::getResourceImplementation(
 #endif
     InputStream* resource = InputStream::getResourceAsStream(wDrive + name);
     // InputStream *stream =
-    // DefaultTexturePack::class->getResourceAsStream(name); if (stream == NULL)
+    // DefaultTexturePack::class->getResourceAsStream(name); if (stream == nullptr)
     //{
     //	throw new FileNotFoundException(name);
     // }

@@ -55,9 +55,9 @@ HRESULT CScene_HowToPlayMenu::OnInit(XUIMessageInit* pInitData,
                                      BOOL& bHandled) {
     m_iPad = *(int*)pInitData->pvInitData;
     // if we're not in the game, we need to use basescene 0
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
     bool bSplitscreen = app.GetLocalPlayerCount() > 1;
-    m_ButtonList = NULL;
+    m_ButtonList = nullptr;
 
     // MapChildControls();
 

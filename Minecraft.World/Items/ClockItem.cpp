@@ -12,7 +12,7 @@ const std::wstring ClockItem::TEXTURE_PLAYER_ICON[XUSER_MAX_COUNT] = {
     L"clockP0", L"clockP1", L"clockP2", L"clockP3"};
 #endif
 
-ClockItem::ClockItem(int id) : Item(id) { icons = NULL; }
+ClockItem::ClockItem(int id) : Item(id) { icons = nullptr; }
 
 // 4J Added so that we can override the icon id used to calculate the texture
 // UV's for each player
@@ -20,7 +20,7 @@ Icon* ClockItem::getIcon(int auxValue) {
     Icon* icon = Item::getIcon(auxValue);
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
-    if (pMinecraft->player != NULL && auxValue == 0) {
+    if (pMinecraft->player != nullptr && auxValue == 0) {
         icon = icons[pMinecraft->player->GetXboxPad()];
     }
     return icon;

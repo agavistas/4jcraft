@@ -36,7 +36,7 @@ HRESULT CXuiSceneInventory::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     }
 
 #ifdef _XBOX
-    if (pMinecraft->localgameModes[initData->iPad] != NULL) {
+    if (pMinecraft->localgameModes[initData->iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[initData->iPad];
         m_previousTutorialState = gameMode->getTutorial()->getCurrentState();
@@ -86,10 +86,10 @@ HRESULT CXuiSceneInventory::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
 HRESULT CXuiSceneInventory::OnDestroy() {
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
-    if (pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
-        if (gameMode != NULL)
+        if (gameMode != nullptr)
             gameMode->getTutorial()->changeTutorialState(
                 m_previousTutorialState);
     }
@@ -99,7 +99,7 @@ HRESULT CXuiSceneInventory::OnDestroy() {
     // packet loss. We need to make sure that we call closeContainer() anytime
     // this menu is closed, even if it is forced to close by some other reason
     // (like the player dying)
-    if (Minecraft::GetInstance()->localplayers[m_iPad] != NULL)
+    if (Minecraft::GetInstance()->localplayers[m_iPad] != nullptr)
         Minecraft::GetInstance()->localplayers[m_iPad]->closeContainer();
     return S_OK;
 }
@@ -128,7 +128,7 @@ CXuiControl* CXuiSceneInventory::GetSectionControl(ESceneSection eSection) {
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 CXuiCtrlSlotList* CXuiSceneInventory::GetSectionSlotList(
@@ -147,7 +147,7 @@ CXuiCtrlSlotList* CXuiSceneInventory::GetSectionSlotList(
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 // 4J Stu - Added to support auto-save. Need to re-associate on a navigate back
@@ -166,7 +166,7 @@ void CXuiSceneInventory::updateEffectsDisplay() {
     Minecraft* pMinecraft = Minecraft::GetInstance();
     std::shared_ptr<LocalPlayer> player = pMinecraft->localplayers[m_iPad];
 
-    if (player == NULL) return;
+    if (player == nullptr) return;
 
     std::vector<MobEffectInstance*>* activeEffects = player->getActiveEffects();
 

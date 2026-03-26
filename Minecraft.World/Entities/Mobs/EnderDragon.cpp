@@ -83,7 +83,7 @@ void EnderDragon::_init() {
 
     m_nodes = new NodeArray(24);
     openSet = new BinaryHeap();
-    m_currentPath = NULL;
+    m_currentPath = nullptr;
 }
 
 EnderDragon::EnderDragon(Level* level) : Mob(level) {
@@ -140,14 +140,14 @@ void EnderDragon::AddParts() {
 }
 
 EnderDragon::~EnderDragon() {
-    if (m_nodes->data != NULL) {
+    if (m_nodes->data != nullptr) {
         for (unsigned int i = 0; i < m_nodes->length; ++i) {
-            if (m_nodes->data[i] != NULL) delete m_nodes->data[i];
+            if (m_nodes->data[i] != nullptr) delete m_nodes->data[i];
         }
         delete[] m_nodes->data;
     }
     delete openSet;
-    if (m_currentPath != NULL) delete m_currentPath;
+    if (m_currentPath != nullptr) delete m_currentPath;
 }
 
 void EnderDragon::registerAttributes() {
@@ -404,7 +404,7 @@ void EnderDragon::aiStep() {
                                                    SITTING_ATTACK_Y_VIEW_RANGE);
 
             ++m_actionTicks;
-            if (attackTarget != NULL) {
+            if (attackTarget != nullptr) {
                 if (m_actionTicks > SITTING_SCANNING_IDLE_TICKS / 4) {
                     setSynchedAction(e_EnderdragonAction_Sitting_Attacking);
 #if PRINT_DRAGON_STATE_CHANGE_MESSAGES
@@ -476,7 +476,7 @@ void EnderDragon::aiStep() {
         if (getSynchedAction() == e_EnderdragonAction_Sitting_Flaming) {
             // No movement
         } else if (getSynchedAction() == e_EnderdragonAction_Sitting_Scanning) {
-            if (attackTarget != NULL) {
+            if (attackTarget != nullptr) {
                 Vec3* aim = Vec3::newTemp((attackTarget->x - x), 0,
                                           (attackTarget->z - z))
                                 ->normalize();
@@ -529,7 +529,7 @@ void EnderDragon::aiStep() {
             // 			double yTargetO = yTarget;
             // 			double zTargetO = zTarget;
             if (getSynchedAction() == e_EnderdragonAction_StrafePlayer &&
-                attackTarget != NULL && m_currentPath != NULL &&
+                attackTarget != nullptr && m_currentPath != nullptr &&
                 m_currentPath->isDone()) {
                 xTarget = attackTarget->x;
                 zTarget = attackTarget->z;
@@ -728,7 +728,7 @@ void EnderDragon::aiStep() {
     if (!level->isClientSide) {
         double maxDist = 64.0f;
         if (getSynchedAction() == e_EnderdragonAction_StrafePlayer &&
-            attackTarget != NULL &&
+            attackTarget != nullptr &&
             attackTarget->distanceToSqr(shared_from_this()) <
                 maxDist * maxDist) {
             if (this->canSee(attackTarget)) {
@@ -772,7 +772,7 @@ void EnderDragon::aiStep() {
 
                     app.DebugPrintf(
                         "Finding new target due to having fired a fireball\n");
-                    if (m_currentPath != NULL) {
+                    if (m_currentPath != nullptr) {
                         while (!m_currentPath->isDone()) {
                             m_currentPath->next();
                         }
@@ -796,7 +796,7 @@ void EnderDragon::aiStep() {
 }
 
 void EnderDragon::checkCrystals() {
-    if (nearestCrystal != NULL) {
+    if (nearestCrystal != nullptr) {
         if (nearestCrystal->removed) {
             if (!level->isClientSide) {
                 hurt(head, DamageSource::explosion(NULL), 10);
@@ -888,7 +888,7 @@ void EnderDragon::findNewTarget() {
     switch (getSynchedAction()) {
         case e_EnderdragonAction_Takeoff:
         case e_EnderdragonAction_HoldingPattern: {
-            if (!newTarget && m_currentPath != NULL &&
+            if (!newTarget && m_currentPath != nullptr &&
                 m_currentPath->isDone()) {
                 // Distance is 64, which is the radius of the circle
                 int eggHeight =
@@ -899,7 +899,7 @@ void EnderDragon::findNewTarget() {
                 playerNearestToEgg = level->getNearestPlayer(
                     PODIUM_X_POS, eggHeight, PODIUM_Z_POS, 64.0);
                 double dist = 64.0f;
-                if (playerNearestToEgg != NULL) {
+                if (playerNearestToEgg != nullptr) {
                     dist = playerNearestToEgg->distanceToSqr(
                         PODIUM_X_POS, eggHeight, PODIUM_Z_POS);
                     dist /= (8 * 8 * 8);
@@ -914,7 +914,7 @@ void EnderDragon::findNewTarget() {
                 }
                 // More likely to strafe a player if they are close to the egg,
                 // or there are not many crystals remaining
-                else if (playerNearestToEgg != NULL &&
+                else if (playerNearestToEgg != nullptr &&
                          (random->nextInt(abs(dist) + 2) == 0 ||
                           random->nextInt(m_remainingCrystalsCount + 2) == 0)) {
                     setSynchedAction(e_EnderdragonAction_StrafePlayer);
@@ -926,7 +926,7 @@ void EnderDragon::findNewTarget() {
         } break;
         case e_EnderdragonAction_StrafePlayer:
             // Always return to the holding pattern after strafing
-            if (m_currentPath == NULL ||
+            if (m_currentPath == nullptr ||
                 (m_currentPath->isDone() && newTarget)) {
                 setSynchedAction(e_EnderdragonAction_HoldingPattern);
 #if PRINT_DRAGON_STATE_CHANGE_MESSAGES
@@ -959,12 +959,12 @@ void EnderDragon::findNewTarget() {
 
     // if (random->nextInt(2) == 0 && level->players.size() > 0)
     if (getSynchedAction() == e_EnderdragonAction_StrafePlayer &&
-        playerNearestToEgg != NULL) {
+        playerNearestToEgg != nullptr) {
         attackTarget = playerNearestToEgg;
         strafeAttackTarget();
     } else if (getSynchedAction() == e_EnderdragonAction_LandingApproach) {
         // Generate a new path if we don't currently have one
-        if (m_currentPath == NULL || m_currentPath->isDone()) {
+        if (m_currentPath == nullptr || m_currentPath->isDone()) {
             int currentNodeIndex = findClosestNode();
 
             // To get the angle to the player correct when landing, head to a
@@ -977,7 +977,7 @@ void EnderDragon::findNewTarget() {
                 PODIUM_X_POS, eggHeight, PODIUM_Z_POS, 128.0);
 
             int targetNodeIndex = 0;
-            if (playerNearestToEgg != NULL) {
+            if (playerNearestToEgg != nullptr) {
                 Vec3* aim = Vec3::newTemp(playerNearestToEgg->x, 0,
                                           playerNearestToEgg->z)
                                 ->normalize();
@@ -990,19 +990,19 @@ void EnderDragon::findNewTarget() {
             }
             Node finalNode(PODIUM_X_POS, eggHeight, PODIUM_Z_POS);
 
-            if (m_currentPath != NULL) delete m_currentPath;
+            if (m_currentPath != nullptr) delete m_currentPath;
             m_currentPath =
                 findPath(currentNodeIndex, targetNodeIndex, &finalNode);
 
             // Always skip the first node (as that's where we are already)
-            if (m_currentPath != NULL) m_currentPath->next();
+            if (m_currentPath != nullptr) m_currentPath->next();
         }
 
         m_actionTicks = 0;
 
         navigateToNextPathNode();
 
-        if (m_currentPath != NULL && m_currentPath->isDone()) {
+        if (m_currentPath != nullptr && m_currentPath->isDone()) {
             setSynchedAction(e_EnderdragonAction_Landing);
 #if PRINT_DRAGON_STATE_CHANGE_MESSAGES
             app.DebugPrintf("Dragon action is now: Landing\n");
@@ -1015,7 +1015,7 @@ void EnderDragon::findNewTarget() {
     } else {
         // Default is e_EnderdragonAction_HoldingPattern
         // Generate a new path if we don't currently have one
-        if (m_currentPath == NULL || m_currentPath->isDone()) {
+        if (m_currentPath == nullptr || m_currentPath->isDone()) {
             int currentNodeIndex = findClosestNode();
             int targetNodeIndex = currentNodeIndex;
             // if(random->nextInt(4) == 0) m_holdingPatternClockwise =
@@ -1051,11 +1051,11 @@ void EnderDragon::findNewTarget() {
                 if (targetNodeIndex < 0) targetNodeIndex += 12;
             }
 
-            if (m_currentPath != NULL) delete m_currentPath;
+            if (m_currentPath != nullptr) delete m_currentPath;
             m_currentPath = findPath(currentNodeIndex, targetNodeIndex);
 
             // Always skip the first node (as that's where we are already)
-            if (m_currentPath != NULL) m_currentPath->next();
+            if (m_currentPath != nullptr) m_currentPath->next();
         }
 
         navigateToNextPathNode();
@@ -1121,9 +1121,9 @@ bool EnderDragon::hurt(std::shared_ptr<MultiEntityMobPart> MultiEntityMobPart,
     // xTarget = x + ss1 * 5 + (random->nextFloat() - 0.5f) * 2;
     // yTarget = y + random->nextFloat() * 3 + 1;
     // zTarget = z - cc1 * 5 + (random->nextFloat() - 0.5f) * 2;
-    // attackTarget = NULL;
+    // attackTarget = nullptr;
 
-    if (source->getEntity() != NULL &&
+    if (source->getEntity() != nullptr &&
             source->getEntity()->instanceof(eTYPE_PLAYER) ||
         source->isExplosion()) {
         int healthBefore = getHealth();
@@ -1138,7 +1138,7 @@ bool EnderDragon::hurt(std::shared_ptr<MultiEntityMobPart> MultiEntityMobPart,
             setHealth(1);
 
             if (setSynchedAction(e_EnderdragonAction_LandingApproach)) {
-                if (m_currentPath != NULL) {
+                if (m_currentPath != nullptr) {
                     while (!m_currentPath->isDone()) {
                         m_currentPath->next();
                     }
@@ -1434,7 +1434,7 @@ void EnderDragon::handleCrystalDestroyed(DamageSource* source) {
 
     if (m_remainingCrystalsCount % 2 == 0) {
         if (setSynchedAction(e_EnderdragonAction_LandingApproach)) {
-            if (m_currentPath != NULL) {
+            if (m_currentPath != nullptr) {
                 while (!m_currentPath->isDone()) {
                     m_currentPath->next();
                 }
@@ -1444,7 +1444,7 @@ void EnderDragon::handleCrystalDestroyed(DamageSource* source) {
             app.DebugPrintf("Dragon action is now: LandingApproach\n");
 #endif
         }
-    } else if (source->getEntity() != NULL &&
+    } else if (source->getEntity() != nullptr &&
                source->getEntity()->instanceof(eTYPE_PLAYER)) {
         if (setSynchedAction(e_EnderdragonAction_StrafePlayer)) {
             attackTarget =
@@ -1475,10 +1475,10 @@ void EnderDragon::strafeAttackTarget() {
 
     Node finalNode(finalXTarget, finalYTarget, finalZTarget);
 
-    if (m_currentPath != NULL) delete m_currentPath;
+    if (m_currentPath != nullptr) delete m_currentPath;
     m_currentPath = findPath(currentNodeIndex, targetNodeIndex, &finalNode);
 
-    if (m_currentPath != NULL) {
+    if (m_currentPath != nullptr) {
         // Always skip the first node (as that's where we are already)
         m_currentPath->next();
 
@@ -1487,7 +1487,7 @@ void EnderDragon::strafeAttackTarget() {
 }
 
 void EnderDragon::navigateToNextPathNode() {
-    if (m_currentPath != NULL && !m_currentPath->isDone()) {
+    if (m_currentPath != nullptr && !m_currentPath->isDone()) {
         Vec3* curr = m_currentPath->currentPos();
 
         m_currentPath->next();
@@ -1513,7 +1513,7 @@ void EnderDragon::navigateToNextPathNode() {
 
 int EnderDragon::findClosestNode() {
     // Setup all the nodes on the first time this is called
-    if (m_nodes->data[0] == NULL) {
+    if (m_nodes->data[0] == nullptr) {
         // Path nodes for navigation
         // 0 - 11 are the outer ring at 60 blocks from centre
         // 12 - 19 are the middle ring at 40 blocks from centre
@@ -1603,7 +1603,7 @@ int EnderDragon::findClosestNode(double tX, double tY, double tZ) {
         startIndex = 12;
     }
     for (unsigned int i = startIndex; i < 24; ++i) {
-        if (m_nodes->data[i] != NULL) {
+        if (m_nodes->data[i] != nullptr) {
             float dist = m_nodes->data[i]->distanceTo(currentPos);
             if (dist < closestDist) {
                 closestDist = dist;
@@ -1617,14 +1617,14 @@ int EnderDragon::findClosestNode(double tX, double tY, double tZ) {
 
 // 4J Stu - A* taken from PathFinder and modified
 Path* EnderDragon::findPath(int startIndex, int endIndex,
-                            Node* finalNode /* = NULL */) {
+                            Node* finalNode /* = nullptr */) {
     for (unsigned int i = 0; i < 24; ++i) {
         Node* n = m_nodes->data[i];
         n->closed = false;
         n->f = 0;
         n->g = 0;
         n->h = 0;
-        n->cameFrom = NULL;
+        n->cameFrom = nullptr;
         n->heapIdx = -1;
     }
 
@@ -1652,7 +1652,7 @@ Path* EnderDragon::findPath(int startIndex, int endIndex,
 
         if (x->equals(to)) {
             app.DebugPrintf("Found path from %d to %d\n", startIndex, endIndex);
-            if (finalNode != NULL) {
+            if (finalNode != nullptr) {
                 finalNode->cameFrom = to;
                 to = finalNode;
             }
@@ -1694,10 +1694,10 @@ Path* EnderDragon::findPath(int startIndex, int endIndex,
         }
     }
 
-    if (closest == from) return NULL;
+    if (closest == from) return nullptr;
     app.DebugPrintf("Failed to find path from %d to %d\n", startIndex,
                     endIndex);
-    if (finalNode != NULL) {
+    if (finalNode != nullptr) {
         finalNode->cameFrom = closest;
         closest = finalNode;
     }
@@ -1708,7 +1708,7 @@ Path* EnderDragon::findPath(int startIndex, int endIndex,
 Path* EnderDragon::reconstruct_path(Node* from, Node* to) {
     int count = 1;
     Node* n = to;
-    while (n->cameFrom != NULL) {
+    while (n->cameFrom != nullptr) {
         count++;
         n = n->cameFrom;
     }
@@ -1716,7 +1716,7 @@ Path* EnderDragon::reconstruct_path(Node* from, Node* to) {
     NodeArray nodes = NodeArray(count);
     n = to;
     nodes.data[--count] = n;
-    while (n->cameFrom != NULL) {
+    while (n->cameFrom != nullptr) {
         n = n->cameFrom;
         nodes.data[--count] = n;
     }
@@ -1847,7 +1847,7 @@ double EnderDragon::getHeadPartYRotDiff(int partIndex, doubleArray bodyPos,
 }
 
 Vec3* EnderDragon::getHeadLookVector(float a) {
-    Vec3* result = NULL;
+    Vec3* result = nullptr;
 
     if (getSynchedAction() == e_EnderdragonAction_Landing ||
         getSynchedAction() == e_EnderdragonAction_Takeoff) {

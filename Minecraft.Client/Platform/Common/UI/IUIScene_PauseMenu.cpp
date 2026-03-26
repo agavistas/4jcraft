@@ -240,7 +240,7 @@ int IUIScene_PauseMenu::WarningTrialTexturePackReturned(
             // 4J-PB - need to check this user can access the store
             bool bContentRestricted;
             ProfileManager.GetChatAndContentRestrictions(
-                iPad, true, NULL, &bContentRestricted, NULL);
+                iPad, true, nullptr, &bContentRestricted, nullptr);
             if (bContentRestricted) {
                 unsigned int uiIDA[1];
                 uiIDA[0] = IDS_CONFIRM_OK;
@@ -262,7 +262,7 @@ int IUIScene_PauseMenu::WarningTrialTexturePackReturned(
                 app.DebugPrintf("Texture Pack - %s\n", pchPackName);
                 SONYDLC* pSONYDLCInfo = app.GetSONYDLCInfo((char*)pchPackName);
 
-                if (pSONYDLCInfo != NULL) {
+                if (pSONYDLCInfo != nullptr) {
                     char chName[42];
                     char chSkuID[SCE_NP_COMMERCE2_SKU_ID_LEN];
 
@@ -313,7 +313,7 @@ int IUIScene_PauseMenu::WarningTrialTexturePackReturned(
 
                 StorageManager.InstallOffer(
                     1, const_cast<wchar_t*>(pDLCInfo->wsProductId.c_str()),
-                    NULL, NULL);
+                    nullptr, nullptr);
 
                 // the license change coming in when the offer has been
                 // installed will cause this scene to refresh
@@ -355,7 +355,7 @@ int IUIScene_PauseMenu::WarningTrialTexturePackReturned(
             // bandwidth...
             XBackgroundDownloadSetMode(XBACKGROUND_DOWNLOAD_MODE_ALWAYS_ALLOW);
 
-            StorageManager.InstallOffer(1, ullIndexA, NULL, NULL);
+            StorageManager.InstallOffer(1, ullIndexA, nullptr, nullptr);
         }
     } else {
         TelemetryManager->RecordUpsellResponded(
@@ -439,7 +439,7 @@ void IUIScene_PauseMenu::_ExitWorld(void* lpParameter) {
 
     bool saveStats = true;
     if (pMinecraft->isClientSide() || g_NetworkManager.IsInSession()) {
-        if (lpParameter != NULL) {
+        if (lpParameter != nullptr) {
             // 4J-PB - check if we have lost connection to Live
             if (ProfileManager.GetLiveConnectionStatus() !=
                 XONLINE_S_LOGON_CONNECTION_ESTABLISHED) {
@@ -552,21 +552,21 @@ void IUIScene_PauseMenu::_ExitWorld(void* lpParameter) {
 
             // 4J - Force a disconnection, this handles the situation that the
             // server has already disconnected
-            if (pMinecraft->levels[0] != NULL)
+            if (pMinecraft->levels[0] != nullptr)
                 pMinecraft->levels[0]->disconnect(false);
-            if (pMinecraft->levels[1] != NULL)
+            if (pMinecraft->levels[1] != nullptr)
                 pMinecraft->levels[1]->disconnect(false);
-            if (pMinecraft->levels[2] != NULL)
+            if (pMinecraft->levels[2] != nullptr)
                 pMinecraft->levels[2]->disconnect(false);
         } else {
             exitReasonStringId = IDS_EXITING_GAME;
             pMinecraft->progressRenderer->progressStartNoAbort(
                 IDS_EXITING_GAME);
-            if (pMinecraft->levels[0] != NULL)
+            if (pMinecraft->levels[0] != nullptr)
                 pMinecraft->levels[0]->disconnect();
-            if (pMinecraft->levels[1] != NULL)
+            if (pMinecraft->levels[1] != nullptr)
                 pMinecraft->levels[1]->disconnect();
-            if (pMinecraft->levels[2] != NULL)
+            if (pMinecraft->levels[2] != nullptr)
                 pMinecraft->levels[2]->disconnect();
         }
 
@@ -582,7 +582,7 @@ void IUIScene_PauseMenu::_ExitWorld(void* lpParameter) {
         // 4J Stu - Leave the session once the disconnect packet has been sent
         g_NetworkManager.LeaveGame(FALSE);
     } else {
-        if (lpParameter != NULL &&
+        if (lpParameter != nullptr &&
             ProfileManager.IsSignedIn(ProfileManager.GetPrimaryPad())) {
             switch (app.GetDisconnectReason()) {
                 case DisconnectPacket::eDisconnect_Kicked:

@@ -29,7 +29,7 @@ HRESULT CScene_TutorialPopup::OnInit(XUIMessageInit* pInitData,
     m_textFontSize = _fromString<int>(m_fontSizeControl.GetText());
     m_fontSizeControl.SetShow(false);
 
-    m_interactScene = NULL;
+    m_interactScene = nullptr;
     m_lastSceneMovedLeft = false;
     m_bAllowFade = false;
 
@@ -57,7 +57,7 @@ HRESULT CScene_TutorialPopup::OnTimer(XUIMessageTimer* pData, BOOL& rfHandled) {
 }
 
 void CScene_TutorialPopup::UpdateInteractScenePosition(bool visible) {
-    if (m_interactScene == NULL) return;
+    if (m_interactScene == nullptr) return;
 
     // 4J-PB - check this players screen section to see if we should allow the
     // animation
@@ -139,8 +139,8 @@ HRESULT CScene_TutorialPopup::_SetDescription(CXuiScene* interactScene,
     HRESULT hr = S_OK;
     m_interactScene = interactScene;
     if (interactScene != m_lastInteractSceneMoved)
-        m_lastInteractSceneMoved = NULL;
-    if (desc == NULL) {
+        m_lastInteractSceneMoved = nullptr;
+    if (desc == nullptr) {
         SetShow(false);
         XuiSetTimer(m_hObj, TUTORIAL_POPUP_MOVE_SCENE_TIMER_ID,
                     TUTORIAL_POPUP_MOVE_SCENE_TIME);
@@ -184,7 +184,7 @@ HRESULT CScene_TutorialPopup::_SetDescription(CXuiScene* interactScene,
         hr = XuiElementGetPosition(m_title, &titlePos);
 
         bool titleShowAtStart = m_title.IsShown() != FALSE;
-        if (title != NULL && title[0] != 0) {
+        if (title != nullptr && title[0] != 0) {
             m_title.SetText(title);
             m_title.SetShow(TRUE);
         } else {
@@ -249,7 +249,7 @@ HRESULT CScene_TutorialPopup::SetDescription(int iPad,
         parsed = pThis->_SetImage(parsed);
         parsed = CScene_TutorialPopup::ParseDescription(iPad, parsed);
         if (parsed.empty()) {
-            hr = pThis->_SetDescription(info->interactScene, NULL, NULL,
+            hr = pThis->_SetDescription(info->interactScene, nullptr, nullptr,
                                         info->allowFade, info->isReminder);
         } else {
             hr = pThis->_SetDescription(info->interactScene, parsed.c_str(),

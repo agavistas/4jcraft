@@ -372,7 +372,7 @@ HRESULT CScene_Main::OnTransitionStart(XUIMessageTransition* pTransition,
         HRESULT hr = S_OK;
         float fWidth, fHeight;
 
-        HXUIOBJ visual = NULL;
+        HXUIOBJ visual = nullptr;
         HXUIOBJ pulser, subtitle, text;
         hr = XuiControlGetVisual(m_Subtitle.m_hObj, &visual);
         hr = XuiElementGetChildById(visual, L"Pulser", &pulser);
@@ -450,7 +450,7 @@ HRESULT CScene_Main::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 #endif
@@ -887,7 +887,7 @@ void CScene_Main::LoadTrial(void) {
 
     NetworkGameInitData* param = new NetworkGameInitData();
     param->seed = 0;
-    param->saveData = NULL;
+    param->saveData = nullptr;
     param->settings = app.GetGameHostOption(eGameHostOption_Tutorial);
 
     std::vector<LevelGenerationOptions*>* generators = app.getLevelGenerators();

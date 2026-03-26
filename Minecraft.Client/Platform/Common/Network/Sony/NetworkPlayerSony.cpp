@@ -3,7 +3,7 @@
 
 NetworkPlayerSony::NetworkPlayerSony(SQRNetworkPlayer* qnetPlayer) {
     m_sqrPlayer = qnetPlayer;
-    m_pSocket = NULL;
+    m_pSocket = nullptr;
 }
 
 unsigned char NetworkPlayerSony::GetSmallId() {

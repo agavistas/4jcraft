@@ -222,7 +222,7 @@ HRESULT CScene_Reinstall::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 
@@ -239,7 +239,7 @@ HRESULT CScene_Reinstall::OnTransitionStart(XUIMessageTransition* pTransition,
         // 4J-PB - Going to resize buttons if the text is too big to fit on any
         // of them (Br-pt problem with the length of Unlock Full Game)
         XUIRect xuiRect;
-        HXUIOBJ visual = NULL;
+        HXUIOBJ visual = nullptr;
         HXUIOBJ text;
         float fMaxTextLen = 0.0f;
         float fTextVisualLen;

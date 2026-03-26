@@ -130,10 +130,10 @@ bool IUIScene_CraftingMenu::handleKeyDown(int iPad, int iAction, bool bRepeat) {
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
-    if (pMinecraft->localgameModes[getPad()] != NULL) {
+    if (pMinecraft->localgameModes[getPad()] != nullptr) {
         Tutorial* tutorial =
             pMinecraft->localgameModes[getPad()]->getTutorial();
-        if (tutorial != NULL) {
+        if (tutorial != nullptr) {
             tutorial->handleUIInput(iAction);
             if (ui.IsTutorialVisible(getPad()) &&
                 !tutorial->isInputAllowed(iAction)) {
@@ -191,10 +191,10 @@ bool IUIScene_CraftingMenu::handleKeyDown(int iPad, int iAction, bool bRepeat) {
                         // int
                         // iIcon=pTempItemInst->getItem()->getIcon(pTempItemInst->getAuxValue());
 
-                        if (pMinecraft->localgameModes[iPad] != NULL) {
+                        if (pMinecraft->localgameModes[iPad] != nullptr) {
                             Tutorial* tutorial =
                                 pMinecraft->localgameModes[iPad]->getTutorial();
-                            if (tutorial != NULL) {
+                            if (tutorial != nullptr) {
                                 tutorial->onCrafted(pTempItemInst);
                             }
                         }
@@ -226,10 +226,10 @@ bool IUIScene_CraftingMenu::handleKeyDown(int iPad, int iAction, bool bRepeat) {
                     // int
                     // iIcon=pTempItemInst->getItem()->getIcon(pTempItemInst->getAuxValue());
 
-                    if (pMinecraft->localgameModes[iPad] != NULL) {
+                    if (pMinecraft->localgameModes[iPad] != nullptr) {
                         Tutorial* tutorial =
                             pMinecraft->localgameModes[iPad]->getTutorial();
-                        if (tutorial != NULL) {
+                        if (tutorial != nullptr) {
                             tutorial->createItemSelected(
                                 pTempItemInst,
                                 pRecipeIngredientsRequired[iRecipe]
@@ -299,7 +299,7 @@ bool IUIScene_CraftingMenu::handleKeyDown(int iPad, int iAction, bool bRepeat) {
 
                                     // 4J Stu - Fix for #13097 - Bug: Milk
                                     // Buckets are removed when crafting Cake
-                                    if (ingItemInst != NULL) {
+                                    if (ingItemInst != nullptr) {
                                         if (ingItemInst->getItem()
                                                 ->hasCraftingRemainingItem()) {
                                             // replace item with remaining
@@ -622,7 +622,7 @@ void IUIScene_CraftingMenu::CheckRecipesAvailable() {
         /*		for (unsigned int k = 0; k <
         m_pPlayer->inventory->items.length; k++)
         {
-        if (m_pPlayer->inventory->items[k] != NULL)
+        if (m_pPlayer->inventory->items[k] != nullptr)
         {
         std::wstring itemstring=m_pPlayer->inventory->items[k]->toString();
 
@@ -645,7 +645,7 @@ void IUIScene_CraftingMenu::CheckRecipesAvailable() {
         // 		{
         // 			std::shared_ptr<ItemInstance>
         // pTempItemInst=pRecipeIngredientsRequired[i].pRecipy->assemble(NULL);
-        // 			if (pTempItemInst != NULL)
+        // 			if (pTempItemInst != nullptr)
         // 			{
         // 				std::wstring
         // itemstring=pTempItemInst->toString();
@@ -703,7 +703,7 @@ void IUIScene_CraftingMenu::CheckRecipesAvailable() {
                 // Does the player have this ingredient?
                 for (unsigned int k = 0; k < m_pPlayer->inventory->items.length;
                      k++) {
-                    if (m_pPlayer->inventory->items[k] != NULL) {
+                    if (m_pPlayer->inventory->items[k] != nullptr) {
                         // do they have the ingredient, and the aux value
                         // matches, and enough off it?
                         if ((m_pPlayer->inventory->items[k]->id ==
@@ -731,7 +731,7 @@ void IUIScene_CraftingMenu::CheckRecipesAvailable() {
                                      l < m_pPlayer->inventory->items.length;
                                      l++) {
                                     if (m_pPlayer->inventory->items[l] !=
-                                        NULL) {
+                                        nullptr) {
                                         if ((m_pPlayer->inventory->items[l]
                                                  ->id ==
                                              pRecipeIngredientsRequired[i]

@@ -18,7 +18,7 @@
 
 TileItem::TileItem(int id) : Item(id) {
     this->tileId = id + 256;
-    itemIcon = NULL;
+    itemIcon = nullptr;
 }
 
 int TileItem::getTileId() { return tileId; }
@@ -31,7 +31,7 @@ int TileItem::getIconType() {
 }
 
 Icon* TileItem::getIcon(int auxValue) {
-    if (itemIcon != NULL) {
+    if (itemIcon != nullptr) {
         return itemIcon;
     }
     return Tile::tiles[tileId]->getTexture(Facing::UP, auxValue);

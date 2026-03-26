@@ -7,7 +7,7 @@
 LeverTile::LeverTile(int id)
     : Tile(id, Material::decoration, false) {}
 
-AABB* LeverTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* LeverTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 bool LeverTile::blocksLight() { return false; }
 

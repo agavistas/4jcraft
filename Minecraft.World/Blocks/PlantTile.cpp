@@ -52,7 +52,7 @@ bool Bush::canSurvive(Level* level, int x, int y, int z) {
            mayPlaceOn(level->getTile(x, y - 1, z));
 }
 
-AABB* Bush::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* Bush::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 bool Bush::blocksLight() { return false; }
 

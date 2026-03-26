@@ -37,7 +37,7 @@ InputStream* FileTexturePack::getResourceImplementation(
 
 	return zipFile.getInputStream(entry);
 #endif
-    return NULL;
+    return nullptr;
 }
 
 bool FileTexturePack::hasFile(const std::wstring& name) {

@@ -141,7 +141,7 @@ void Throwable::tick() {
 
     from = Vec3::newTemp(x, y, z);
     to = Vec3::newTemp(x + xd, y + yd, z + zd);
-    if (res != NULL) {
+    if (res != nullptr) {
         to = Vec3::newTemp(res->pos->x, res->pos->y, res->pos->z);
     }
 
@@ -158,7 +158,7 @@ void Throwable::tick() {
             float rr = 0.3f;
             AABB* bb = e->bb->grow(rr, rr, rr);
             HitResult* p = bb->clip(from, to);
-            if (p != NULL) {
+            if (p != nullptr) {
                 double dd = from->distanceTo(p->pos);
                 delete p;
                 if (dd < nearest || nearest == 0) {
@@ -168,13 +168,13 @@ void Throwable::tick() {
             }
         }
 
-        if (hitEntity != NULL) {
-            if (res != NULL) delete res;
+        if (hitEntity != nullptr) {
+            if (res != nullptr) delete res;
             res = new HitResult(hitEntity);
         }
     }
 
-    if (res != NULL) {
+    if (res != nullptr) {
         if ((res->type == HitResult::TILE) &&
             (level->getTile(res->x, res->y, res->z) == Tile::portalTile_Id)) {
             handleInsidePortal();
@@ -230,7 +230,7 @@ void Throwable::addAdditonalSaveData(CompoundTag* tag) {
     tag->putByte(L"shake", (uint8_t)shakeTime);
     tag->putByte(L"inGround", (uint8_t)(inGround ? 1 : 0));
 
-    if (ownerName.empty() && (owner != NULL) &&
+    if (ownerName.empty() && (owner != nullptr) &&
         owner->instanceof(eTYPE_PLAYER)) {
         ownerName = owner->getAName();
     }
@@ -252,7 +252,7 @@ void Throwable::readAdditionalSaveData(CompoundTag* tag) {
 float Throwable::getShadowHeightOffs() { return 0; }
 
 std::shared_ptr<LivingEntity> Throwable::getOwner() {
-    if (owner == NULL && !ownerName.empty()) {
+    if (owner == nullptr && !ownerName.empty()) {
         owner = level->getPlayerByName(ownerName);
     }
     return owner;

@@ -60,7 +60,7 @@ CXuiCtrlMinecraftSkinPreview::CXuiCtrlMinecraftSkinPreview()
     m_fOriginalRotation = 0.0f;
     m_framesAnimatingRotation = 0;
     m_bAnimatingToFacing = false;
-    m_pvAdditionalModelParts = NULL;
+    m_pvAdditionalModelParts = nullptr;
     m_uiAnimOverrideBitmask = 0L;
 }
 
@@ -241,7 +241,7 @@ HRESULT CXuiCtrlMinecraftSkinPreview::OnRender(XUIMessageRender* pRenderData,
     // 0, 0, 0, 1);
     EntityRenderer* renderer =
         EntityRenderDispatcher::instance->getRenderer(eTYPE_PLAYER);
-    if (renderer != NULL) {
+    if (renderer != nullptr) {
         // 4J-PB - any additional parts to turn on for this player (skin
         // dependent)
         // std::vector<ModelPart *>
@@ -294,9 +294,9 @@ void CXuiCtrlMinecraftSkinPreview::render(EntityRenderer* renderer, double x,
     HumanoidModel* model = (HumanoidModel*)renderer->getModel();
 
     // getAttackAnim(mob, a);
-    // if (armor != NULL) armor->attackTime = model->attackTime;
+    // if (armor != nullptr) armor->attackTime = model->attackTime;
     // model->riding = mob->isRiding();
-    // if (armor != NULL) armor->riding = model->riding;
+    // if (armor != nullptr) armor->riding = model->riding;
 
     // 4J Stu - Remember to reset these values once the rendering is done if you
     // add another one

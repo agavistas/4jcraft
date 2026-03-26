@@ -21,7 +21,7 @@ bool FleeSunGoal::canUse() {
         return false;
 
     Vec3* pos = getHidePos();
-    if (pos == NULL) return false;
+    if (pos == nullptr) return false;
     wantedX = pos->x;
     wantedY = pos->y;
     wantedZ = pos->z;
@@ -44,5 +44,5 @@ Vec3* FleeSunGoal::getHidePos() {
             mob->getWalkTargetValue(xt, yt, zt) < 0)
             return Vec3::newTemp(xt, yt, zt);
     }
-    return NULL;
+    return nullptr;
 }

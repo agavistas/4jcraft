@@ -61,7 +61,7 @@ void ItemRenderer::render(std::shared_ptr<Entity> _itemEntity, double x,
 
     random->setSeed(187);
     std::shared_ptr<ItemInstance> item = itemEntity->getItem();
-    if (item->getItem() == NULL) return;
+    if (item->getItem() == nullptr) return;
 
     glPushMatrix();
     float bob =
@@ -81,7 +81,7 @@ void ItemRenderer::render(std::shared_ptr<Entity> _itemEntity, double x,
 
     Tile* tile = Tile::tiles[item->id];
 
-    if (item->getIconType() == Icon::TYPE_TERRAIN && tile != NULL &&
+    if (item->getIconType() == Icon::TYPE_TERRAIN && tile != nullptr &&
         TileRenderer::canRender(tile->getRenderShape())) {
         glRotatef(spin, 0, 1, 0);
 
@@ -190,7 +190,7 @@ void ItemRenderer::renderItemBillboard(std::shared_ptr<ItemEntity> entity,
                                        float red, float green, float blue) {
     Tesselator* t = Tesselator::getInstance();
 
-    if (icon == NULL)
+    if (icon == nullptr)
         icon = entityRenderDispatcher->textures->getMissingIcon(
             entity->getItem()->getIconType());
     float u0 = icon->getU0();
@@ -247,7 +247,7 @@ void ItemRenderer::renderItemBillboard(std::shared_ptr<ItemEntity> entity,
 
             bool bIsTerrain = false;
             if (item->getIconType() == Icon::TYPE_TERRAIN &&
-                Tile::tiles[item->id] != NULL) {
+                Tile::tiles[item->id] != nullptr) {
                 bIsTerrain = true;
                 bindTexture(&TextureAtlas::LOCATION_BLOCKS);  // TODO: Do this
                                                               // sanely by Icon
@@ -264,7 +264,7 @@ void ItemRenderer::renderItemBillboard(std::shared_ptr<ItemEntity> entity,
                 t, u0, v0, u1, v1, icon->getSourceWidth(),
                 icon->getSourceHeight(), width, false, bIsTerrain);
 
-            if (item != NULL && item->isFoil()) {
+            if (item != nullptr && item->isFoil()) {
                 glDepthFunc(GL_EQUAL);
                 glDisable(GL_LIGHTING);
                 entityRenderDispatcher->textures->bindTexture(
@@ -443,7 +443,7 @@ void ItemRenderer::renderGuiItem(Font* font, Textures* textures,
         }
         MemSect(0);
 
-        if (itemIcon == NULL) {
+        if (itemIcon == nullptr) {
             itemIcon = textures->getMissingIcon(item->getIconType());
         }
 
@@ -479,7 +479,7 @@ void ItemRenderer::renderGuiItem(Font* font, Textures* textures,
 void ItemRenderer::renderAndDecorateItem(
     Font* font, Textures* textures, const std::shared_ptr<ItemInstance> item,
     float x, float y, float fScale, float fAlpha, bool isFoil) {
-    if (item == NULL) return;
+    if (item == nullptr) return;
     renderAndDecorateItem(font, textures, item, x, y, fScale, fScale, fAlpha,
                           isFoil, true);
 }
@@ -493,7 +493,7 @@ void ItemRenderer::renderAndDecorateItem(
     Font* font, Textures* textures, const std::shared_ptr<ItemInstance> item,
     float x, float y, float fScaleX, float fScaleY, float fAlpha, bool isFoil,
     bool isConstantBlended, bool useCompiled) {
-    if (item == NULL) {
+    if (item == nullptr) {
         return;
     }
 
@@ -613,7 +613,7 @@ void ItemRenderer::renderGuiItemDecorations(Font* font, Textures* textures,
                                             int x, int y,
                                             const std::wstring& countText,
                                             float fAlpha) {
-    if (item == NULL) {
+    if (item == nullptr) {
         return;
     }
 

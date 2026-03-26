@@ -73,7 +73,7 @@ S32 UIControl_DynamicLabel::GetRealWidth() {
     IggyDataValue result;
     IggyResult out =
         IggyPlayerCallMethodRS(m_parentScene->getMovie(), &result,
-                               getIggyValuePath(), m_funcGetRealWidth, 0, NULL);
+                               getIggyValuePath(), m_funcGetRealWidth, 0, nullptr);
 
     S32 iRealWidth = m_width;
     if (result.type == IGGY_DATATYPE_number) {
@@ -86,7 +86,7 @@ S32 UIControl_DynamicLabel::GetRealHeight() {
     IggyDataValue result;
     IggyResult out = IggyPlayerCallMethodRS(m_parentScene->getMovie(), &result,
                                             getIggyValuePath(),
-                                            m_funcGetRealHeight, 0, NULL);
+                                            m_funcGetRealHeight, 0, nullptr);
 
     S32 iRealHeight = m_height;
     if (result.type == IGGY_DATATYPE_number) {

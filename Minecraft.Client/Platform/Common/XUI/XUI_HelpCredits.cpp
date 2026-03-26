@@ -549,7 +549,7 @@ HRESULT CScene_Credits::OnInit(XUIMessageInit* pInitData, BOOL& bHandled) {
     MapChildControls();
 
     // if we're not in the game, we need to use basescene 0
-    if (Minecraft::GetInstance()->level == NULL) {
+    if (Minecraft::GetInstance()->level == nullptr) {
         iPad = 0;
     }
 

@@ -48,7 +48,7 @@ HRESULT CXuiSceneInventoryCreative::OnInit(XUIMessageInit* pInitData,
     }
 
 #ifdef _XBOX
-    if (pMinecraft->localgameModes[initData->iPad] != NULL) {
+    if (pMinecraft->localgameModes[initData->iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[initData->iPad];
         m_previousTutorialState = gameMode->getTutorial()->getCurrentState();
@@ -104,10 +104,10 @@ HRESULT CXuiSceneInventoryCreative::OnDestroy() {
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
 #ifdef _XBOX
-    if (pMinecraft->localgameModes[m_iPad] != NULL) {
+    if (pMinecraft->localgameModes[m_iPad] != nullptr) {
         TutorialMode* gameMode =
             (TutorialMode*)pMinecraft->localgameModes[m_iPad];
-        if (gameMode != NULL)
+        if (gameMode != nullptr)
             gameMode->getTutorial()->changeTutorialState(
                 m_previousTutorialState);
     }
@@ -118,7 +118,7 @@ HRESULT CXuiSceneInventoryCreative::OnDestroy() {
     // packet loss. We need to make sure that we call closeContainer() anytime
     // this menu is closed, even if it is forced to close by some other reason
     // (like the player dying)
-    if (Minecraft::GetInstance()->localplayers[m_iPad] != NULL)
+    if (Minecraft::GetInstance()->localplayers[m_iPad] != nullptr)
         Minecraft::GetInstance()->localplayers[m_iPad]->closeContainer();
     return S_OK;
 }
@@ -139,7 +139,7 @@ HRESULT CXuiSceneInventoryCreative::OnTransitionEnd(
     if (pTransData->dwTransType == XUI_TRANSITION_TO ||
         pTransData->dwTransType == XUI_TRANSITION_BACKTO) {
         for (int i = 0; i < eCreativeInventoryTab_COUNT; i++) {
-            m_hGroupIconA[i].PlayVisualRange(specs[i]->m_icon, NULL,
+            m_hGroupIconA[i].PlayVisualRange(specs[i]->m_icon, nullptr,
                                              specs[i]->m_icon);
             XuiElementSetShow(m_hGroupIconA[i].m_hObj, TRUE);
         }
@@ -161,7 +161,7 @@ CXuiControl* CXuiSceneInventoryCreative::GetSectionControl(
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 CXuiCtrlSlotList* CXuiSceneInventoryCreative::GetSectionSlotList(
@@ -177,7 +177,7 @@ CXuiCtrlSlotList* CXuiSceneInventoryCreative::GetSectionSlotList(
             assert(false);
             break;
     }
-    return NULL;
+    return nullptr;
 }
 
 void CXuiSceneInventoryCreative::updateTabHighlightAndText(

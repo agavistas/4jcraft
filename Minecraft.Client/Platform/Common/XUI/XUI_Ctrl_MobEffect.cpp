@@ -22,9 +22,9 @@ HRESULT CXuiCtrlMobEffect::OnGetSourceDataText(
         pGetSourceTextData->szText = m_name.c_str();
         pGetSourceTextData->bDisplay = TRUE;
 
-        if (FAILED(PlayVisualRange(iconFrameNames[m_icon], NULL,
+        if (FAILED(PlayVisualRange(iconFrameNames[m_icon], nullptr,
                                    iconFrameNames[m_icon]))) {
-            PlayVisualRange(L"Normal", NULL, L"Normal");
+            PlayVisualRange(L"Normal", nullptr, L"Normal");
         }
 
         bHandled = TRUE;

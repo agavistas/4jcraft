@@ -6,7 +6,7 @@
 extern CConsoleMinecraftApp app;
 
 FileHeader::FileHeader() {
-    lastFile = NULL;
+    lastFile = nullptr;
     m_saveVersion = 0;
 
     // New saves should have an original version set to the latest version. This
@@ -47,7 +47,7 @@ FileEntry* FileHeader::AddFile(const std::wstring& name,
 }
 
 void FileHeader::RemoveFile(FileEntry* file) {
-    if (file == NULL) return;
+    if (file == nullptr) return;
 
     AdjustStartOffsets(file, file->getFileSize(), true);
 
@@ -371,12 +371,12 @@ bool FileHeader::fileExists(const std::wstring& name) {
 
 std::vector<FileEntry*>* FileHeader::getFilesWithPrefix(
     const std::wstring& prefix) {
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
 
     for (unsigned int i = 0; i < fileTable.size(); ++i) {
         if (wcsncmp(fileTable[i]->data.filename, prefix.c_str(),
                     prefix.size()) == 0) {
-            if (files == NULL) {
+            if (files == nullptr) {
                 files = new std::vector<FileEntry*>();
             }
 
@@ -467,7 +467,7 @@ std::wstring FileHeader::getPlayerDataFilenameForSave(const PlayerUID& pUID) {
 }
 
 std::vector<FileEntry*>* FileHeader::getValidPlayerDatFiles() {
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
 
     // find filenames that match this pattern
     // P_5e7ff8372ea9_00000004_Mark_4J
@@ -492,7 +492,7 @@ std::vector<FileEntry*>* FileHeader::getValidPlayerDatFiles() {
         if (!isDecimalString(&filenameOnly[15], 8)) continue;
 
         // if we get here, it must be a valid filename
-        if (files == NULL) {
+        if (files == nullptr) {
             files = new std::vector<FileEntry*>();
         }
         files->push_back(fileTable[i]);
@@ -503,19 +503,19 @@ std::vector<FileEntry*>* FileHeader::getValidPlayerDatFiles() {
 
 std::vector<FileEntry*>* FileHeader::getDatFilesWithOnlineID(
     const PlayerUID& pUID) {
-    if (pUID.isSignedIntoPSN() == false) return NULL;
+    if (pUID.isSignedIntoPSN() == false) return nullptr;
 
     std::vector<FileEntry*>* datFiles = getValidPlayerDatFiles();
-    if (datFiles == NULL) return NULL;
+    if (datFiles == nullptr) return nullptr;
 
     // we're looking for the online name from the pUID in these types of
     // filenames - P_5e7ff8372ea9_00000004_Mark_4J
     wchar_t onlineIDW[64];
     mbstowcs(onlineIDW, pUID.getOnlineID(), 64);
 
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
     int onlineIDSize = wcslen(onlineIDW);
-    if (onlineIDSize == 0) return NULL;
+    if (onlineIDSize == 0) return nullptr;
 
     wcscat(onlineIDW, L".dat");
 
@@ -541,7 +541,7 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithOnlineID(
         {
             if (wcsncmp(&filenameOnly[onlineIDStart], onlineIDW,
                         onlineIDSize) == 0) {
-                if (files == NULL) {
+                if (files == nullptr) {
                     files = new std::vector<FileEntry*>();
                 }
                 files->push_back(datFiles->at(i));
@@ -557,7 +557,7 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithOnlineID(
 std::vector<FileEntry*>* FileHeader::getDatFilesWithMacAndUserID(
     const PlayerUID& pUID) {
     std::vector<FileEntry*>* datFiles = getValidPlayerDatFiles();
-    if (datFiles == NULL) return NULL;
+    if (datFiles == nullptr) return nullptr;
 
     // we're looking for the mac address and userIDfrom the pUID in these types
     // of filenames - P_5e7ff8372ea9_00000004_Mark_4J
@@ -566,7 +566,7 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithMacAndUserID(
     const wchar_t* pMacStr = macStr.c_str();
     const wchar_t* pUserStr = userStr.c_str();
 
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
     static const int macAddrStart = 2;  // 2 characters into the filename
     static const int userIDStart = 15;  // 15 characters into the filename
 
@@ -582,7 +582,7 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithMacAndUserID(
             // check the userID matches
             if (wcsncmp(&filenameOnly[userIDStart], pUserStr, userStr.size()) ==
                 0) {
-                if (files == NULL) {
+                if (files == nullptr) {
                     files = new std::vector<FileEntry*>();
                 }
                 files->push_back(datFiles->at(i));
@@ -596,11 +596,11 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithMacAndUserID(
 
 std::vector<FileEntry*>* FileHeader::getDatFilesWithPrimaryUser() {
     std::vector<FileEntry*>* datFiles = getValidPlayerDatFiles();
-    if (datFiles == NULL) return NULL;
+    if (datFiles == nullptr) return nullptr;
 
     // we're just looking for filenames starting with "P_" in these types of
     // filenames - P_5e7ff8372ea9_00000004_Mark_4J
-    std::vector<FileEntry*>* files = NULL;
+    std::vector<FileEntry*>* files = nullptr;
 
     char tempStr[128];
     for (unsigned int i = 0; i < datFiles->size(); ++i) {
@@ -611,7 +611,7 @@ std::vector<FileEntry*>* FileHeader::getDatFilesWithPrimaryUser() {
 
         // check for "P_" prefix
         if (wcsncmp(&filenameOnly[0], L"P_", 2) == 0) {
-            if (files == NULL) {
+            if (files == nullptr) {
                 files = new std::vector<FileEntry*>();
             }
             files->push_back(datFiles->at(i));

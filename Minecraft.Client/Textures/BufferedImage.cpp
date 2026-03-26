@@ -28,7 +28,7 @@ BufferedImage::BufferedImage(int width, int height, int type) {
     data[0] = new int[width * height];
 
     for (int i = 1; i < 10; i++) {
-        data[i] = NULL;
+        data[i] = nullptr;
     }
     this->width = width;
     this->height = height;
@@ -121,7 +121,7 @@ BufferedImage::BufferedImage(const std::wstring& File,
     }
 
     for (int l = 0; l < 10; l++) {
-        data[l] = NULL;
+        data[l] = nullptr;
     }
 
     for (int l = 0; l < 10; l++) {
@@ -168,11 +168,11 @@ BufferedImage::BufferedImage(DLCPack* dlcPack, const std::wstring& File,
                              bool filenameHasExtension /*= false*/) {
     HRESULT hr;
     std::wstring filePath = File;
-    std::uint8_t* pbData = NULL;
+    std::uint8_t* pbData = nullptr;
     std::uint32_t dataBytes = 0;
 
     for (int l = 0; l < 10; l++) {
-        data[l] = NULL;
+        data[l] = nullptr;
     }
 
     for (int l = 0; l < 10; l++) {
@@ -199,7 +199,7 @@ BufferedImage::BufferedImage(DLCPack* dlcPack, const std::wstring& File,
 
         DLCFile* dlcFile = dlcPack->getFile(DLCManager::e_DLCType_All, name);
         pbData = dlcFile->getData(dataBytes);
-        if (pbData == NULL || dataBytes == 0) {
+        if (pbData == nullptr || dataBytes == 0) {
             // 4J - If we haven't loaded the non-mipmap version then exit the
             // game
             if (l == 0) {
@@ -232,7 +232,7 @@ BufferedImage::BufferedImage(DLCPack* dlcPack, const std::wstring& File,
 BufferedImage::BufferedImage(std::uint8_t* pbData, std::uint32_t dataBytes) {
     int iCurrentByte = 0;
     for (int l = 0; l < 10; l++) {
-        data[l] = NULL;
+        data[l] = nullptr;
     }
 
     D3DXIMAGE_INFO ImageInfo;
@@ -273,7 +273,7 @@ int* BufferedImage::getData() { return data[0]; }
 
 int* BufferedImage::getData(int level) { return data[level]; }
 
-Graphics* BufferedImage::getGraphics() { return NULL; }
+Graphics* BufferedImage::getGraphics() { return nullptr; }
 
 // Returns the transparency. Returns either OPAQUE, BITMASK, or TRANSLUCENT.
 // Specified by:
@@ -299,7 +299,7 @@ BufferedImage* BufferedImage::getSubimage(int x, int y, int w, int h) {
     this->getRGB(x, y, w, h, arrayWrapper, 0, w);
 
     int level = 1;
-    while (getData(level) != NULL) {
+    while (getData(level) != nullptr) {
         int ww = w >> level;
         int hh = h >> level;
         int xx = x >> level;

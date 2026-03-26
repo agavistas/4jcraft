@@ -12,7 +12,7 @@ HRESULT CScene_SettingsControl::OnInit(XUIMessageInit* pInitData,
     WCHAR TempString[256];
     m_iPad = *(int*)pInitData->pvInitData;
     // if we're not in the game, we need to use basescene 0
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
     MapChildControls();
 
@@ -125,7 +125,7 @@ HRESULT CScene_SettingsControl::OnControlNavigate(
         pControlNavigateData->hObjSource,
         pControlNavigateData->nControlNavigate, TRUE, TRUE);
 
-    if (pControlNavigateData->hObjDest != NULL) {
+    if (pControlNavigateData->hObjDest != nullptr) {
         bHandled = TRUE;
     }
 
@@ -226,7 +226,7 @@ HRESULT CScene_SettingsControl::OnTransitionStart(
 }
 
 HRESULT CScene_SettingsControl::OnNavReturn(HXUIOBJ hObj, BOOL& rfHandled) {
-    bool bNotInGame = (Minecraft::GetInstance()->level == NULL);
+    bool bNotInGame = (Minecraft::GetInstance()->level == nullptr);
 
     // if we're not in the game, we need to use basescene 0
     if (bNotInGame) {

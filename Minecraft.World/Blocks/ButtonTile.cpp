@@ -20,7 +20,7 @@ Icon* ButtonTile::getTexture(int face, int data) {
         return Tile::stone->getTexture(Facing::UP);
 }
 
-AABB* ButtonTile::getAABB(Level* level, int x, int y, int z) { return NULL; }
+AABB* ButtonTile::getAABB(Level* level, int x, int y, int z) { return nullptr; }
 
 int ButtonTile::getTickDelay(Level* level) { return sensitive ? 30 : 20; }
 

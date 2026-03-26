@@ -13,10 +13,10 @@ ArmorSlot::ArmorSlot(int slotNum, std::shared_ptr<Container> container, int id,
 int ArmorSlot::getMaxStackSize() { return 1; }
 
 bool ArmorSlot::mayPlace(std::shared_ptr<ItemInstance> item) {
-    if (item == NULL) {
+    if (item == nullptr) {
         return false;
     }
-    if (dynamic_cast<ArmorItem*>(item->getItem()) != NULL) {
+    if (dynamic_cast<ArmorItem*>(item->getItem()) != nullptr) {
         return dynamic_cast<ArmorItem*>(item->getItem())->slot == slotNum;
     }
     if (item->getItem()->id == Tile::pumpkin_Id ||
@@ -32,7 +32,7 @@ Icon* ArmorSlot::getNoItemIcon() { return ArmorItem::getEmptyIcon(slotNum); }
 // bool ArmorSlot::mayCombine(shared_ptr<ItemInstance> item)
 //{
 //	shared_ptr<ItemInstance> thisItemI = getItem();
-//	if(thisItemI == NULL || item == NULL) return false;
+//	if(thisItemI == nullptr || item == nullptr) return false;
 //
 //	ArmorItem *thisItem = (ArmorItem *)thisItemI->getItem();
 //	bool thisIsDyableArmor = thisItem->getMaterial() ==

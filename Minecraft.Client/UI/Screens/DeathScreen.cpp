@@ -13,7 +13,7 @@ void DeathScreen::init() {
     buttons.push_back(
         new Button(2, width / 2 - 100, height / 4 + 24 * 4, L"Title menu"));
 
-    if (minecraft->user == NULL) {
+    if (minecraft->user == nullptr) {
         buttons[1]->active = false;
     }
 }

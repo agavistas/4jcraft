@@ -56,7 +56,7 @@ CXuiCtrlMinecraftSlot::CXuiCtrlMinecraftSlot()
 
     Minecraft* pMinecraft = Minecraft::GetInstance();
 
-    if (pMinecraft != NULL) {
+    if (pMinecraft != nullptr) {
         m_fScreenWidth = (float)pMinecraft->width_phys;
         m_fScreenHeight = (float)pMinecraft->height_phys;
         m_bScreenWidthSetup = true;
@@ -100,7 +100,7 @@ HRESULT CXuiCtrlMinecraftSlot::OnGetSourceImage(XUIMessageGetSourceImage* pData,
             pData->szPath = MsgGetSlotItem.szPath;
             pData->bDirty = MsgGetSlotItem.bDirty;
 
-            if (MsgGetSlotItem.item != NULL) {
+            if (MsgGetSlotItem.item != nullptr) {
                 m_item = MsgGetSlotItem.item;
                 m_iID = m_item->id;
                 m_iPad = GET_SLOTDISPLAY_USERINDEX_FROM_DATA_BITMASK(
@@ -150,7 +150,7 @@ HRESULT CXuiCtrlMinecraftSlot::OnGetSourceImage(XUIMessageGetSourceImage* pData,
                     pData->szPath = xzpIcons[m_iID - 32000];
                 }
 
-                if (m_item != NULL && (m_item->id != m_iID ||
+                if (m_item != nullptr && (m_item->id != m_iID ||
                                        m_item->getAuxValue() != m_iAuxVal ||
                                        m_item->GetCount() != m_iCount))
                     m_item = nullptr;
@@ -191,10 +191,10 @@ HRESULT CXuiCtrlMinecraftSlot::OnRender(XUIMessageRender* pRenderData,
     hr = XuiSendMessage(m_hObj, &Message);
 
     // We cannot have an Item with id 0
-    if (m_item != NULL || (m_iID > 0 && m_iID < 32000)) {
+    if (m_item != nullptr || (m_iID > 0 && m_iID < 32000)) {
         HXUIDC hDC = pRenderData->hDC;
         CXuiControl xuiControl(m_hObj);
-        if (m_item == NULL)
+        if (m_item == nullptr)
             m_item = std::shared_ptr<ItemInstance>(
                 new ItemInstance(m_iID, m_iCount, m_iAuxVal));
 
@@ -234,7 +234,7 @@ HRESULT CXuiCtrlMinecraftSlot::OnRender(XUIMessageRender* pRenderData,
 
         if (!m_bScreenWidthSetup) {
             Minecraft* pMinecraft = Minecraft::GetInstance();
-            if (pMinecraft != NULL) {
+            if (pMinecraft != nullptr) {
                 m_fScreenWidth = (float)pMinecraft->width_phys;
                 m_fScreenHeight = (float)pMinecraft->height_phys;
                 m_bScreenWidthSetup = true;

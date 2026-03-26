@@ -114,7 +114,7 @@ HRESULT CXuiCtrlSliderWrapper::SetValueDisplay(bool show) {
     hr = XuiControlGetVisual(pThis->m_pSlider->m_hObj, &hVisual);
     hr = XuiElementGetChildById(hVisual, L"Text_Value", &hText);
 
-    if (hText != NULL) {
+    if (hText != nullptr) {
         XuiElementSetShow(hText, show);
     }
 
@@ -124,7 +124,7 @@ HRESULT CXuiCtrlSliderWrapper::SetValueDisplay(bool show) {
 LPCWSTR CXuiCtrlSliderWrapper::GetText() {
     CXuiCtrlSliderWrapper* pThis;
     HRESULT hr = XuiObjectFromHandle(m_hObj, (void**)&pThis);
-    if (FAILED(hr)) return NULL;
+    if (FAILED(hr)) return nullptr;
     return pThis->m_pSlider->GetText();
     // return S_OK;
 }
@@ -145,7 +145,7 @@ HRESULT CXuiCtrlSliderWrapper::SetText(LPCWSTR text, int iDataAssoc) {
 HXUIOBJ CXuiCtrlSliderWrapper::GetSlider() {
     CXuiCtrlSliderWrapper* pThis;
     HRESULT hr = XuiObjectFromHandle(m_hObj, (void**)&pThis);
-    if (FAILED(hr)) return NULL;
+    if (FAILED(hr)) return nullptr;
     return pThis->m_pSlider->m_hObj;
 }
 

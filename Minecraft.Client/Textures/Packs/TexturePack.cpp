@@ -2,7 +2,7 @@
 #include "TexturePack.h"
 
 std::wstring TexturePack::getPath(bool bTitleUpdateTexture /*= false*/,
-                                  const char* pchBDPatchFileName /*= NULL*/) {
+                                  const char* pchBDPatchFileName /*= nullptr*/) {
     std::wstring wDrive;
 #ifdef _XBOX
     if (bTitleUpdateTexture) {
@@ -22,8 +22,8 @@ std::wstring TexturePack::getPath(bool bTitleUpdateTexture /*= false*/,
 
     // 4J-PB - we need to check for a BD patch - this is going to be an issue
     // for full DLC texture packs (Halloween)
-    char* pchUsrDir = NULL;
-    if (app.GetBootedFromDiscPatch() && pchBDPatchFileName != NULL) {
+    char* pchUsrDir = nullptr;
+    if (app.GetBootedFromDiscPatch() && pchBDPatchFileName != nullptr) {
         pchUsrDir = app.GetBDUsrDirPath(pchBDPatchFileName);
         std::wstring wstr(pchUsrDir, pchUsrDir + strlen(pchUsrDir));
 

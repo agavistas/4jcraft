@@ -7,7 +7,7 @@ HRESULT CXuiCtrl4JEdit::OnInit(XUIMessageInit* pInitData, BOOL& rfHandled) {
     // set a limit for the text box
     m_uTextLimit = XUI_4JEDIT_MAX_CHARS - 1;
     XuiEditSetTextLimit(m_hObj, m_uTextLimit);
-    //  Find the text limit. (Add one for NULL terminator)
+    //  Find the text limit. (Add one for nullptr terminator)
     // m_uTextLimit = std::min( XuiEditGetTextLimit(m_hObj) + 1,
     // XUI_4JEDIT_MAX_CHARS);
 
@@ -135,7 +135,7 @@ HRESULT CXuiCtrl4JEdit::OnKeyDown(XUIMessageInput* pInputData,
 
     if (pThis->m_bReadOnly) return hr;
 
-    //  Find the text limit. (Add one for NULL terminator)
+    //  Find the text limit. (Add one for nullptr terminator)
     // m_uTextLimit = std::min( XuiEditGetTextLimit(m_hObj) + 1,
     // XUI_4JEDIT_MAX_CHARS);
 

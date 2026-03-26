@@ -24,7 +24,7 @@ bool RandomStrollGoal::canUse() {
                 RandomPos::getPos(std::dynamic_pointer_cast<PathfinderMob>(
                                       mob->shared_from_this()),
                                   10, 7);
-            if (pos == NULL) return false;
+            if (pos == nullptr) return false;
             wantedX = pos->x;
             wantedY = pos->y;
             wantedZ = pos->z;
@@ -42,7 +42,7 @@ bool RandomStrollGoal::canUse() {
                 RandomPos::getPos(std::dynamic_pointer_cast<PathfinderMob>(
                                       mob->shared_from_this()),
                                   10, 7, mob->getWanderingQuadrant());
-            if (pos == NULL) return false;
+            if (pos == nullptr) return false;
             wantedX = pos->x;
             wantedY = pos->y;
             wantedZ = pos->z;

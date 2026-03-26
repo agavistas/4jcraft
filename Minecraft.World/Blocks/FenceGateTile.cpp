@@ -20,7 +20,7 @@ bool FenceGateTile::mayPlace(Level* level, int x, int y, int z) {
 AABB* FenceGateTile::getAABB(Level* level, int x, int y, int z) {
     int data = level->getData(x, y, z);
     if (isOpen(data)) {
-        return NULL;
+        return nullptr;
     }
     // 4J Brought forward change from 1.2.3 to fix hit box rotation
     if (data == Direction::NORTH || data == Direction::SOUTH) {
@@ -74,7 +74,7 @@ bool FenceGateTile::use(Level* level, int x, int y, int z,
         // 4J - added - just do enough to play the sound
         level->levelEvent(
             player, LevelEvent::SOUND_OPEN_DOOR, x, y, z,
-            0);  // 4J - changed event to pass player rather than NULL as the
+            0);  // 4J - changed event to pass player rather than nullptr as the
                  // source of the event so we can filter the broadcast properly
         return false;
     }

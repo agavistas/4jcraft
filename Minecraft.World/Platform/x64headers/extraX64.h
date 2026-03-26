@@ -109,7 +109,7 @@ public:
             return ret;
         } else {
             LeaveCriticalSection(&m_cs);
-            return NULL;
+            return nullptr;
         }
     }
 
